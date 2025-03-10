@@ -16,7 +16,7 @@ function Header() {
         <ThemeToggle />
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center md:gap-4">
         <Button size="sm" variant="ghost" className="text-primary-text">
           <Settings /> Settings
         </Button>

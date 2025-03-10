@@ -6,9 +6,12 @@ import { immer } from "zustand/middleware/immer";
 type Settings = {
   settings: {
     title: string;
+    description: string;
+    expirationDate: Date | undefined;
+    showProgressBar: boolean;
   };
 
-  editTitle: (title: string) => void;
+  setTitle: (title: string) => void;
 };
 
 type Fields = {
@@ -29,9 +32,12 @@ export const useFormStore = create(
 
       settings: {
         title: "",
+        description: "",
+        expirationDate: undefined,
+        showProgressBar: false,
       },
 
-      editTitle: (newTitle: string) =>
+      setTitle: (newTitle: string) =>
         set((state) => {
           state.settings.title = newTitle;
         }),

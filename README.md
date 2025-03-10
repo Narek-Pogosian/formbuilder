@@ -9,7 +9,10 @@
 - Title, description
 - Expiration date,
 - Progress bar
-- Customization: colors, images
+
+### Customization:
+
+- colors, images
 
 ### Conditional logic
 

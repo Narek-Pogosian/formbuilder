@@ -1,4 +1,4 @@
-import { type FieldType } from "@/schemas/form-schema";
+import { type FieldType } from "@/schemas/field-schemas";
 import {
   CircleCheckBig,
   Heading2,

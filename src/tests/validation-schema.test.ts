@@ -13,6 +13,7 @@ describe("createValidationSchema", () => {
         required: true,
         showDescription: false,
         longAnswer: false,
+        isFieldSchema: true,
       },
       {
         id: "id",
@@ -22,6 +23,7 @@ describe("createValidationSchema", () => {
         required: true,
         longAnswer: true,
         showDescription: false,
+        isFieldSchema: true,
       },
     ];
 
@@ -53,6 +55,7 @@ describe("createValidationSchema", () => {
         placeholder: "",
         showDescription: false,
         longAnswer: false,
+        isFieldSchema: true,
       },
       {
         id: "id2",
@@ -60,6 +63,7 @@ describe("createValidationSchema", () => {
         label: "age",
         required: false,
         showDescription: false,
+        isFieldSchema: true,
       },
     ];
 
@@ -91,6 +95,7 @@ describe("createValidationSchema", () => {
         max: 99,
         required: true,
         showDescription: false,
+        isFieldSchema: true,
       },
     ];
 
@@ -111,6 +116,7 @@ describe("createValidationSchema", () => {
         label: "consent",
         required: false,
         showDescription: false,
+        isFieldSchema: true,
       },
     ];
 
@@ -135,6 +141,7 @@ describe("createValidationSchema", () => {
           { value: "option2" },
           { value: "option3" },
         ],
+        isFieldSchema: true,
       },
       {
         id: "id",
@@ -147,6 +154,7 @@ describe("createValidationSchema", () => {
           { value: "option2" },
           { value: "option3" },
         ],
+        isFieldSchema: true,
       },
     ];
 
@@ -172,6 +180,7 @@ describe("createValidationSchema", () => {
         id: "id",
         type: "unsupported",
         label: "unsupportedField",
+        isFieldSchema: true,
         required: true,
       },
       {
@@ -181,9 +190,11 @@ describe("createValidationSchema", () => {
         min: 18,
         max: 99,
         required: true,
+        isFieldSchema: true,
       },
     ];
 
+    // @ts-expect-error We are testing a wrong input
     expect(() => createValidationSchema(survey)).toThrow(
       /Unsupported field type/,
     );

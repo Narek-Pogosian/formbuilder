@@ -39,7 +39,7 @@ export const titleSchema = baseSchema.extend({
 });
 
 export const paragraphSchema = baseSchema.extend({
-  type: z.literal("text"),
+  type: z.literal("paragraph"),
   text: z.string().min(1, { message: "Text is required" }),
 });
 
@@ -95,7 +95,7 @@ export const optionsSchema = baseFieldSchema.extend({
     .min(1),
 });
 
-export const surveySchema = z
+export const formSchema = z
   .array(
     z.discriminatedUnion("type", [
       textSchema,
@@ -117,6 +117,7 @@ export const surveySchema = z
         .filter((item) => Object.hasOwn(item, "label"))
         // @ts-expect-error filtered out without label
         .map((item) => item.label);
+
       const uniqueLabels = new Set(labels);
       return uniqueLabels.size === labels.length;
     },
@@ -128,9 +129,9 @@ export const surveySchema = z
 
 export const createSurveyScema = z.object({
   title: z.string().trim().min(1, { message: "Title is required" }),
-  survey: surveySchema,
+  form: formSchema,
 });
 
 export type FieldType = (typeof FieldTypes)[number];
-export type SurveySchema = z.infer<typeof surveySchema>;
-export type SurveySchemaField = SurveySchema[number];
+export type FormSchema = z.infer<typeof formSchema>;
+export type FormSchemaField = FormSchema[number];

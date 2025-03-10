@@ -1,10 +1,10 @@
 import { createValidationSchema } from "../components/surveyrenderer/create-validation";
-import { type SurveySchema } from "@/lib/zod/survey-schemas";
+import { type FormSchema } from "@/schemas/form-schema";
 import { describe, it, expect } from "vitest";
 
 describe("createValidationSchema", () => {
   it("should create a schema for text and textarea field with min and max length", async () => {
-    const survey: SurveySchema = [
+    const survey: FormSchema = [
       {
         id: "id",
         type: "text",
@@ -48,7 +48,7 @@ describe("createValidationSchema", () => {
   });
 
   it("should create a schema for optional text and number fields", async () => {
-    const survey: SurveySchema = [
+    const survey: FormSchema = [
       {
         id: "id1",
         type: "text",
@@ -83,7 +83,7 @@ describe("createValidationSchema", () => {
   });
 
   it("should create a schema for a number field with min and max", async () => {
-    const survey: SurveySchema = [
+    const survey: FormSchema = [
       {
         id: "id",
         type: "number",
@@ -104,7 +104,7 @@ describe("createValidationSchema", () => {
   });
 
   it("should create a schema for a checkbox that passes", async () => {
-    const survey: SurveySchema = [
+    const survey: FormSchema = [
       {
         id: "id",
         type: "checkbox",
@@ -122,7 +122,7 @@ describe("createValidationSchema", () => {
   });
 
   it("should create a schema for 2 radio groups where one is required and checks different inputs", async () => {
-    const survey: SurveySchema = [
+    const survey: FormSchema = [
       {
         id: "id",
         type: "options",

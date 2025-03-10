@@ -9,7 +9,6 @@ import {
   useSensor,
   useSensors,
   DragEndEvent,
-  DragOverEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -17,9 +16,9 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { GripVertical } from "lucide-react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { GripVertical } from "lucide-react";
 
 const SortableItem = ({ id }: { id: number }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -39,12 +38,14 @@ const SortableItem = ({ id }: { id: number }) => {
       >
         <GripVertical />
       </button>
-      <div className="bg-card grow rounded-md p-4">Item {id}</div>
+      <div className="bg-card grow rounded-md p-4">
+        Item {id} <input />
+      </div>
     </div>
   );
 };
 
-export default function Builder() {
+export default function SortableList() {
   const [items, setItems] = useState([1, 2, 3, 4]);
 
   const sensors = useSensors(
@@ -53,29 +54,6 @@ export default function Builder() {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
   );
-
-  return (
-    <div className="gap-12 px-4 py-8 md:px-6">
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-        onDragOver={handleDragOver}
-      >
-        <SortableContext items={items} strategy={verticalListSortingStrategy}>
-          <div className="mx-auto grid max-w-3xl gap-8">
-            {items.map((id) => (
-              <SortableItem key={id} id={id} />
-            ))}
-          </div>
-        </SortableContext>
-      </DndContext>
-    </div>
-  );
-
-  function handleDragOver(e: DragOverEvent) {
-    console.log(e);
-  }
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -89,4 +67,20 @@ export default function Builder() {
       });
     }
   }
+
+  return (
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+    >
+      <SortableContext items={items} strategy={verticalListSortingStrategy}>
+        <div className="mx-auto grid max-w-3xl gap-8">
+          {items.map((id) => (
+            <SortableItem key={id} id={id} />
+          ))}
+        </div>
+      </SortableContext>
+    </DndContext>
+  );
 }

@@ -1,4 +1,4 @@
-import Builder from "./_components/builder";
+import Builder from "@/components/builder";
 import Header from "./_components/header";
 
 export default function CreatePage() {

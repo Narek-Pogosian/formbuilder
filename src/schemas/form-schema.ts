@@ -7,7 +7,7 @@ const FieldTypes = [
   "number",
   "options",
   "checkbox",
-  "checkbox group",
+  "checkboxGroup",
   "email",
   "url",
   "divide",
@@ -73,7 +73,7 @@ export const checkboxSchema = baseFieldSchema.extend({
 });
 
 export const checkboxGroupSchema = baseFieldSchema.extend({
-  type: z.literal("checkbox group"),
+  type: z.literal("checkboxGroup"),
   options: z.array(
     z.object({
       label: z.string().trim().min(1, { message: "A label is required" }),

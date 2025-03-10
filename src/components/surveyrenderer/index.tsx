@@ -19,10 +19,11 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { createValidationSchema } from "./create-validation";
 import { FileQuestion } from "lucide-react";
 import { Textarea } from "../ui/textarea";
+import { FormSchema } from "@/schemas/form-schema";
 
 interface SurveyRendererProps {
   onSubmit: (data: unknown) => void;
-  survey: SurveySchema;
+  survey: FormSchema;
   loading?: boolean;
 }
 
@@ -36,11 +37,11 @@ function SurveyRenderer({ onSubmit, survey, loading }: SurveyRendererProps) {
   if (survey.length === 0) {
     return (
       <div className="mx-auto mb-8 pt-16 text-center">
-        <div className="mx-auto mb-4 flex size-20 items-center justify-center rounded-full bg-primary/5">
-          <FileQuestion className="size-10 text-primary" />
+        <div className="bg-primary/5 mx-auto mb-4 flex size-20 items-center justify-center rounded-full">
+          <FileQuestion className="text-primary size-10" />
         </div>
         <h2 className="mb-2 text-xl font-semibold">Your survey is empty.</h2>
-        <p className="text-sm text-foreground-muted">
+        <p className="text-foreground-muted text-sm">
           Add some questions to see how they&apos;ll appear to your respondents.
         </p>
       </div>
@@ -216,7 +217,7 @@ function SurveyRenderer({ onSubmit, survey, loading }: SurveyRendererProps) {
                         {formField.options.map((option) => (
                           <FormItem
                             key={option.value}
-                            className="flex items-center space-x-3 space-y-0"
+                            className="flex items-center space-y-0 space-x-3"
                           >
                             <FormControl>
                               <RadioGroupItem value={option.value} />

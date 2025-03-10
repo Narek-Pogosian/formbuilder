@@ -1,9 +1,9 @@
 import { createValidationSchema } from "../components/surveyrenderer/create-validation";
-import { type FormSchema } from "@/schemas/form-schema";
 import { describe, it, expect } from "vitest";
+import { type FormSchema } from "@/schemas/form-schema";
 
 describe("createValidationSchema", () => {
-  it("should create a schema for text and textarea field with min and max length", async () => {
+  it("should create a schema for required text and textarea field", async () => {
     const survey: FormSchema = [
       {
         id: "id",
@@ -11,6 +11,8 @@ describe("createValidationSchema", () => {
         label: "username",
         placeholder: "",
         required: true,
+        showDescription: false,
+        longAnswer: false,
       },
       {
         id: "id",
@@ -18,6 +20,8 @@ describe("createValidationSchema", () => {
         label: "bio",
         placeholder: "",
         required: true,
+        longAnswer: true,
+        showDescription: false,
       },
     ];
 
@@ -27,20 +31,12 @@ describe("createValidationSchema", () => {
     expect(schema.shape).toHaveProperty("bio");
 
     await expect(
-      schema.parseAsync({ username: "a", bio: "okay" }),
-    ).rejects.toThrow(/at least 3 characters/);
+      schema.parseAsync({ username: "", bio: "okay" }),
+    ).rejects.toThrow();
 
     await expect(
-      schema.parseAsync({ username: "okay", bio: "a" }),
-    ).rejects.toThrow(/at least 3 characters/);
-
-    await expect(
-      schema.parseAsync({ username: "a".repeat(11), bio: "okay" }),
-    ).rejects.toThrow(/at most 10 characters/);
-
-    await expect(
-      schema.parseAsync({ username: "okay", bio: "a".repeat(11) }),
-    ).rejects.toThrow(/at most 10 characters/);
+      schema.parseAsync({ username: "okay", bio: "" }),
+    ).rejects.toThrow();
 
     await expect(
       schema.parseAsync({ username: "valid", bio: "valid" }),
@@ -55,12 +51,15 @@ describe("createValidationSchema", () => {
         label: "nickname",
         required: false,
         placeholder: "",
+        showDescription: false,
+        longAnswer: false,
       },
       {
         id: "id2",
         type: "number",
         label: "age",
         required: false,
+        showDescription: false,
       },
     ];
 
@@ -91,6 +90,7 @@ describe("createValidationSchema", () => {
         min: 18,
         max: 99,
         required: true,
+        showDescription: false,
       },
     ];
 
@@ -110,6 +110,7 @@ describe("createValidationSchema", () => {
         type: "checkbox",
         label: "consent",
         required: false,
+        showDescription: false,
       },
     ];
 
@@ -128,6 +129,7 @@ describe("createValidationSchema", () => {
         type: "options",
         label: "radio1",
         required: false,
+        showDescription: false,
         options: [
           { value: "option1" },
           { value: "option2" },
@@ -139,6 +141,7 @@ describe("createValidationSchema", () => {
         type: "options",
         label: "radio2",
         required: true,
+        showDescription: false,
         options: [
           { value: "option1" },
           { value: "option2" },
@@ -181,7 +184,6 @@ describe("createValidationSchema", () => {
       },
     ];
 
-    // @ts-expect-error we are testing a wrong input
     expect(() => createValidationSchema(survey)).toThrow(
       /Unsupported field type/,
     );

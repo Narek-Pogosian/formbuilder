@@ -17,13 +17,15 @@ function Header() {
       </div>
 
       <div className="flex items-center md:gap-4">
-        <Button size="sm" variant="ghost" className="text-primary-text">
+        <Button size="sm" variant="ghost" className="text-accent-text">
           <Settings /> Settings
         </Button>
         <Button size="sm" variant="ghost">
           <Eye /> Preview
         </Button>
-        <Button size="sm">Publish</Button>
+        <Button size="sm" variant="accent">
+          Publish
+        </Button>
       </div>
     </header>
   );

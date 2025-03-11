@@ -1,4 +1,5 @@
 import { type FieldType } from "@/schemas/field-schemas";
+import { FormSchemaField } from "@/schemas/form-schema";
 import {
   CircleCheckBig,
   Heading2,
@@ -13,28 +14,89 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-type Value = {
+import TextCreateForm from "./create-forms/text-create-form";
+
+export type CreateFormProps = {
+  handleAdd: (data: FormSchemaField) => void | "Label Error";
+};
+
+type Value = Readonly<{
   label: string;
   icon: LucideIcon;
   isLayout: boolean;
-
-  //   addForm?: React.ComponentType<"">;
-  //   example?: React.ComponentType<"">;
-  //   renderComponent: React.ComponentType<"">
-};
+  createForm: React.ComponentType<CreateFormProps>;
+}>;
 
 type Fields = Record<FieldType, Value>;
 
 export const Fields: Fields = {
-  title: { icon: Heading2, label: "Subtitle", isLayout: true },
-  paragraph: { icon: Pilcrow, label: "Paragraph", isLayout: true },
-  divide: { icon: Minus, label: "Divider", isLayout: true },
+  title: {
+    icon: Heading2,
+    label: "Subtitle",
+    isLayout: true,
+    createForm: TextCreateForm,
+  },
 
-  text: { icon: Type, label: "Text", isLayout: false },
-  number: { icon: Sigma, label: "Number", isLayout: false },
-  options: { icon: ListTodo, label: "Multi Options", isLayout: false },
-  email: { icon: Mail, label: "Email", isLayout: false },
-  url: { icon: Link2, label: "URL", isLayout: false },
-  checkbox: { icon: CircleCheckBig, label: "Checkbox", isLayout: false },
-  checkboxGroup: { icon: ListChecks, label: "Checkbox Group", isLayout: false },
+  paragraph: {
+    icon: Pilcrow,
+    label: "Paragraph",
+    isLayout: true,
+    createForm: TextCreateForm,
+  },
+
+  divide: {
+    icon: Minus,
+    label: "Divider",
+    isLayout: true,
+    createForm: TextCreateForm,
+  },
+
+  text: {
+    icon: Type,
+    label: "Text",
+    isLayout: false,
+    createForm: TextCreateForm,
+  },
+
+  number: {
+    icon: Sigma,
+    label: "Number",
+    isLayout: false,
+    createForm: TextCreateForm,
+  },
+
+  options: {
+    icon: ListTodo,
+    label: "Multi Options",
+    isLayout: false,
+    createForm: TextCreateForm,
+  },
+
+  email: {
+    icon: Mail,
+    label: "Email",
+    isLayout: false,
+    createForm: TextCreateForm,
+  },
+
+  url: {
+    icon: Link2,
+    label: "URL",
+    isLayout: false,
+    createForm: TextCreateForm,
+  },
+
+  checkbox: {
+    icon: CircleCheckBig,
+    label: "Checkbox",
+    isLayout: false,
+    createForm: TextCreateForm,
+  },
+
+  checkboxGroup: {
+    icon: ListChecks,
+    label: "Checkbox Group",
+    isLayout: false,
+    createForm: TextCreateForm,
+  },
 } as const;

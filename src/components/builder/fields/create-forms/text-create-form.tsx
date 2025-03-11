@@ -1,6 +1,11 @@
-import { useForm } from "react-hook-form";
-import { textSchema } from "@/schemas/field-schemas";
+import { type CreateFormProps } from "..";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { textSchema } from "@/schemas/field-schemas";
+import { Textarea } from "@/components/ui/textarea";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { type z } from "zod";
+import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
@@ -9,36 +14,34 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { type FieldFormProps } from ".";
-import { type z } from "zod";
-import { Switch } from "@/components/ui/switch";
+import { Checkbox } from "@/components/ui/checkbox";
 
-const textFormSchema = textSchema.omit({ id: true, type: true });
+const textFormSchema = textSchema.omit({
+  id: true,
+  type: true,
+  isFieldSchema: true,
+});
+
 type TextFormSchemaType = z.infer<typeof textFormSchema>;
 
-function TextForm({ defaultField, handleAdd }: FieldFormProps) {
-  if (defaultField && defaultField.type !== "text")
-    throw Error("Need to pass in a text field to text form");
-
+export default function TextCreateForm({ handleAdd }: CreateFormProps) {
   const form = useForm<TextFormSchemaType>({
     resolver: zodResolver(textFormSchema),
     defaultValues: {
-      label: defaultField?.label ?? "",
-      placeholder: defaultField?.placeholder ?? "",
-      description: defaultField?.description ?? "",
-      required: defaultField?.required ?? false,
-      showDescription: defaultField?.showDescription ?? false,
-      longAnswer: defaultField?.longAnswer ?? false,
+      label: "",
+      placeholder: "",
+      description: "",
+      required: false,
+      showDescription: false,
+      longAnswer: false,
     },
   });
 
   function onSubmit(data: TextFormSchemaType) {
     const res = handleAdd({
-      id: defaultField?.id ?? crypto.randomUUID(),
+      id: crypto.randomUUID(),
       type: "text",
+      isFieldSchema: true,
       ...data,
     });
 
@@ -81,14 +84,14 @@ function TextForm({ defaultField, handleAdd }: FieldFormProps) {
           )}
         />
 
-        <div className="flex gap-8">
+        <div className="flex flex-wrap justify-around gap-3">
           <FormField
             control={form.control}
             name="required"
             render={({ field }) => (
               <FormItem className="flex items-center gap-1">
                 <FormControl>
-                  <Switch
+                  <Checkbox
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
@@ -104,7 +107,7 @@ function TextForm({ defaultField, handleAdd }: FieldFormProps) {
             render={({ field }) => (
               <FormItem className="flex items-center gap-1">
                 <FormControl>
-                  <Switch
+                  <Checkbox
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
@@ -120,7 +123,7 @@ function TextForm({ defaultField, handleAdd }: FieldFormProps) {
             render={({ field }) => (
               <FormItem className="flex items-center gap-1">
                 <FormControl>
-                  <Switch
+                  <Checkbox
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
@@ -132,7 +135,7 @@ function TextForm({ defaultField, handleAdd }: FieldFormProps) {
           />
         </div>
 
-        {form.getValues().showDescription && (
+        {form.watch("showDescription") && (
           <FormField
             control={form.control}
             name="description"
@@ -148,10 +151,8 @@ function TextForm({ defaultField, handleAdd }: FieldFormProps) {
           />
         )}
 
-        <Button type="submit">{defaultField ? "Edit" : "Add"}</Button>
+        <Button type="submit">Add field</Button>
       </form>
     </Form>
   );
 }
-
-export default TextForm;

@@ -1,12 +1,16 @@
 import { type LucideIcon } from "lucide-react";
+import { FormSchemaField } from "@/schemas/form-schema";
+import { createElement } from "react";
 import { useFormStore } from "../store";
 import { Button } from "@/components/ui/button";
 import { Fields } from "../fields";
 
 export default function FieldDialogContent() {
-  const selectedFieldType = useFormStore(
-    (state) => state.fieldDialog.selectedFieldType,
-  );
+  const fieldDialogState = useFormStore((state) => state.fieldDialog);
+  const fields = useFormStore((state) => state.fields);
+
+  const addField = useFormStore((state) => state.addField);
+  const setFieldDalogOpen = useFormStore((state) => state.setFieldDalogOpen);
 
   const layoutFields = Object.entries(Fields).filter(
     ([_, value]) => value.isLayout,
@@ -15,7 +19,7 @@ export default function FieldDialogContent() {
     ([_, value]) => !value.isLayout,
   );
 
-  if (!selectedFieldType) {
+  if (!fieldDialogState.selectedFieldType) {
     return (
       <div className="-mt-4 grid gap-8">
         <FieldList title="Form" fields={formFields} />
@@ -24,9 +28,28 @@ export default function FieldDialogContent() {
     );
   }
 
+  function handleAdd(data: FormSchemaField) {
+    if (
+      data.isFieldSchema &&
+      fields
+        .filter((field) => field.isFieldSchema)
+        .find(
+          (field) =>
+            field.label.trim() === data.label.trim() && field.id !== data.id,
+        )
+    ) {
+      return "Label Error";
+    }
+
+    addField(data, fieldDialogState.bellowId);
+    setFieldDalogOpen(false);
+  }
+
   return (
-    <div>
-      <div>Field form - {selectedFieldType}</div>
+    <div className="-mt-4">
+      {createElement(Fields[fieldDialogState.selectedFieldType].createForm, {
+        handleAdd,
+      })}
     </div>
   );
 }

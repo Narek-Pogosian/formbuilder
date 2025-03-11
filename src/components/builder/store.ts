@@ -18,9 +18,7 @@ type Settings = {
 type Fields = {
   fields: FormSchema;
 
-  addField: (field: FormSchemaField) => void;
-  addFieldBelowId: (field: FormSchemaField, id: string) => void;
-
+  addField: (field: FormSchemaField, bellowId?: string) => void;
   removeField: (id: string) => void;
   editField: (field: FormSchemaField) => void;
   setFields: (fields: FormSchema) => void;
@@ -29,14 +27,12 @@ type Fields = {
 type FieldDialog = {
   fieldDialog: {
     isOpen: boolean;
-    fieldToUpdate: FormSchemaField | null;
-    selectedFieldType: FieldType | null;
-    bellowId: string | null;
+    selectedFieldType: FieldType | undefined;
+    bellowId: string | undefined;
   };
 
   setFieldDalogOpen: (val: boolean) => void;
-  setFieldToUpdate: (field: FormSchemaField) => void;
-  setSelectedFieldType: (type: FieldType | null) => void;
+  setSelectedFieldType: (type: FieldType | undefined) => void;
   setBellowId: (id: string) => void;
 };
 
@@ -56,9 +52,8 @@ export const useFormStore = create(
 
       fieldDialog: {
         isOpen: false,
-        fieldToUpdate: null,
-        selectedFieldType: null,
-        bellowId: null,
+        selectedFieldType: undefined,
+        bellowId: undefined,
       },
 
       setTitle: (newTitle: string) =>
@@ -66,16 +61,15 @@ export const useFormStore = create(
           state.settings.title = newTitle;
         }),
 
-      addField: (field: FormSchemaField) =>
+      addField: (field: FormSchemaField, bellowId?: string) =>
         set((state) => {
-          state.fields.push(field);
-        }),
-
-      addFieldBelowId: (field: FormSchemaField, id: string) =>
-        set((state) => {
-          const index = state.fields.findIndex((f) => f.id === id);
-          if (index !== -1) {
-            state.fields.splice(index + 1, 0, field);
+          if (bellowId) {
+            const index = state.fields.findIndex((f) => f.id === bellowId);
+            if (index !== -1) {
+              state.fields.splice(index + 1, 0, field);
+            }
+          } else {
+            state.fields.push(field);
           }
         }),
 
@@ -104,27 +98,15 @@ export const useFormStore = create(
           } else {
             state.fieldDialog = {
               isOpen: false,
-              fieldToUpdate: null,
-              selectedFieldType: null,
-              bellowId: null,
+              selectedFieldType: undefined,
+              bellowId: undefined,
             };
           }
         }),
 
-      setFieldToUpdate: (field: FormSchemaField) =>
+      setSelectedFieldType: (type: FieldType | undefined) =>
         set((state) => {
-          state.fieldDialog.fieldToUpdate = field;
-          state.fieldDialog.selectedFieldType = field.type;
-        }),
-
-      setSelectedFieldType: (type: FieldType | null) =>
-        set((state) => {
-          if (state.fieldDialog.fieldToUpdate) {
-            state.fieldDialog.selectedFieldType =
-              state.fieldDialog.fieldToUpdate.type;
-          } else {
-            state.fieldDialog.selectedFieldType = type;
-          }
+          state.fieldDialog.selectedFieldType = type;
         }),
 
       setBellowId: (id: string) =>

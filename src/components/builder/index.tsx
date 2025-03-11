@@ -10,7 +10,7 @@ export default function Builder() {
     <div className="mx-auto w-full max-w-2xl px-4 py-8">
       <Title />
 
-      <div className="text-primary-text mb-8">
+      <div className="text-accent-text mb-8">
         {JSON.stringify(fields, null, 2)}
       </div>
 

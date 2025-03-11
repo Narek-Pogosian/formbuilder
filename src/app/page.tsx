@@ -17,7 +17,7 @@ export default function Home() {
             uncover trends, and make data-driven decisions with ease.
           </p>
         </div>
-        <Button asChild>
+        <Button variant="accent" asChild>
           <Link href="/create">
             Create a free form <ArrowRight />
           </Link>

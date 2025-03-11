@@ -134,7 +134,7 @@ function OptionsForm({ defaultField, handleAdd }: FieldFormProps) {
           />
         </div>
 
-        {form.getValues().showDescription && (
+        {form.watch("showDescription").showDescription && (
           <FormField
             control={form.control}
             name="description"
@@ -173,7 +173,7 @@ function OptionsForm({ defaultField, handleAdd }: FieldFormProps) {
             type="button"
             size="sm"
             variant="outline"
-            className="mt-2 bg-background-input"
+            className="bg-background-input mt-2"
             onClick={() => append({ value: "" })}
           >
             Add Option
@@ -216,7 +216,7 @@ const SortableItem = ({
       }}
       className="flex cursor-grab items-start gap-1"
     >
-      <GripVertical className="mt-2 size-5 text-foreground-muted" />
+      <GripVertical className="text-foreground-muted mt-2 size-5" />
       <FormField
         control={control}
         name={`options.${index}.value`}

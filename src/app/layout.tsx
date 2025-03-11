@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-scrollbar h-full overflow-y-scroll"
+      className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-scrollbar h-full"
       suppressHydrationWarning
     >
       <body

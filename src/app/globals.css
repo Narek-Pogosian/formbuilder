@@ -34,7 +34,7 @@
 .dark {
   --primary-text: hsl(343, 48%, 63%);
 
-  --background: hsl(240, 8%, 9%);
+  --background: hsl(240, 8%, 8%);
   --foreground: hsl(240, 8%, 98%);
   --foreground-muted: hsl(240, 8%, 75%);
 

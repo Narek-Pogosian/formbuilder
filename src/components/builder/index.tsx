@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "../ui/button";
+import FieldDialog from "./field-dialog";
 import { useFormStore } from "./store";
 
 export default function Builder() {
@@ -10,12 +10,11 @@ export default function Builder() {
     <div className="mx-auto w-full max-w-2xl px-4 py-8">
       <Title />
 
-      <p className="text-primary-text">Sortable list of readonly fields</p>
-      <div className="mb-8">{JSON.stringify(fields, null, 2)}</div>
+      <div className="text-primary-text mb-8">
+        {JSON.stringify(fields, null, 2)}
+      </div>
 
-      <Button variant="secondary" size="sm">
-        Add field
-      </Button>
+      <FieldDialog />
     </div>
   );
 }

@@ -14,6 +14,11 @@
   --foreground: hsl(240, 2%, 10%);
   --foreground-muted: hsl(240, 2%, 35%);
 
+  --input-background: hsl(240, 12%, 99.5%);
+  --input-foreground: hsl(240, 2%, 10%);
+  --input-placeholder: hsl(240, 6%, 35%);
+  --input-border: hsl(240, 12%, 89.5%);
+
   --primary: hsl(240 5.9% 10%);
   --primary-foreground: hsl(0 0% 98%);
 
@@ -29,7 +34,6 @@
 
   --scrollbar: hsl(240, 8%, 82%);
   --border: hsl(240, 6%, 92%);
-  --input: hsl(240, 6%, 82%);
   --ring: hsl(0, 0%, 0%);
 
   --radius: 6px;
@@ -43,6 +47,11 @@
   --foreground: hsl(240, 8%, 98%);
   --foreground-muted: hsl(240, 8%, 70%);
 
+  --input-background: hsl(240, 8%, 10%);
+  --input-foreground: hsl(240, 8%, 98%);
+  --input-placeholder: hsl(240, 6%, 65%);
+  --input-border: hsl(240, 8%, 16%);
+
   --primary: hsl(0 0% 98%);
   --primary-foreground: hsl(240 5.9% 10%);
 
@@ -53,8 +62,7 @@
   --popover-foreground: hsl(0, 100%, 98.5%);
 
   --scrollbar: hsl(240, 8%, 22%);
-  --border: hsl(240, 6%, 27%);
-  --input: hsl(240, 6%, 27%);
+  --border: hsl(240, 6%, 22%);
   --ring: hsl(0, 0%, 100%);
 }
 
@@ -66,6 +74,11 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
+
+  --color-input-background: var(--input-background);
+  --color-input-foreground: var(--input-foreground);
+  --color-input-placeholder: var(--input-placeholder);
+  --color-input-border: var(--input-border);
 
   --color-destructive: var(--destructive);
   --color-destructive-text: var(--destructive-text);
@@ -82,7 +95,6 @@
 
   --color-scrollbar: var(--scrollbar);
   --color-border: var(--border);
-  --color-input: var(--input);
   --color-ring: var(--ring);
 
   --radius-sm: calc(var(--radius) - 4px);

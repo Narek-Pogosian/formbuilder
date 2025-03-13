@@ -20,7 +20,7 @@ export default function RenderEmailField({
   return (
     <FormField
       control={form.control}
-      name={formField.label}
+      name={formField.id}
       render={({ field }) => (
         <FormItem>
           <FormLabel>{formField.label}</FormLabel>

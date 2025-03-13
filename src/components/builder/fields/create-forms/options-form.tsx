@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { type z } from "zod";
@@ -24,7 +24,7 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { CreateFormProps } from "..";
+import { type CreateFormProps } from "..";
 
 export const optionsFormSchema = optionsSchema.omit({
   id: true,
@@ -114,7 +114,7 @@ export default function OptionsCreateForm({
             render={({ field }) => (
               <FormItem className="col-span-2 flex items-center gap-1">
                 <FormControl>
-                  <Switch
+                  <Checkbox
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
@@ -130,7 +130,7 @@ export default function OptionsCreateForm({
             render={({ field }) => (
               <FormItem className="flex items-center gap-1">
                 <FormControl>
-                  <Switch
+                  <Checkbox
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />

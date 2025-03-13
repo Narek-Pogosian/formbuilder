@@ -20,7 +20,7 @@ export default function RenderCheckboxField({
   return (
     <FormField
       control={form.control}
-      name={formField.label}
+      name={formField.id}
       render={({ field }) => (
         <FormItem>
           <div className="flex items-center gap-2">
@@ -30,7 +30,7 @@ export default function RenderCheckboxField({
                 onCheckedChange={field.onChange}
               />
             </FormControl>
-            <FormLabel className="mb-0 text-base">{formField.label}</FormLabel>
+            <FormLabel className="mb-0">{formField.label}</FormLabel>
           </div>
 
           <FormMessage />

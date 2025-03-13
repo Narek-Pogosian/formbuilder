@@ -20,10 +20,10 @@ export default function RenderOptionsField({
   return (
     <FormField
       control={form.control}
-      name={formField.label}
+      name={formField.id}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="text-base">{formField.label}</FormLabel>
+          <FormLabel>{formField.label}</FormLabel>
           {formField.showDescription && formField.description && (
             <FormDescription>{formField.description}</FormDescription>
           )}

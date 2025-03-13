@@ -27,21 +27,7 @@ export const formSchema = z
       titleSchema,
     ]),
   )
-  .min(1, { message: "At least 1 field is required" })
-  .refine(
-    (data) => {
-      const labels = data
-        .filter((item) => item.isFieldType)
-        .map((item) => item.label);
-
-      const uniqueLabels = new Set(labels);
-      return uniqueLabels.size === labels.length;
-    },
-    {
-      message: "Labels must be unique",
-      path: [],
-    },
-  );
+  .min(1, { message: "At least 1 field is required" });
 
 export type FormSchema = z.infer<typeof formSchema>;
 export type FormSchemaField = FormSchema[number];

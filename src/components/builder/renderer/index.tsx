@@ -43,12 +43,12 @@ function FormRenderer({ onSubmit, survey }: FormRendererProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mx-auto grid w-full max-w-2xl gap-y-8"
       >
-        {survey.map((formField, i) => {
+        {survey.map((formField) => {
           return createElement(Fields[formField.type].renderField, {
             // @ts-expect-error it works
             form,
             formField,
-            key: i,
+            key: formField.id,
           });
         })}
 

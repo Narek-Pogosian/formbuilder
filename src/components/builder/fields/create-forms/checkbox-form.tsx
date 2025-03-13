@@ -12,9 +12,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { type z } from "zod";
-import { Switch } from "@/components/ui/switch";
-import { CreateFormProps } from "..";
+import { type CreateFormProps } from "..";
 
 const checkboxFormSchema = checkboxSchema.omit({
   id: true,
@@ -81,7 +81,7 @@ export default function CheckboxCreateForm({
             render={({ field }) => (
               <FormItem className="col-span-2 flex items-center">
                 <FormControl>
-                  <Switch
+                  <Checkbox
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
@@ -97,7 +97,7 @@ export default function CheckboxCreateForm({
             render={({ field }) => (
               <FormItem className="flex items-center">
                 <FormControl>
-                  <Switch
+                  <Checkbox
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />

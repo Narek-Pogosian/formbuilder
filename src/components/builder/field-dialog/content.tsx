@@ -7,7 +7,6 @@ import { Fields } from "../fields";
 
 export default function FieldDialogContent() {
   const fieldDialogState = useFormStore((state) => state.fieldDialog);
-  const fields = useFormStore((state) => state.fields);
 
   const addField = useFormStore((state) => state.addField);
   const setFieldDalogOpen = useFormStore((state) => state.setFieldDalogOpen);
@@ -32,18 +31,6 @@ export default function FieldDialogContent() {
   }
 
   function handleAdd(data: FormSchemaField) {
-    if (
-      data.isFieldType &&
-      fields
-        .filter((field) => field.isFieldType)
-        .find(
-          (field) =>
-            field.label.trim() === data.label.trim() && field.id !== data.id,
-        )
-    ) {
-      return "Label Error";
-    }
-
     addField(data, fieldDialogState.bellowId);
     setFieldDalogOpen(false);
   }

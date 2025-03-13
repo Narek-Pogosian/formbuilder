@@ -106,7 +106,7 @@ export function createValidationSchema(form: FormSchema) {
           throw new Error(`Unsupported field type`);
       }
 
-      shape[field.label] = fieldSchema;
+      shape[field.id] = fieldSchema;
     });
 
   return z.object(shape);

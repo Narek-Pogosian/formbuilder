@@ -18,7 +18,7 @@ export default function RenderTextField({ form, formField }: RenderFieldProps) {
   return (
     <FormField
       control={form.control}
-      name={formField.label}
+      name={formField.id}
       render={({ field }) => (
         <FormItem>
           <FormLabel>{formField.label}</FormLabel>

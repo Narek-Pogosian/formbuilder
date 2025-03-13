@@ -23,7 +23,7 @@ export default function FieldDialog() {
           Add field
         </Button>
       </DialogTrigger>
-      <DialogContent className="data-[state=closed]:animate-none data-[state=closed]:duration-0 md:p-10">
+      <DialogContent className="data-[state=closed]:animate-none data-[state=closed]:duration-0 md:p-8">
         <DialogHeader>
           <DialogTitle className="sr-only">Fields</DialogTitle>
           <DialogDescription></DialogDescription>

@@ -14,16 +14,21 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import TextCreateForm from "./create-forms/text-create-form";
+import TextCreateForm from "./create-forms/text-form";
+import NumberCreateForm from "./create-forms/number-form";
+import EmailCreateForm from "./create-forms/email-form";
+import CheckboxCreateForm from "./create-forms/checkbox-form";
+import OptionsCreateForm from "./create-forms/options-form";
 
 export type CreateFormProps = {
-  handleAdd: (data: FormSchemaField) => void | "Label Error";
+  submitHandler: (data: FormSchemaField) => void | "Label Error";
+  defaultField?: FormSchemaField;
 };
 
 type Value = Readonly<{
   label: string;
   icon: LucideIcon;
-  isLayout: boolean;
+  isFieldType: boolean;
   createForm: React.ComponentType<CreateFormProps>;
 }>;
 
@@ -33,70 +38,70 @@ export const Fields: Fields = {
   title: {
     icon: Heading2,
     label: "Subtitle",
-    isLayout: true,
+    isFieldType: false,
     createForm: TextCreateForm,
   },
 
   paragraph: {
     icon: Pilcrow,
     label: "Paragraph",
-    isLayout: true,
+    isFieldType: false,
     createForm: TextCreateForm,
   },
 
   divide: {
     icon: Minus,
     label: "Divider",
-    isLayout: true,
+    isFieldType: false,
     createForm: TextCreateForm,
   },
 
   text: {
     icon: Type,
     label: "Text",
-    isLayout: false,
+    isFieldType: true,
     createForm: TextCreateForm,
   },
 
   number: {
     icon: Sigma,
     label: "Number",
-    isLayout: false,
-    createForm: TextCreateForm,
+    isFieldType: true,
+    createForm: NumberCreateForm,
   },
 
   options: {
     icon: ListTodo,
     label: "Multi Options",
-    isLayout: false,
-    createForm: TextCreateForm,
+    isFieldType: true,
+    createForm: OptionsCreateForm,
   },
 
   email: {
     icon: Mail,
     label: "Email",
-    isLayout: false,
-    createForm: TextCreateForm,
+    isFieldType: true,
+    createForm: EmailCreateForm,
   },
 
   url: {
     icon: Link2,
     label: "URL",
-    isLayout: false,
+    isFieldType: true,
     createForm: TextCreateForm,
   },
 
   checkbox: {
     icon: CircleCheckBig,
     label: "Checkbox",
-    isLayout: false,
-    createForm: TextCreateForm,
+    isFieldType: true,
+    createForm: CheckboxCreateForm,
   },
 
   checkboxGroup: {
     icon: ListChecks,
     label: "Checkbox Group",
-    isLayout: false,
+    isFieldType: true,
     createForm: TextCreateForm,
   },
 } as const;

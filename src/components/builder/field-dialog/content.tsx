@@ -1,4 +1,4 @@
-import { type LucideIcon } from "lucide-react";
+import { ArrowLeft, type LucideIcon } from "lucide-react";
 import { FormSchemaField } from "@/schemas/form-schema";
 import { createElement } from "react";
 import { useFormStore } from "../store";
@@ -11,12 +11,15 @@ export default function FieldDialogContent() {
 
   const addField = useFormStore((state) => state.addField);
   const setFieldDalogOpen = useFormStore((state) => state.setFieldDalogOpen);
+  const setSelectedFieldType = useFormStore(
+    (state) => state.setSelectedFieldType,
+  );
 
   const layoutFields = Object.entries(Fields).filter(
-    ([_, value]) => value.isLayout,
+    ([_, value]) => !value.isFieldType,
   );
   const formFields = Object.entries(Fields).filter(
-    ([_, value]) => !value.isLayout,
+    ([_, value]) => value.isFieldType,
   );
 
   if (!fieldDialogState.selectedFieldType) {
@@ -30,9 +33,9 @@ export default function FieldDialogContent() {
 
   function handleAdd(data: FormSchemaField) {
     if (
-      data.isFieldSchema &&
+      data.isFieldType &&
       fields
-        .filter((field) => field.isFieldSchema)
+        .filter((field) => field.isFieldType)
         .find(
           (field) =>
             field.label.trim() === data.label.trim() && field.id !== data.id,
@@ -46,9 +49,19 @@ export default function FieldDialogContent() {
   }
 
   return (
-    <div className="-mt-4">
+    <div className="">
+      <Button
+        size="sm"
+        variant="ghost"
+        className="absolute top-2 left-1"
+        aria-label="Back"
+        onClick={() => setSelectedFieldType(undefined)}
+      >
+        <ArrowLeft className="size-5" />
+      </Button>
+
       {createElement(Fields[fieldDialogState.selectedFieldType].createForm, {
-        handleAdd,
+        submitHandler: handleAdd,
       })}
     </div>
   );

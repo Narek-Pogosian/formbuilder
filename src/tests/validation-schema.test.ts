@@ -13,7 +13,7 @@ describe("createValidationSchema", () => {
         required: true,
         showDescription: false,
         longAnswer: false,
-        isFieldSchema: true,
+        isFieldType: true,
       },
       {
         id: "id",
@@ -23,7 +23,7 @@ describe("createValidationSchema", () => {
         required: true,
         longAnswer: true,
         showDescription: false,
-        isFieldSchema: true,
+        isFieldType: true,
       },
     ];
 
@@ -55,7 +55,7 @@ describe("createValidationSchema", () => {
         placeholder: "",
         showDescription: false,
         longAnswer: false,
-        isFieldSchema: true,
+        isFieldType: true,
       },
       {
         id: "id2",
@@ -63,7 +63,7 @@ describe("createValidationSchema", () => {
         label: "age",
         required: false,
         showDescription: false,
-        isFieldSchema: true,
+        isFieldType: true,
       },
     ];
 
@@ -95,7 +95,7 @@ describe("createValidationSchema", () => {
         max: 99,
         required: true,
         showDescription: false,
-        isFieldSchema: true,
+        isFieldType: true,
       },
     ];
 
@@ -116,7 +116,7 @@ describe("createValidationSchema", () => {
         label: "consent",
         required: false,
         showDescription: false,
-        isFieldSchema: true,
+        isFieldType: true,
       },
     ];
 
@@ -141,7 +141,7 @@ describe("createValidationSchema", () => {
           { value: "option2" },
           { value: "option3" },
         ],
-        isFieldSchema: true,
+        isFieldType: true,
       },
       {
         id: "id",
@@ -154,7 +154,7 @@ describe("createValidationSchema", () => {
           { value: "option2" },
           { value: "option3" },
         ],
-        isFieldSchema: true,
+        isFieldType: true,
       },
     ];
 

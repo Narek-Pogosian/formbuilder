@@ -1,11 +1,6 @@
-import { type CreateFormProps } from "..";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { textSchema } from "@/schemas/field-schemas";
-import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { type z } from "zod";
-import { Input } from "@/components/ui/input";
+import { urlSchema } from "@/schemas/field-schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -14,34 +9,43 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { type z } from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
+import { CreateFormProps } from "..";
 
-const textFormSchema = textSchema.omit({
+const urlFormSchema = urlSchema.omit({
   id: true,
   type: true,
-  isFieldSchema: true,
+  isFieldType: true,
 });
+type UrlFormSchemaType = z.infer<typeof urlFormSchema>;
 
-type TextFormSchemaType = z.infer<typeof textFormSchema>;
+export default function UrlCreateForm({
+  defaultField,
+  submitHandler,
+}: CreateFormProps) {
+  if (defaultField && defaultField.type !== "url")
+    throw Error("Need to pass in a url field to url form");
 
-export default function TextCreateForm({ handleAdd }: CreateFormProps) {
-  const form = useForm<TextFormSchemaType>({
-    resolver: zodResolver(textFormSchema),
+  const form = useForm<UrlFormSchemaType>({
+    resolver: zodResolver(urlFormSchema),
     defaultValues: {
-      label: "",
-      placeholder: "",
-      description: "",
-      required: false,
-      showDescription: false,
-      longAnswer: false,
+      label: defaultField?.label ?? "",
+      placeholder: defaultField?.placeholder ?? "",
+      description: defaultField?.description ?? "",
+      required: defaultField?.required ?? false,
+      showDescription: defaultField?.showDescription ?? false,
     },
   });
 
-  function onSubmit(data: TextFormSchemaType) {
-    const res = handleAdd({
-      id: crypto.randomUUID(),
-      type: "text",
-      isFieldSchema: true,
+  function onSubmit(data: UrlFormSchemaType) {
+    const res = submitHandler({
+      id: defaultField?.id ?? crypto.randomUUID(),
+      type: "url",
+      isFieldType: true,
       ...data,
     });
 
@@ -63,7 +67,7 @@ export default function TextCreateForm({ handleAdd }: CreateFormProps) {
             <FormItem>
               <FormLabel>Label*</FormLabel>
               <FormControl>
-                <Input placeholder="Name" {...field} />
+                <Input placeholder="Website" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -75,67 +79,52 @@ export default function TextCreateForm({ handleAdd }: CreateFormProps) {
           name="placeholder"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Placeholder*</FormLabel>
+              <FormLabel>Placeholder</FormLabel>
               <FormControl>
-                <Input placeholder="John Smith" {...field} />
+                <Input placeholder="google.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <div className="flex flex-wrap justify-around gap-3">
+        <div className="flex gap-8">
           <FormField
             control={form.control}
             name="required"
             render={({ field }) => (
-              <FormItem className="flex items-center gap-1">
+              <FormItem className="flex items-center">
                 <FormControl>
                   <Checkbox
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
                 </FormControl>
-                <FormLabel className="mb-0">Required</FormLabel>
+                <FormLabel className="mb-0 pl-1">Required</FormLabel>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="longAnswer"
-            render={({ field }) => (
-              <FormItem className="flex items-center gap-1">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <FormLabel className="mb-0">Long Answer</FormLabel>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+
           <FormField
             control={form.control}
             name="showDescription"
             render={({ field }) => (
-              <FormItem className="flex items-center gap-1">
+              <FormItem className="flex items-center">
                 <FormControl>
                   <Checkbox
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
                 </FormControl>
-                <FormLabel className="mb-0">Show Description</FormLabel>
+                <FormLabel className="mb-0 pl-1">Show Description</FormLabel>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
 
-        {form.watch("showDescription") && (
+        {form.watch("description") && (
           <FormField
             control={form.control}
             name="description"
@@ -151,7 +140,7 @@ export default function TextCreateForm({ handleAdd }: CreateFormProps) {
           />
         )}
 
-        <Button type="submit">Add field</Button>
+        <Button type="submit">{defaultField ? "Edit" : "Add"}</Button>
       </form>
     </Form>
   );

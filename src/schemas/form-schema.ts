@@ -31,7 +31,7 @@ export const formSchema = z
   .refine(
     (data) => {
       const labels = data
-        .filter((item) => item.isFieldSchema)
+        .filter((item) => item.isFieldType)
         .map((item) => item.label);
 
       const uniqueLabels = new Set(labels);

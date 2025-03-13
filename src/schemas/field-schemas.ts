@@ -16,12 +16,12 @@ const FieldTypes = [
 const baseSchema = z.object({
   id: z.string(),
   type: z.enum(FieldTypes),
-  isFieldSchema: z.literal(false),
+  isFieldType: z.literal(false),
 });
 
 const baseFieldSchema = baseSchema.extend({
   showDescription: z.boolean(),
-  isFieldSchema: z.literal(true),
+  isFieldType: z.literal(true),
   description: z.string().optional(),
   required: z.boolean(),
   label: z

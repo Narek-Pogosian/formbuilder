@@ -2,7 +2,13 @@
 
 ## Todo
 
-### I18n
+### Fields to add
+
+- Checkbox group
+- Linear scale, radio group with numbers
+
+- Space, divide
+- H2, text
 
 ### Survey settings
 
@@ -10,23 +16,14 @@
 - Expiration date,
 - Progress bar
 
+### Field dialog
+
+- Make it larger on deksktop and show field selectors on left side and and the selected form on the right.
+
 ### Customization:
 
-- colors, images
+- Colors, images
 
 ### Conditional logic
 
 - Show follow up field based on answer
-
-### Fields to add
-
-- Multiple Choice
-- Text Input (short and long answer)
-- Number input
-- Checkbox & checkbox group
-- Radio group (Options)
-- Linear scale, radio group with numbers
-- Url, email
-
-- Space, divide
-- H2, text

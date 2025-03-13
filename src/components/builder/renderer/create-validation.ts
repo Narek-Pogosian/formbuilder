@@ -5,7 +5,7 @@ export function createValidationSchema(form: FormSchema) {
   const shape: Record<string, ZodTypeAny> = {};
 
   form
-    .filter((field) => field.isFieldSchema)
+    .filter((field) => field.isFieldType)
     .forEach((field) => {
       let fieldSchema;
 

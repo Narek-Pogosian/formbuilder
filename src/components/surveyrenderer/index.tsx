@@ -1,6 +1,5 @@
 "use client";
 
-import { type SurveySchema } from "@/lib/zod/survey-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
@@ -16,7 +15,7 @@ import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { createValidationSchema } from "./create-validation";
+import { createValidationSchema } from "../builder/renderer/create-validation";
 import { FileQuestion } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import { FormSchema } from "@/schemas/form-schema";

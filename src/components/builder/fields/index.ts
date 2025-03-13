@@ -1,5 +1,7 @@
 import { type FieldType } from "@/schemas/field-schemas";
-import { FormSchemaField } from "@/schemas/form-schema";
+import { type UseFormReturn } from "react-hook-form";
+import { type FormSchemaField } from "@/schemas/form-schema";
+
 import {
   CircleCheckBig,
   Heading2,
@@ -19,10 +21,21 @@ import NumberCreateForm from "./create-forms/number-form";
 import EmailCreateForm from "./create-forms/email-form";
 import CheckboxCreateForm from "./create-forms/checkbox-form";
 import OptionsCreateForm from "./create-forms/options-form";
+import RenderTextField from "./render-fields/text-field";
+import RenderNumberField from "./render-fields/number-field";
+import RenderOptionsField from "./render-fields/options-field";
+import RenderEmailField from "./render-fields/email-field";
+import RenderUrlField from "./render-fields/url-field";
+import RenderCheckboxField from "./render-fields/checkbox-field";
 
 export type CreateFormProps = {
   submitHandler: (data: FormSchemaField) => void | "Label Error";
   defaultField?: FormSchemaField;
+};
+
+export type RenderFieldProps = {
+  form: UseFormReturn;
+  formField: FormSchemaField;
 };
 
 type Value = Readonly<{
@@ -30,6 +43,7 @@ type Value = Readonly<{
   icon: LucideIcon;
   isFieldType: boolean;
   createForm: React.ComponentType<CreateFormProps>;
+  renderField: React.ComponentType<RenderFieldProps>;
 }>;
 
 type Fields = Record<FieldType, Value>;
@@ -40,6 +54,7 @@ export const Fields: Fields = {
     label: "Subtitle",
     isFieldType: false,
     createForm: TextCreateForm,
+    renderField: RenderTextField,
   },
 
   paragraph: {
@@ -47,6 +62,7 @@ export const Fields: Fields = {
     label: "Paragraph",
     isFieldType: false,
     createForm: TextCreateForm,
+    renderField: RenderTextField,
   },
 
   divide: {
@@ -54,6 +70,7 @@ export const Fields: Fields = {
     label: "Divider",
     isFieldType: false,
     createForm: TextCreateForm,
+    renderField: RenderTextField,
   },
 
   text: {
@@ -61,6 +78,7 @@ export const Fields: Fields = {
     label: "Text",
     isFieldType: true,
     createForm: TextCreateForm,
+    renderField: RenderTextField,
   },
 
   number: {
@@ -68,6 +86,7 @@ export const Fields: Fields = {
     label: "Number",
     isFieldType: true,
     createForm: NumberCreateForm,
+    renderField: RenderNumberField,
   },
 
   options: {
@@ -75,6 +94,7 @@ export const Fields: Fields = {
     label: "Multi Options",
     isFieldType: true,
     createForm: OptionsCreateForm,
+    renderField: RenderOptionsField,
   },
 
   email: {
@@ -82,6 +102,7 @@ export const Fields: Fields = {
     label: "Email",
     isFieldType: true,
     createForm: EmailCreateForm,
+    renderField: RenderEmailField,
   },
 
   url: {
@@ -89,6 +110,7 @@ export const Fields: Fields = {
     label: "URL",
     isFieldType: true,
     createForm: TextCreateForm,
+    renderField: RenderUrlField,
   },
 
   checkbox: {
@@ -96,6 +118,7 @@ export const Fields: Fields = {
     label: "Checkbox",
     isFieldType: true,
     createForm: CheckboxCreateForm,
+    renderField: RenderCheckboxField,
   },
 
   checkboxGroup: {
@@ -103,5 +126,6 @@ export const Fields: Fields = {
     label: "Checkbox Group",
     isFieldType: true,
     createForm: TextCreateForm,
+    renderField: RenderCheckboxField,
   },
 } as const;

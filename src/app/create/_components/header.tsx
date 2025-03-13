@@ -1,7 +1,8 @@
-import { Eye, Home, Settings } from "lucide-react";
+import { Home, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/theme-toggle";
 import Link from "next/link";
+import PreviewDialog from "@/components/preview-dialog";
 
 function Header() {
   return (
@@ -20,9 +21,7 @@ function Header() {
         <Button size="sm" variant="ghost" className="text-accent-text">
           <Settings /> Settings
         </Button>
-        <Button size="sm" variant="ghost">
-          <Eye /> Preview
-        </Button>
+        <PreviewDialog />
         <Button size="sm" variant="accent">
           Publish
         </Button>

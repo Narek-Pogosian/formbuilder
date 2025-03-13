@@ -12,7 +12,7 @@
 
   --background: hsl(240, 12%, 97.5%);
   --foreground: hsl(240, 2%, 10%);
-  --foreground-muted: hsl(240, 2%, 30%);
+  --foreground-muted: hsl(240, 2%, 35%);
 
   --primary: hsl(240 5.9% 10%);
   --primary-foreground: hsl(0 0% 98%);
@@ -41,7 +41,7 @@
 
   --background: hsl(240, 8%, 8%);
   --foreground: hsl(240, 8%, 98%);
-  --foreground-muted: hsl(240, 8%, 75%);
+  --foreground-muted: hsl(240, 8%, 70%);
 
   --primary: hsl(0 0% 98%);
   --primary-foreground: hsl(240 5.9% 10%);

@@ -1,4 +1,4 @@
-import { createValidationSchema } from "../components/surveyrenderer/create-validation";
+import { createValidationSchema } from "../components/builder/renderer/create-validation";
 import { describe, it, expect } from "vitest";
 import { type FormSchema } from "@/schemas/form-schema";
 

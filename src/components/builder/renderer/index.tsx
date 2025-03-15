@@ -15,10 +15,10 @@ interface FormRendererProps {
   survey: FormSchema;
 }
 
-function FormRenderer({ onSubmit, survey }: FormRendererProps) {
+export default function FormRenderer({ onSubmit, survey }: FormRendererProps) {
   const schema = createValidationSchema(survey);
   const form = useForm<typeof schema>({
-    // @ts-expect-error should work
+    // @ts-expect-error it works
     resolver: zodResolver(schema),
     reValidateMode: "onChange",
   });
@@ -26,10 +26,10 @@ function FormRenderer({ onSubmit, survey }: FormRendererProps) {
   if (survey.length === 0) {
     return (
       <div className="mx-auto mb-8 pt-16 text-center">
-        <div className="bg-primary/5 mx-auto mb-4 flex size-20 items-center justify-center rounded-full">
-          <FileQuestion className="text-primary size-10" />
+        <div className="bg-accent mx-auto mb-4 flex size-24 items-center justify-center rounded-full">
+          <FileQuestion className="text-accent-foreground size-12" />
         </div>
-        <h2 className="mb-2 text-xl font-semibold">Your survey is empty.</h2>
+        <h2 className="mb-2 text-xl font-semibold">Your form is empty</h2>
         <p className="text-foreground-muted text-sm">
           Add some questions to see how they&apos;ll appear to your respondents.
         </p>
@@ -41,7 +41,7 @@ function FormRenderer({ onSubmit, survey }: FormRendererProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mx-auto grid w-full max-w-2xl gap-y-8"
+        className="mx-auto grid w-full max-w-2xl gap-10"
       >
         {survey.map((formField) => {
           return createElement(Fields[formField.type].renderField, {
@@ -59,5 +59,3 @@ function FormRenderer({ onSubmit, survey }: FormRendererProps) {
     </Form>
   );
 }
-
-export default FormRenderer;

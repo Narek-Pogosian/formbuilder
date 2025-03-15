@@ -44,16 +44,12 @@ export default function TextCreateForm({
   });
 
   function onSubmit(data: TextFormSchemaType) {
-    const res = submitHandler({
+    submitHandler({
       id: crypto.randomUUID(),
       type: "text",
       isFieldType: true,
       ...data,
     });
-
-    if (res === "Label Error") {
-      form.setError("label", { message: "Every label needs to be unique" });
-    }
   }
 
   return (

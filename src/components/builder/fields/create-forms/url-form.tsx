@@ -42,16 +42,12 @@ export default function UrlCreateForm({
   });
 
   function onSubmit(data: UrlFormSchemaType) {
-    const res = submitHandler({
+    submitHandler({
       id: defaultField?.id ?? crypto.randomUUID(),
       type: "url",
       isFieldType: true,
       ...data,
     });
-
-    if (res === "Label Error") {
-      form.setError("label", { message: "Every label needs to be unique" });
-    }
   }
 
   return (
@@ -124,7 +120,7 @@ export default function UrlCreateForm({
           />
         </div>
 
-        {form.watch("description") && (
+        {form.watch("showDescription") && (
           <FormField
             control={form.control}
             name="description"

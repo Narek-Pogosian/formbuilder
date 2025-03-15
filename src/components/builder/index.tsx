@@ -1,19 +1,14 @@
 "use client";
 
 import FieldDialog from "./field-dialog";
+import SortableList from "./sortable-list";
 import { useFormStore } from "./store";
 
 export default function Builder() {
-  const fields = useFormStore((state) => state.fields);
-
   return (
     <div className="mx-auto w-full max-w-2xl px-4 py-8">
       <Title />
-
-      <div className="text-accent-text mb-8">
-        {JSON.stringify(fields, null, 2)}
-      </div>
-
+      <SortableList />
       <FieldDialog />
     </div>
   );
@@ -25,6 +20,7 @@ function Title() {
 
   return (
     <input
+      id="title"
       aria-label="Title of form"
       type="text"
       className="mb-4 w-full py-2 text-3xl font-bold outline-0"

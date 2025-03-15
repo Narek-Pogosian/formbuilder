@@ -10,6 +10,8 @@
 - Space, divide
 - H2, text
 
+### Start from templates
+
 ### Survey settings
 
 - Title, description

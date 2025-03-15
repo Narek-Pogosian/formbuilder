@@ -1,12 +1,12 @@
 import { Home, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import PreviewDialog from "@/components/preview-dialog";
 import ThemeToggle from "@/components/theme-toggle";
 import Link from "next/link";
-import PreviewDialog from "@/components/preview-dialog";
 
 function Header() {
   return (
-    <header className="flex items-center justify-between px-2 py-2 md:px-4">
+    <header className="bg-background sticky top-0 left-0 flex items-center justify-between px-2 py-2 md:px-4">
       <div className="flex gap-2">
         <Button variant="ghost" size="icon" asChild>
           <Link href="/">

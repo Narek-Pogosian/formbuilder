@@ -42,16 +42,12 @@ export default function CheckboxCreateForm({
   });
 
   function onSubmit(data: CheckboxFormSchemaType) {
-    const res = submitHandler({
+    submitHandler({
       id: defaultField?.id ?? crypto.randomUUID(),
       type: "checkbox",
       isFieldType: true,
       ...data,
     });
-
-    if (res === "Label Error") {
-      form.setError("label", { message: "Every label needs to be unique" });
-    }
   }
 
   return (
@@ -109,7 +105,7 @@ export default function CheckboxCreateForm({
           />
         </div>
 
-        {form.getValues().showDescription && (
+        {form.watch("showDescription") && (
           <FormField
             control={form.control}
             name="description"

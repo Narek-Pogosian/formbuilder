@@ -23,7 +23,7 @@ export default function PreviewDialog() {
       </DialogTrigger>
       <DialogContent className="py-14 sm:max-w-4xl">
         <DialogHeader>
-          <DialogTitle className="text-center">Preview</DialogTitle>
+          <DialogTitle className="sr-only text-center">Preview</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
         <Content />

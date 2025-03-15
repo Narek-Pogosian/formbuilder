@@ -3,200 +3,203 @@ import { describe, it, expect } from "vitest";
 import { type FormSchema } from "@/schemas/form-schema";
 
 describe("createValidationSchema", () => {
-  it("should create a schema for required text and textarea field", async () => {
-    const survey: FormSchema = [
+  it("should fail if a required text field is empty", () => {
+    const form: FormSchema = [
       {
-        id: "id",
+        id: "textField",
         type: "text",
-        label: "username",
-        placeholder: "",
+        isFieldType: true,
         required: true,
-        showDescription: false,
+        label: "",
         longAnswer: false,
-        isFieldType: true,
-      },
-      {
-        id: "id",
-        type: "text",
-        label: "bio",
         placeholder: "",
-        required: true,
-        longAnswer: true,
         showDescription: false,
-        isFieldType: true,
       },
     ];
 
-    const schema = createValidationSchema(survey);
+    const validationSchema = createValidationSchema(form);
+    const result = validationSchema.safeParse({ textField: "" });
 
-    expect(schema.shape).toHaveProperty("username");
-    expect(schema.shape).toHaveProperty("bio");
-
-    await expect(
-      schema.parseAsync({ username: "", bio: "okay" }),
-    ).rejects.toThrow();
-
-    await expect(
-      schema.parseAsync({ username: "okay", bio: "" }),
-    ).rejects.toThrow();
-
-    await expect(
-      schema.parseAsync({ username: "valid", bio: "valid" }),
-    ).resolves.not.toThrow();
+    expect(result.success).toBe(false);
+    expect(result.error?.errors[0].message).toBe("This field is required");
   });
 
-  it("should create a schema for optional text and number fields", async () => {
-    const survey: FormSchema = [
+  it("should pass if an optional text field is empty", () => {
+    const form: FormSchema = [
       {
-        id: "id1",
+        id: "textField",
         type: "text",
-        label: "nickname",
+        isFieldType: true,
         required: false,
-        placeholder: "",
-        showDescription: false,
+        label: "",
         longAnswer: false,
-        isFieldType: true,
-      },
-      {
-        id: "id2",
-        type: "number",
-        label: "age",
-        required: false,
+        placeholder: "",
         showDescription: false,
-        isFieldType: true,
       },
     ];
 
-    const schema = createValidationSchema(survey);
+    const validationSchema = createValidationSchema(form);
+    const result = validationSchema.safeParse({ textField: "" });
 
-    expect(schema.shape).toHaveProperty("nickname");
-    expect(schema.shape).toHaveProperty("age");
-
-    await expect(
-      schema.parseAsync({ nickname: "", age: "" }),
-    ).resolves.not.toThrow();
-
-    await expect(
-      schema.parseAsync({ nickname: undefined, age: undefined }),
-    ).resolves.not.toThrow();
-
-    await expect(
-      schema.parseAsync({ nickname: "name", age: undefined }),
-    ).resolves.not.toThrow();
+    expect(result.success).toBe(true);
   });
 
-  it("should create a schema for a number field with min and max", async () => {
-    const survey: FormSchema = [
+  it("should pass if the email field is valid", () => {
+    const form: FormSchema = [
       {
-        id: "id",
-        type: "number",
-        label: "age",
-        min: 18,
-        max: 99,
+        id: "emailField",
+        type: "email",
+        isFieldType: true,
         required: true,
+        label: "",
+        placeholder: "",
         showDescription: false,
-        isFieldType: true,
       },
     ];
 
-    const schema = createValidationSchema(survey);
+    const validationSchema = createValidationSchema(form);
+    const result = validationSchema.safeParse({
+      emailField: "test@example.com",
+    });
 
-    expect(schema.shape).toHaveProperty("age");
-
-    await expect(schema.parseAsync({ age: 17 })).rejects.toThrow(/at least 18/);
-    await expect(schema.parseAsync({ age: 100 })).rejects.toThrow(/at most 99/);
-    await expect(schema.parseAsync({ age: 50 })).resolves.not.toThrow();
+    expect(result.success).toBe(true);
   });
 
-  it("should create a schema for a checkbox that passes", async () => {
-    const survey: FormSchema = [
+  it("should fail if the email field contains an invalid email", () => {
+    const form: FormSchema = [
       {
-        id: "id",
+        id: "emailField",
+        type: "email",
+        isFieldType: true,
+        required: true,
+        label: "",
+        placeholder: "",
+        showDescription: false,
+      },
+    ];
+
+    const validationSchema = createValidationSchema(form);
+    const result = validationSchema.safeParse({ emailField: "invalid-email" });
+
+    expect(result.success).toBe(false);
+    expect(result.error?.errors[0].message).toBe("Invalid email");
+  });
+
+  it("should pass if the URL field is valid", () => {
+    const form: FormSchema = [
+      {
+        id: "urlField",
+        type: "url",
+        isFieldType: true,
+        required: true,
+        label: "",
+        placeholder: "",
+        showDescription: false,
+      },
+    ];
+
+    const validationSchema = createValidationSchema(form);
+    const result = validationSchema.safeParse({
+      urlField: "https://example.com",
+    });
+
+    expect(result.success).toBe(true);
+  });
+
+  it("should pass if the number field is within the specified range", () => {
+    const form: FormSchema = [
+      {
+        id: "numberField",
+        type: "number",
+        isFieldType: true,
+        required: true,
+        min: 10,
+        max: 100,
+        label: "",
+        showDescription: false,
+      },
+    ];
+
+    const validationSchema = createValidationSchema(form);
+    const result = validationSchema.safeParse({ numberField: 50 });
+
+    expect(result.success).toBe(true);
+  });
+
+  it("should fail if the number field is below the minimum value", () => {
+    const form: FormSchema = [
+      {
+        id: "numberField",
+        type: "number",
+        isFieldType: true,
+        required: true,
+        min: 10,
+        max: 100,
+        label: "",
+        showDescription: false,
+      },
+    ];
+
+    const validationSchema = createValidationSchema(form);
+    const result = validationSchema.safeParse({ numberField: 5 });
+
+    expect(result.success).toBe(false);
+    expect(result.error?.errors[0].message).toBe("Must be at least 10");
+  });
+
+  it("should pass if the options field has a valid value", () => {
+    const form: FormSchema = [
+      {
+        id: "optionsField",
+        type: "options",
+        isFieldType: true,
+        required: true,
+        options: [{ value: "option1" }, { value: "option2" }],
+        label: "",
+        showDescription: false,
+      },
+    ];
+
+    const validationSchema = createValidationSchema(form);
+    const result = validationSchema.safeParse({ optionsField: "option1" });
+
+    expect(result.success).toBe(true);
+  });
+
+  it("should fail if the checkbox field is not checked (required)", () => {
+    const form: FormSchema = [
+      {
+        id: "checkboxField",
         type: "checkbox",
-        label: "consent",
-        required: false,
-        showDescription: false,
         isFieldType: true,
+        required: true,
+        label: "",
+        showDescription: false,
       },
     ];
 
-    const schema = createValidationSchema(survey);
+    const validationSchema = createValidationSchema(form);
+    const result = validationSchema.safeParse({ checkboxField: false });
 
-    expect(schema.shape).toHaveProperty("consent");
-
-    await expect(schema.parseAsync({ consent: true })).resolves.not.toThrow();
-    await expect(schema.parseAsync({ consent: false })).resolves.not.toThrow();
+    expect(result.success).toBe(false);
+    expect(result.error?.errors[0].message).toBe("This field is required");
   });
 
-  it("should create a schema for 2 radio groups where one is required and checks different inputs", async () => {
-    const survey: FormSchema = [
+  it("should pass if the checkbox field is checked (required)", () => {
+    const form: FormSchema = [
       {
-        id: "id",
-        type: "options",
-        label: "radio1",
-        required: false,
-        showDescription: false,
-        options: [
-          { value: "option1" },
-          { value: "option2" },
-          { value: "option3" },
-        ],
+        id: "checkboxField",
+        type: "checkbox",
         isFieldType: true,
-      },
-      {
-        id: "id",
-        type: "options",
-        label: "radio2",
         required: true,
+        label: "",
         showDescription: false,
-        options: [
-          { value: "option1" },
-          { value: "option2" },
-          { value: "option3" },
-        ],
-        isFieldType: true,
       },
     ];
 
-    const schema = createValidationSchema(survey);
+    const validationSchema = createValidationSchema(form);
+    const result = validationSchema.safeParse({ checkboxField: true });
 
-    expect(schema.shape).toHaveProperty("radio1");
-    expect(schema.shape).toHaveProperty("radio2");
-
-    await expect(
-      schema.parseAsync({ radio1: undefined, radio2: "option1" }),
-    ).resolves.not.toThrow();
-    await expect(
-      schema.parseAsync({ radio1: "option1", radio2: undefined }),
-    ).rejects.toThrow(/Required/);
-    await expect(
-      schema.parseAsync({ radio1: "invalid option", radio2: undefined }),
-    ).rejects.toThrow(/Invalid option/);
-  });
-
-  it("should throw an error for unsupported field type", () => {
-    const survey = [
-      {
-        id: "id",
-        type: "unsupported",
-        label: "unsupportedField",
-        isFieldSchema: true,
-        required: true,
-      },
-      {
-        id: "id",
-        type: "number",
-        label: "age",
-        min: 18,
-        max: 99,
-        required: true,
-        isFieldSchema: true,
-      },
-    ];
-
-    // @ts-expect-error We are testing a wrong input
-    expect(() => createValidationSchema(survey)).toThrow(
-      /Unsupported field type/,
-    );
+    expect(result.success).toBe(true);
   });
 });

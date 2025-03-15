@@ -42,16 +42,12 @@ export default function EmailCreateForm({
   });
 
   function onSubmit(data: EmailFormSchemaType) {
-    const res = submitHandler({
+    submitHandler({
       id: defaultField?.id ?? crypto.randomUUID(),
       type: "email",
       isFieldType: true,
       ...data,
     });
-
-    if (res === "Label Error") {
-      form.setError("label", { message: "Every label needs to be unique" });
-    }
   }
 
   return (

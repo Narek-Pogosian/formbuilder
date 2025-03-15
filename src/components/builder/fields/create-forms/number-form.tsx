@@ -59,16 +59,12 @@ export default function NumberCreateForm({
   });
 
   function onSubmit(data: NumberFormSchemaType) {
-    const res = submitHandler({
+    submitHandler({
       id: crypto.randomUUID(),
       type: "number",
       isFieldType: true,
       ...data,
     });
-
-    if (res === "Label Error") {
-      form.setError("label", { message: "Every label needs to be unique" });
-    }
   }
 
   return (

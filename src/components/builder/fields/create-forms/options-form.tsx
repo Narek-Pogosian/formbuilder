@@ -58,16 +58,12 @@ export default function OptionsCreateForm({
   });
 
   function onSubmit(data: RadioFormSchemaType) {
-    const res = submitHandler({
+    submitHandler({
       id: defaultField?.id ?? crypto.randomUUID(),
       type: "options",
       isFieldType: true,
       ...data,
     });
-
-    if (res === "Label Error") {
-      form.setError("label", { message: "Every label needs to be unique" });
-    }
   }
 
   const sensors = useSensors(

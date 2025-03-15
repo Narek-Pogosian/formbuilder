@@ -1,7 +1,6 @@
 import { type FieldType } from "@/schemas/field-schemas";
 import { type UseFormReturn } from "react-hook-form";
 import { type FormSchemaField } from "@/schemas/form-schema";
-
 import {
   CircleCheckBig,
   Heading2,
@@ -15,21 +14,21 @@ import {
   Type,
   type LucideIcon,
 } from "lucide-react";
-
-import TextCreateForm from "./create-forms/text-form";
-import NumberCreateForm from "./create-forms/number-form";
-import EmailCreateForm from "./create-forms/email-form";
 import CheckboxCreateForm from "./create-forms/checkbox-form";
 import OptionsCreateForm from "./create-forms/options-form";
-import RenderTextField from "./render-fields/text-field";
-import RenderNumberField from "./render-fields/number-field";
-import RenderOptionsField from "./render-fields/options-field";
-import RenderEmailField from "./render-fields/email-field";
-import RenderUrlField from "./render-fields/url-field";
+import NumberCreateForm from "./create-forms/number-form";
+import EmailCreateForm from "./create-forms/email-form";
+import TextCreateForm from "./create-forms/text-form";
+import UrlCreateForm from "./create-forms/url-form";
 import RenderCheckboxField from "./render-fields/checkbox-field";
+import RenderOptionsField from "./render-fields/options-field";
+import RenderNumberField from "./render-fields/number-field";
+import RenderEmailField from "./render-fields/email-field";
+import RenderTextField from "./render-fields/text-field";
+import RenderUrlField from "./render-fields/url-field";
 
 export type CreateFormProps = {
-  submitHandler: (data: FormSchemaField) => void | "Label Error";
+  submitHandler: (data: FormSchemaField) => void;
   defaultField?: FormSchemaField;
 };
 
@@ -38,15 +37,16 @@ export type RenderFieldProps = {
   formField: FormSchemaField;
 };
 
-type Value = Readonly<{
-  label: string;
-  icon: LucideIcon;
-  isFieldType: boolean;
-  createForm: React.ComponentType<CreateFormProps>;
-  renderField: React.ComponentType<RenderFieldProps>;
-}>;
-
-type Fields = Record<FieldType, Value>;
+type Fields = Record<
+  FieldType,
+  Readonly<{
+    label: string;
+    icon: LucideIcon;
+    isFieldType: boolean;
+    createForm: React.ComponentType<CreateFormProps>;
+    renderField: React.ComponentType<RenderFieldProps>;
+  }>
+>;
 
 export const Fields: Fields = {
   title: {
@@ -109,7 +109,7 @@ export const Fields: Fields = {
     icon: Link2,
     label: "URL",
     isFieldType: true,
-    createForm: TextCreateForm,
+    createForm: UrlCreateForm,
     renderField: RenderUrlField,
   },
 

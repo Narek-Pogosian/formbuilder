@@ -2,7 +2,7 @@ import { createElement, useEffect, useMemo } from "react";
 import {
   type FormSchema,
   type FormSchemaField,
-} from "@/lib/schemas/form.schema";
+} from "@/lib/schemas/form-schemas";
 import { createValidationSchema } from "./create-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

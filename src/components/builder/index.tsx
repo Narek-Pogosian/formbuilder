@@ -42,7 +42,7 @@ export default function Builder() {
       onDragEnd={handleDragEnd}
     >
       <div className="grid gap-8 lg:grid-cols-[250px_1fr] xl:grid-cols-[230px_1fr_360px]">
-        <div className="bg-card sticky top-[94px] hidden h-fit rounded border p-4 lg:block">
+        <div className="bg-card sticky top-[94px] hidden h-fit rounded border p-3 lg:block">
           <FieldPanel />
         </div>
 
@@ -50,7 +50,7 @@ export default function Builder() {
           items={fields.map((f) => f.id)}
           strategy={verticalListSortingStrategy}
         >
-          <ul className="mx-auto grid w-full max-w-xl gap-4">
+          <ul className="mx-auto grid w-full max-w-xl gap-5">
             {fields.map((field) => (
               <FieldItem key={field.id} field={field} />
             ))}
@@ -60,7 +60,7 @@ export default function Builder() {
 
         <Overlay draggedField={draggedField} />
 
-        <div className="bg-card sticky top-[94px] hidden h-fit rounded border p-4 xl:block">
+        <div className="bg-card sticky top-[94px] hidden h-fit rounded border p-3 xl:block">
           Settings
         </div>
       </div>
@@ -80,7 +80,7 @@ const LastItem = memo(function LastItem({
       <div
         className={cn(
           "h-40 rounded grid place-content-center border border-dashed border-black/20 dark:border-white/15",
-          { "bg-primary/10": isOver }
+          { "bg-primary/5": isOver }
         )}
         ref={setNodeRef}
       >

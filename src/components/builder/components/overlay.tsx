@@ -1,7 +1,7 @@
 import { type DraggedField } from "../hooks/use-drag-handlers";
 import { FieldPanelOverlay } from "./field-panel";
 import { FieldItemOverlay } from "./field-item";
-import { type FieldType } from "@/lib/schemas/form.schema";
+import { type FieldType } from "@/lib/schemas/form-schemas";
 import { useFormStore } from "../hooks/use-form-store";
 import { DragOverlay } from "@dnd-kit/core";
 

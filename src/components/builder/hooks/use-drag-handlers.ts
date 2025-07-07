@@ -6,7 +6,7 @@ import {
   type DragOverEvent,
   type DragStartEvent,
 } from "@dnd-kit/core";
-import type { FieldType, FormSchemaField } from "@/lib/schemas/form.schema";
+import type { FieldType, FormSchemaField } from "@/lib/schemas/form-schemas";
 
 export interface DraggedField {
   draggingId: string;
@@ -83,10 +83,12 @@ export function useDragHandlers() {
 function getDefaultField(type: FieldType): FormSchemaField {
   const base = {
     id: crypto.randomUUID(),
-    label: "Untitled",
-    required: true,
-    showDescription: false,
+    label: "",
+    required: false,
     description: "",
+    showDescription: false,
+    edited: false,
+    followUps: undefined,
   };
 
   switch (type) {
@@ -95,11 +97,7 @@ function getDefaultField(type: FieldType): FormSchemaField {
         ...base,
         type: "text",
         longAnswer: false,
-        placeholder: "placeholder",
-        // followUps: {
-        //   parentId: "",
-        //   valueToMatch: "show",
-        // },
+        placeholder: "",
       };
 
     case "number":

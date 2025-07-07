@@ -1,14 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@plugin 'tailwind-scrollbar';
+@plugin "tailwind-scrollbar";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
   --radius: 5px;
 
-  --background: hsl(240, 20%, 97%);
+  --background: hsl(240, 10%, 97%);
   --foreground: hsl(0, 0%, 1%);
   --foreground-muted: hsl(0, 0%, 35%);
 
@@ -20,7 +20,7 @@
   --accent-foreground: hsl(0, 0%, 1%);
 
   --card: hsl(0, 0%, 98.5%);
-  --card-foreground: hsl(0, 0%, 4%);
+  --card-foreground: hsl(0, 0%, 1%);
 
   --popover: hsl(0, 0%, 99%);
   --popover-foreground: hsl(0, 0%, 1%);
@@ -137,9 +137,3 @@
     border-radius: var(--radius);
   }
 }
-
-/* html body[data-scroll-locked] {
-  overflow-y: scroll !important;
-  --removed-body-scroll-bar-size: 0 !important;
-  margin-right: 0 !important;
-} */

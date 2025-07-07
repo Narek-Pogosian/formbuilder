@@ -1,5 +1,5 @@
-import type { FormSchema, FormSchemaField } from "@/lib/schemas/form.schema";
-import { z, type ZodTypeAny } from "zod";
+import type { FormSchema, FormSchemaField } from "@/lib/schemas/form-schemas";
+import { z, type ZodTypeAny } from "zod/v4";
 
 function applyCommonStringRules(
   schema: z.ZodString,

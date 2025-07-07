@@ -1,5 +1,5 @@
 import { GripVertical, type LucideIcon } from "lucide-react";
-import { type FieldType } from "@/lib/schemas/form.schema";
+import { type FieldType } from "@/lib/schemas/form-schemas";
 import { createElement } from "react";
 import { useDraggable } from "@dnd-kit/core";
 import { Fields } from "../fields";
@@ -49,7 +49,7 @@ function FieldsPanelItem({
 
 export function FieldPanelOverlay({ fieldType }: { fieldType: FieldType }) {
   return (
-    <button className="bg-card flex cursor-grab items-center gap-2 rounded border px-6 py-2.5 font-semibold capitalize shadow-lg dark:shadow-lg/40 [&>svg]:size-5">
+    <button className="bg-card flex cursor-grabbing items-center gap-2 rounded border px-6 py-2.5 font-semibold capitalize shadow-lg dark:shadow-lg/40 [&>svg]:size-5">
       {createElement(Fields[fieldType].icon)}
       {fieldType}
     </button>

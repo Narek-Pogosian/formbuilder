@@ -1,0 +1,145 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@plugin 'tailwind-scrollbar';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 5px;
+
+  --background: hsl(240, 20%, 97%);
+  --foreground: hsl(0, 0%, 1%);
+  --foreground-muted: hsl(0, 0%, 35%);
+
+  --primary: hsl(250, 80%, 62%);
+  --primary-foreground: hsl(0, 0%, 97%);
+  --primary-text: hsl(250, 70%, 50%);
+
+  --accent: hsl(240, 20%, 50%, 10%);
+  --accent-foreground: hsl(0, 0%, 1%);
+
+  --card: hsl(0, 0%, 98.5%);
+  --card-foreground: hsl(0, 0%, 4%);
+
+  --popover: hsl(0, 0%, 99%);
+  --popover-foreground: hsl(0, 0%, 1%);
+
+  --danger: hsl(352, 60%, 45%);
+  --danger-foreground: hsl(0, 0%, 100%);
+  --danger-text: hsl(352, 90%, 35%);
+
+  --input: hsl(0, 0%, 100%);
+  --input-foreground: hsl(0, 0%, 10%);
+  --input-placeholder: hsl(0, 0%, 65%);
+
+  --scrollbar: hsl(0, 0%, 75%);
+  --border: hsl(0, 0%, 91%);
+  --ring: hsla(250, 80%, 62%, 60%);
+}
+
+.dark {
+  --background: hsl(0, 0%, 8.5%);
+  --foreground: hsl(0, 0%, 97%);
+  --foreground-muted: hsl(0, 0%, 65%);
+
+  --primary: hsl(250, 70%, 58%);
+  --primary-foreground: hsl(0, 0%, 97%);
+  --primary-text: hsl(250, 100%, 80%);
+
+  --accent: hsl(240, 20%, 90%, 5%);
+  --accent-foreground: hsl(0, 0%, 97%);
+
+  --card: hsl(0, 0%, 10%);
+  --card-foreground: hsl(0, 0%, 97%);
+
+  --popover: hsl(0, 0%, 9%);
+  --popover-foreground: hsl(0, 0%, 97%);
+
+  --danger: hsl(352, 60%, 50%);
+  --danger-foreground: hsl(0, 0%, 100%);
+  --danger-text: hsl(360, 100%, 67%);
+
+  --input: hsla(0, 0%, 12.5%);
+  --input-foreground: hsl(0, 0%, 95%);
+  --input-placeholder: hsl(0, 0%, 45%);
+
+  --scrollbar: hsl(0, 0%, 25%);
+  --border: hsla(0, 0%, 16%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-text: var(--primary-text);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-danger-text: var(--danger-text);
+
+  --color-input: var(--input);
+  --color-input-foreground: var(--input-foreground);
+  --color-input-placeholder: var(--input-placeholder);
+
+  --color-scrollbar: var(--scrollbar);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: calc(var(--radius) + 2px);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 6px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-scrollbar h-full;
+  }
+
+  body {
+    @apply bg-background text-foreground h-full overflow-x-clip overflow-y-scroll;
+  }
+
+  a {
+    @apply focus-visible:ring-ring focus-visible:ring-offset-background rounded outline-none focus-visible:ring-2 focus-visible:ring-offset-1;
+  }
+
+  [class*="animate-"] {
+    animation-fill-mode: forwards;
+  }
+}
+
+@layer utilities {
+  .container {
+    max-inline-size: 1300px;
+    margin-inline: auto;
+    padding-inline: 0.5rem;
+  }
+
+  .rounded {
+    border-radius: var(--radius);
+  }
+}
+
+/* html body[data-scroll-locked] {
+  overflow-y: scroll !important;
+  --removed-body-scroll-bar-size: 0 !important;
+  margin-right: 0 !important;
+} */

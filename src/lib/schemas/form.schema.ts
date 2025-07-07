@@ -1,0 +1,43 @@
+import { z } from "zod/v4";
+
+const nonEmptyString = z.string().trim().min(1, { message: "Required" });
+
+const baseFieldSchema = z.object({
+  id: z.string(),
+  label: nonEmptyString,
+  required: z.boolean(),
+  showDescription: z.boolean(),
+  description: z.string().optional(),
+  followUps: z
+    .object({
+      parentId: z.string(),
+      valueToMatch: z.any(),
+    })
+    .optional(),
+});
+
+export const textSchema = baseFieldSchema.extend({
+  type: z.literal("text"),
+  longAnswer: z.boolean(),
+  placeholder: nonEmptyString,
+});
+
+export const numberSchema = baseFieldSchema.extend({
+  type: z.literal("number"),
+  min: z.union([z.literal(""), z.coerce.number().optional()]),
+  max: z.union([z.literal(""), z.coerce.number().optional()]),
+});
+
+export const checkboxSchema = baseFieldSchema.extend({
+  type: z.literal("checkbox"),
+});
+
+export const formSchema = z
+  .array(
+    z.discriminatedUnion("type", [textSchema, numberSchema, checkboxSchema])
+  )
+  .min(1, { message: "At least 1 field is required" });
+
+export type FormSchema = z.infer<typeof formSchema>;
+export type FormSchemaField = FormSchema[number];
+export type FieldType = FormSchema[number]["type"];

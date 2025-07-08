@@ -52,15 +52,17 @@ export default function FormRenderer({ fields }: Props) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mx-auto grid max-w-lg gap-6"
       >
-        {fields.map((formField) => {
-          if (!isVisible(formField, watchedValues)) return null;
+        {fields
+          .filter((f) => f.saved)
+          .map((formField) => {
+            if (!isVisible(formField, watchedValues)) return null;
 
-          return createElement(Fields[formField.type].RenderField, {
-            form,
-            formField,
-            key: formField.id,
-          });
-        })}
+            return createElement(Fields[formField.type].RenderField, {
+              form,
+              formField,
+              key: formField.id,
+            });
+          })}
 
         <Button className="w-fit" type="submit">
           Submit

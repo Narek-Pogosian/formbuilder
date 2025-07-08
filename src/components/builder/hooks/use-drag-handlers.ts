@@ -87,7 +87,8 @@ function getDefaultField(type: FieldType): FormSchemaField {
     required: false,
     description: "",
     showDescription: false,
-    edited: false,
+    editing: true,
+    saved: false,
     followUps: undefined,
   };
 

@@ -8,7 +8,8 @@ const baseFieldSchema = z.object({
   required: z.boolean(),
   showDescription: z.boolean(),
   description: z.string().optional(),
-  edited: z.boolean(),
+  editing: z.boolean(),
+  saved: z.boolean(),
   followUps: z
     .object({
       parentId: z.string(),

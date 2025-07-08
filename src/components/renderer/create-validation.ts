@@ -55,9 +55,11 @@ function createFieldSchema(field: FormSchemaField): ZodTypeAny {
 export function createValidationSchema(form: FormSchema) {
   const shape: Record<string, ZodTypeAny> = {};
 
-  form.forEach((field) => {
-    shape[field.id] = createFieldSchema(field);
-  });
+  form
+    .filter((f) => f.saved)
+    .forEach((field) => {
+      shape[field.id] = createFieldSchema(field);
+    });
 
   return z.object(shape);
 }

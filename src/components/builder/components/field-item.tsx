@@ -1,22 +1,18 @@
 import { type FormSchemaField } from "@/lib/schemas/form-schemas";
-import { GripVertical, Pencil, Trash2 } from "lucide-react";
-import { createElement, memo } from "react";
+import { GripVertical, Pencil, Trash2, X } from "lucide-react";
+import { createElement, memo, useMemo } from "react";
 import { useFormStore } from "../hooks/use-form-store";
 import { useSortable } from "@dnd-kit/sortable";
 import { Button } from "@/components/ui/button";
 import { Fields } from "../fields";
 import { CSS } from "@dnd-kit/utilities";
-import { cn } from "@/lib/utils";
 
 export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
-  const removeField = useFormStore((state) => state.removeField);
-  const editField = useFormStore((state) => state.editField);
-
   const {
+    setNodeRef,
     attributes,
     isDragging,
     listeners,
-    setNodeRef,
     transform,
     transition,
     isOver,
@@ -26,130 +22,106 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
     animateLayoutChanges: () => false,
   });
 
-  const style: React.CSSProperties = {
-    opacity: isDragging ? 0.4 : undefined,
-    transform: CSS.Translate.toString(transform),
-    transition,
-  };
+  const style = useMemo<React.CSSProperties>(
+    () => ({
+      opacity: isDragging ? 0.5 : undefined,
+      transform: CSS.Translate.toString(transform),
+      touchAction: "none",
+      transition,
+    }),
+    [isDragging, transform, transition],
+  );
 
   return (
     <li
       ref={setNodeRef}
       style={style}
-      className={cn(
-        "bg-card ring-ring group relative rounded transition-none border p-4 lg:p-6 duration-300 hover:ring-1",
-        { "focus-within:ring-1": !isDragging }
-      )}
+      className="bg-card ring-ring group relative rounded border p-4 transition-none hover:ring-1 has-focus-visible:ring-1 lg:p-6"
     >
-      <div
-        className={cn("text-primary-text opacity-0 group-hover:opacity-100", {
-          "focus-within:opacity-100": !isDragging,
-        })}
-      >
+      <div className="text-primary-text flex justify-between group-hover:opacity-100 has-focus-visible:opacity-100 max-lg:-mt-2 lg:absolute lg:-top-3.5 lg:-right-4 lg:-left-4 lg:opacity-0">
         {!field.editing && (
           <Button
             size="icon"
-            variant="ghost"
+            variant="secondary"
             {...listeners}
             {...attributes}
-            className="bg-primary/20 cursor-grab disabled:opacity-0 size-8 hover:bg-primary/30 dark:hover:bg-primary/30 absolute -top-3.5 -left-4 backdrop-blur-sm"
+            className="size-8 cursor-grab"
           >
-            <GripVertical className="size-4.5" />{" "}
+            <GripVertical className="size-4.5" />
             <span className="sr-only">Drag</span>
           </Button>
         )}
 
-        <Button
-          size="icon"
-          variant="ghost"
-          className="bg-primary/20 size-8 hover:bg-primary/30 dark:hover:bg-primary/30 absolute -top-3.5 -right-4 backdrop-blur-sm"
-          onClick={() => removeField(field.id)}
-        >
-          <Trash2 className="size-4.5" />{" "}
-          <span className="sr-only">Remove</span>
-        </Button>
-
-        {!field.editing && (
-          <Button
-            size="icon"
-            variant="ghost"
-            className="bg-primary/20 size-8 hover:bg-primary/30 dark:hover:bg-primary/30 absolute top-6 -right-4 backdrop-blur-sm"
-            onClick={() =>
-              editField(field.id, { ...field, editing: !field.editing })
-            }
-          >
-            <Pencil className="size-4.5" />
-            <span className="sr-only">Edit</span>
-          </Button>
-        )}
+        {!isDragging && <FieldControls field={field} />}
       </div>
 
       {isOver && active?.data.current?.fromSidebar && (
         <div className="bg-primary/60 absolute -top-3 left-0 h-1 w-full"></div>
       )}
 
-      <Content field={field} isDragging={isDragging} />
+      <Content field={field} />
     </li>
   );
 });
 
-const Content = memo(function Content({
-  field,
-  isDragging,
-}: {
-  field: FormSchemaField;
-  isDragging: boolean;
-}) {
-  if (isDragging) {
-    return <>{createElement(Fields[field.type].BuilderField, { field })}</>;
-  }
-
-  if (field.editing && !isDragging) {
+const Content = memo(function Content({ field }: { field: FormSchemaField }) {
+  if (field.editing) {
     return <>{createElement(Fields[field.type].EditForm, { field })}</>;
   }
 
   return <>{createElement(Fields[field.type].BuilderField, { field })}</>;
 });
 
+function FieldControls({ field }: { field: FormSchemaField }) {
+  const removeField = useFormStore((state) => state.removeField);
+  const editField = useFormStore((state) => state.editField);
+
+  return (
+    <div className="max-lg ml-auto flex gap-1 max-lg:mb-4 lg:flex-col">
+      <Button
+        size="icon"
+        variant="secondary"
+        className="size-8"
+        onClick={() => removeField(field.id)}
+      >
+        <Trash2 className="size-4.5" />
+        <span className="sr-only">Remove</span>
+      </Button>
+
+      {field.saved && (
+        <Button
+          size="icon"
+          variant="secondary"
+          className="size-8"
+          aria-label={!field.editing ? "Edit" : "Cancel"}
+          onClick={() =>
+            editField(field.id, { ...field, editing: !field.editing })
+          }
+        >
+          {!field.editing ? (
+            <Pencil className="size-4.5" />
+          ) : (
+            <X className="size-5.5" />
+          )}
+        </Button>
+      )}
+    </div>
+  );
+}
+
 export function FieldItemOverlay({ field }: { field: FormSchemaField }) {
   return (
-    <li
-      className={cn(
-        "bg-card ring-ring group relative list-none rounded border p-4 lg:p-6 shadow-lg duration-300 hover:ring-1 dark:shadow-lg/40"
-      )}
-    >
-      <div className="text-primary-text opacity-0 group-hover:opacity-100">
-        <Button
-          size="icon"
-          variant="ghost"
-          className="bg-primary/20 size-8 cursor-grabbing hover:bg-primary/30 dark:hover:bg-primary/30 absolute -top-3.5 -left-4 backdrop-blur-sm"
-        >
-          <GripVertical className="size-4.5" />{" "}
-          <span className="sr-only">Drag</span>
-        </Button>
+    <li className="bg-card ring-ring group relative list-none rounded border p-4 shadow-lg ring-1 lg:p-6 dark:shadow-lg/40">
+      <Button
+        size="icon"
+        variant="secondary"
+        className="absolute -top-3.5 -left-4 size-8 cursor-grabbing"
+      >
+        <GripVertical className="size-4.5" />
+        <span className="sr-only">Drag</span>
+      </Button>
 
-        <Button
-          size="icon"
-          variant="ghost"
-          className="bg-primary/20 size-8 hover:bg-primary/30 dark:hover:bg-primary/30 absolute -top-3.5 -right-4 backdrop-blur-sm"
-        >
-          <Trash2 className="size-4.5" />{" "}
-          <span className="sr-only">Remove</span>
-        </Button>
-
-        {!field.editing && (
-          <Button
-            size="icon"
-            variant="ghost"
-            className="bg-primary/20 size-8 hover:bg-primary/30 dark:hover:bg-primary/30 absolute top-6 -right-4 backdrop-blur-sm"
-          >
-            <Pencil className="size-4.5" />
-            <span className="sr-only">Edit</span>
-          </Button>
-        )}
-      </div>
-
-      <Content field={field} isDragging={true} />
+      <Content field={field} />
     </li>
   );
 }

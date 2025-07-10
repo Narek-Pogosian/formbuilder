@@ -1,10 +1,8 @@
-import { z } from "zod/v4";
-
-const nonEmptyString = z.string().trim().min(1, { message: "Required" });
+import { z } from "zod";
 
 const baseFieldSchema = z.object({
   id: z.string(),
-  label: nonEmptyString,
+  label: z.string().trim().min(1, { message: "A label is required" }),
   required: z.boolean(),
   showDescription: z.boolean(),
   description: z.string().optional(),
@@ -21,7 +19,7 @@ const baseFieldSchema = z.object({
 export const textSchema = baseFieldSchema.extend({
   type: z.literal("text"),
   longAnswer: z.boolean(),
-  placeholder: nonEmptyString,
+  placeholder: z.string().optional(),
 });
 
 export const numberSchema = baseFieldSchema.extend({
@@ -36,7 +34,7 @@ export const checkboxSchema = baseFieldSchema.extend({
 
 export const formSchema = z
   .array(
-    z.discriminatedUnion("type", [textSchema, numberSchema, checkboxSchema])
+    z.discriminatedUnion("type", [textSchema, numberSchema, checkboxSchema]),
   )
   .min(1, { message: "At least 1 field is required" });
 

@@ -13,15 +13,18 @@ export default function BuilderTextField({ field }: BuilderFieldProps) {
       <Label htmlFor={field.id}>{field.label}</Label>
 
       {field.showDescription && field.description && (
-        <p className="mb-1 text-sm text-foreground-muted">
+        <p className="text-foreground-muted mb-1 text-sm">
           {field.description}
         </p>
       )}
 
       {field.longAnswer ? (
-        <Textarea id={field.id} placeholder={field.placeholder} />
+        <Textarea
+          id={field.id}
+          placeholder={field.placeholder || "Your answer"}
+        />
       ) : (
-        <Input id={field.id} placeholder={field.placeholder} />
+        <Input id={field.id} placeholder={field.placeholder || "Your answer"} />
       )}
     </div>
   );

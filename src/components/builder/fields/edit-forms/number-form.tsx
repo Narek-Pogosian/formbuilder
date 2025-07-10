@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { type z } from "zod/v4";
+import { type z } from "zod";
 import { numberSchema } from "@/lib/schemas/form-schemas";
 import { EditFormProps } from "..";
 import { useFormStore } from "../../hooks/use-form-store";
@@ -36,7 +36,7 @@ const numberFormSchema = numberSchema
 
       return true;
     },
-    { message: "Min value must be smaller than max value", path: ["min"] }
+    { message: "Min value must be smaller than max value", path: ["min"] },
   );
 
 type NumberFormSchemaType = z.infer<typeof numberFormSchema>;
@@ -65,7 +65,11 @@ export default function NumberEditForm({ field }: EditFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
+      <form
+        autoComplete="off"
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="grid gap-5"
+      >
         <FormField
           control={form.control}
           name="label"
@@ -80,15 +84,20 @@ export default function NumberEditForm({ field }: EditFormProps) {
           )}
         />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="flex items-start gap-4">
           <FormField
             control={form.control}
             name="min"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="grow">
                 <FormLabel>Minimum value</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="0" {...field} />
+                  <Input
+                    className="h-fit"
+                    type="number"
+                    placeholder="0"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -98,10 +107,15 @@ export default function NumberEditForm({ field }: EditFormProps) {
             control={form.control}
             name="max"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="grow">
                 <FormLabel>Maximum value</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="100" {...field} />
+                  <Input
+                    className="h-fit"
+                    type="number"
+                    placeholder="100"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

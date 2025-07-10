@@ -32,13 +32,13 @@ export default function RenderTextField({ form, formField }: RenderFieldProps) {
           <FormControl>
             {formField.longAnswer ? (
               <Textarea
-                placeholder={formField.placeholder}
+                placeholder={formField.placeholder || "Your answer"}
                 {...field}
                 value={(field.value as string) ?? ""}
               />
             ) : (
               <Input
-                placeholder={formField.placeholder}
+                placeholder={formField.placeholder || "Your answer"}
                 {...field}
                 value={(field.value as string) ?? ""}
               />

@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { type z } from "zod/v4";
+import { type z } from "zod";
 import { Input } from "@/components/ui/input";
 import {
   Form,
@@ -52,7 +52,7 @@ export default function TextEditForm({ field }: EditFormProps) {
     <Form {...form}>
       <form
         autoComplete="off"
-        className="grid gap-4"
+        className="grid gap-5"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -77,7 +77,7 @@ export default function TextEditForm({ field }: EditFormProps) {
               <FormLabel>Placeholder</FormLabel>
 
               <FormControl>
-                <Input placeholder="John Smith" {...field} />
+                <Input placeholder="Your answer" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

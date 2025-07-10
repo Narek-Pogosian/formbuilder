@@ -26,7 +26,7 @@ export default function Builder() {
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
 
   const { draggedField, handleDragStart, handleDragOver, handleDragEnd } =
@@ -79,8 +79,8 @@ const LastItem = memo(function LastItem({
     return (
       <div
         className={cn(
-          "h-40 rounded grid place-content-center border border-dashed border-black/20 dark:border-white/15",
-          { "bg-primary/5": isOver }
+          "grid h-40 place-content-center rounded border border-dashed border-black/20 dark:border-white/15",
+          { "bg-primary/5": isOver },
         )}
         ref={setNodeRef}
       >
@@ -92,7 +92,7 @@ const LastItem = memo(function LastItem({
   }
 
   return (
-    <div ref={setNodeRef} className="h-20 relative">
+    <div ref={setNodeRef} className="relative h-20">
       {isOver && active?.data.current?.fromSidebar && (
         <div className="bg-primary/60 absolute -top-2.5 left-0 h-1 w-full"></div>
       )}

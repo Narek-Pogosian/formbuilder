@@ -1,9 +1,9 @@
 import type { FormSchema, FormSchemaField } from "@/lib/schemas/form-schemas";
-import { z, type ZodTypeAny } from "zod/v4";
+import { z, type ZodTypeAny } from "zod";
 
 function applyCommonStringRules(
   schema: z.ZodString,
-  required: boolean
+  required: boolean,
 ): ZodTypeAny {
   schema = schema.max(600, { message: "Must be at most 600 characters" });
   return required

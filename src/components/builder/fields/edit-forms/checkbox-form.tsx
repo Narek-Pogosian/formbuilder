@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { type z } from "zod/v4";
+import { type z } from "zod";
 import { EditFormProps } from "..";
 import { useFormStore } from "../../hooks/use-form-store";
 
@@ -48,7 +48,11 @@ export default function CheckboxEditForm({ field }: EditFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
+      <form
+        autoComplete="off"
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="grid gap-5"
+      >
         <FormField
           control={form.control}
           name="label"

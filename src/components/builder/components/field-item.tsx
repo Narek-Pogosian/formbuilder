@@ -38,21 +38,19 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
     <li
       ref={setNodeRef}
       style={style}
-      className="card group relative p-4 transition-none lg:p-6"
+      className="card group/item relative p-4 transition-none lg:p-6"
     >
-      <div className="text-primary-text flex justify-between group-hover:opacity-100 has-focus-visible:opacity-100 max-lg:-mt-2 lg:absolute lg:-top-3 lg:-right-4 lg:-left-4 lg:opacity-0">
-        {!field.editing && (
-          <Button
-            size="icon"
-            variant="secondary"
-            {...listeners}
-            {...attributes}
-            className="size-8 cursor-grab"
-          >
-            <GripVertical className="size-4.5" />
-            <span className="sr-only">Drag</span>
-          </Button>
-        )}
+      <div className="text-primary-text flex justify-between group-hover/item:opacity-100 has-focus-visible:opacity-100 max-lg:-mt-2 lg:absolute lg:-top-3 lg:-right-4 lg:-left-4 lg:opacity-0">
+        <Button
+          size="icon"
+          variant="secondary"
+          {...listeners}
+          {...attributes}
+          className="group relative size-8 cursor-grab"
+        >
+          <GripVertical className="size-4.5" />
+          <span className="sr-only">Drag</span>
+        </Button>
 
         {!isDragging && <FieldControls field={field} index={index} />}
       </div>
@@ -92,8 +90,7 @@ function FieldControls({
         <Button
           size="icon"
           variant="secondary"
-          className="size-8"
-          aria-label={!field.editing ? "Edit" : "Cancel"}
+          className="group relative size-8"
           onClick={() =>
             editField(field.id, { ...field, editing: !field.editing })
           }
@@ -103,17 +100,21 @@ function FieldControls({
           ) : (
             <X className="size-5.5" />
           )}
+
+          <span className="field-action-tooltip">
+            {!field.editing ? "Edit" : "Cancel"}
+          </span>
         </Button>
       )}
 
       <Button
         size="icon"
         variant="secondary"
-        className="size-8"
+        className="group relative size-8"
         onClick={() => removeField(field.id)}
       >
         <Trash2 className="size-4.5" />
-        <span className="sr-only">Remove</span>
+        <span className="field-action-tooltip">Remove</span>
       </Button>
     </div>
   );

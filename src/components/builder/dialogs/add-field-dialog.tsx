@@ -47,9 +47,13 @@ export function AddFieldBellow({ index }: { index: number }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="icon" variant="secondary" className="size-8">
+        <Button
+          size="icon"
+          variant="secondary"
+          className="group relative size-8"
+        >
           <Plus />
-          <span className="sr-only">Add field bellow</span>
+          <span className="field-action-tooltip">Add field bellow</span>
         </Button>
       </DialogTrigger>
       <Content setOpen={setOpen} index={index} />

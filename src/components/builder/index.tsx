@@ -3,6 +3,7 @@
 import { useDragHandlers } from "./hooks/use-drag-handlers";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useFormStore } from "./hooks/use-form-store";
+import { useIsMounted } from "@/hooks/use-is-mounted";
 import { AddField } from "./dialogs/add-field-dialog";
 import FieldPanel from "./components/field-panel";
 import FieldItem from "./components/field-item";
@@ -24,6 +25,8 @@ import { memo } from "react";
 import { cn } from "@/lib/utils";
 
 export default function Builder() {
+  const isMounted = useIsMounted();
+
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -36,8 +39,13 @@ export default function Builder() {
 
   const fields = useFormStore((state) => state.fields);
 
+  if (!isMounted) {
+    return <div aria-hidden className="h-32"></div>;
+  }
+
   return (
     <DndContext
+      id="list"
       sensors={sensors}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}

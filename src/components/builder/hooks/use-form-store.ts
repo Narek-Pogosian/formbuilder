@@ -17,8 +17,14 @@ export const useFormStore = create(
 
       addField: (field, atIndex) => {
         set((state) => {
+          const id = field.id;
+
           if (typeof atIndex === "number") {
-            return { fields: state.fields.toSpliced(atIndex, 0, field) };
+            return {
+              fields: state.fields
+                .toSpliced(atIndex, 0, field)
+                .filter((f) => f.saved || f.id === id),
+            };
           } else {
             return { fields: state.fields.concat(field) };
           }

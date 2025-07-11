@@ -11,7 +11,7 @@ const buttonVariants = cva(
         default:
           "bg-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background text-primary-foreground hover:bg-primary/90 dark:hover:bg-primary/80",
         secondary:
-          "bg-primary/10 dark:bg-primary/20 text-primary-text backdrop-blur-sm hover:bg-primary/20 dark:hover:bg-primary/40",
+          "bg-primary/10 dark:bg-primary/30 text-primary-text backdrop-blur-sm hover:bg-primary/20 dark:hover:bg-primary/40",
         danger:
           "bg-danger text-danger-foreground hover:bg-danger/80 focus-visible:ring-danger/20 dark:focus-visible:ring-danger/40",
         outline:

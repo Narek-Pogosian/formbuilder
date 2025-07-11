@@ -2,10 +2,10 @@ import { z } from "zod";
 
 const baseFieldSchema = z.object({
   id: z.string(),
-  label: z.string().trim().min(1, { message: "A label is required" }),
+  label: z.string().trim().min(1, { message: "Required" }),
   required: z.boolean(),
   showDescription: z.boolean(),
-  description: z.string().optional(),
+  description: z.string().trim(),
   editing: z.boolean(),
   saved: z.boolean(),
   followUps: z
@@ -19,7 +19,7 @@ const baseFieldSchema = z.object({
 export const textSchema = baseFieldSchema.extend({
   type: z.literal("text"),
   longAnswer: z.boolean(),
-  placeholder: z.string().optional(),
+  placeholder: z.string(),
 });
 
 export const numberSchema = baseFieldSchema.extend({

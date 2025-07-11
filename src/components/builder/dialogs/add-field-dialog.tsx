@@ -72,13 +72,13 @@ function Content({
   }
 
   return (
-    <DialogContent className="max-w-[270px]">
+    <DialogContent className="max-w-[270px] p-4 pr-6">
       <DialogHeader>
         <DialogTitle className="sr-only">Add field</DialogTitle>
         <DialogDescription></DialogDescription>
       </DialogHeader>
 
-      <ul className="-mt-4 grid gap-1">
+      <ul className="-mt-4 grid">
         {Object.entries(Fields).map(([type, field]) => (
           <li key={type}>
             <Button

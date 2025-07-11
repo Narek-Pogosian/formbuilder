@@ -1,12 +1,12 @@
 import { type FormSchemaField } from "@/lib/schemas/form-schemas";
 import { GripVertical, Pencil, Trash2, X } from "lucide-react";
 import { createElement, memo, useMemo } from "react";
+import { AddFieldBellow } from "../dialogs/add-field-dialog";
 import { useFormStore } from "../hooks/use-form-store";
 import { useSortable } from "@dnd-kit/sortable";
 import { Button } from "@/components/ui/button";
 import { Fields } from "../fields";
 import { CSS } from "@dnd-kit/utilities";
-import { AddFieldBellow } from "../dialogs/add-field-dialog";
 
 export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
   const {
@@ -38,9 +38,9 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
     <li
       ref={setNodeRef}
       style={style}
-      className="bg-card ring-ring group relative rounded border p-4 transition-none hover:ring-1 has-focus-visible:ring-1 lg:p-6"
+      className="card group relative p-4 transition-none lg:p-6"
     >
-      <div className="text-primary-text flex justify-between group-hover:opacity-100 has-focus-visible:opacity-100 max-lg:-mt-2 lg:absolute lg:-top-3.5 lg:-right-4 lg:-left-4 lg:opacity-0">
+      <div className="text-primary-text flex justify-between group-hover:opacity-100 has-focus-visible:opacity-100 max-lg:-mt-2 lg:absolute lg:-top-3 lg:-right-4 lg:-left-4 lg:opacity-0">
         {!field.editing && (
           <Button
             size="icon"
@@ -121,11 +121,11 @@ function FieldControls({
 
 export function FieldItemOverlay({ field }: { field: FormSchemaField }) {
   return (
-    <li className="bg-card ring-ring group relative list-none rounded border p-4 shadow-lg ring-1 lg:p-6 dark:shadow-lg/40">
+    <li className="card group relative list-none p-4 shadow-lg lg:p-6 dark:shadow-lg/40">
       <Button
         size="icon"
         variant="secondary"
-        className="absolute -top-3.5 -left-4 size-8 cursor-grabbing"
+        className="absolute -top-3 -left-4 size-8 cursor-grabbing"
       >
         <GripVertical className="size-4.5" />
         <span className="sr-only">Drag</span>

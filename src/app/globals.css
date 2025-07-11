@@ -8,7 +8,7 @@
 :root {
   --radius: 6px;
 
-  --background: hsl(270, 15%, 97%);
+  --background: hsl(270, 15%, 98%);
   --foreground: hsl(0, 0%, 1%);
   --foreground-muted: hsl(0, 0%, 35%);
 
@@ -19,7 +19,7 @@
   --accent: hsl(270, 20%, 50%, 10%);
   --accent-foreground: hsl(0, 0%, 1%);
 
-  --card: hsl(270, 10%, 99%);
+  --card: hsl(270, 10%, 99.5%);
   --card-foreground: hsl(0, 0%, 1%);
 
   --popover: hsl(0, 0%, 99%);
@@ -29,7 +29,7 @@
   --danger-foreground: hsl(0, 0%, 100%);
   --danger-text: hsl(352, 90%, 35%);
 
-  --input: hsl(0, 0%, 99%);
+  --input: hsl(0, 0%, 99.5%);
   --input-foreground: hsl(0, 0%, 10%);
   --input-placeholder: hsl(0, 0%, 65%);
 

@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 interface Store {
   fields: FormSchema;
-  addField: (field: FormSchemaField, atIndex: number | null) => void;
+  addField: (field: FormSchemaField, atIndex?: number | null) => void;
   editField: (id: string, field: FormSchemaField) => void;
   setFields: (fields: FormSchema) => void;
   removeField: (id: string) => void;
@@ -41,6 +41,6 @@ export const useFormStore = create(
     }),
     {
       name: "form-builder",
-    }
-  )
+    },
+  ),
 );

@@ -6,6 +6,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { Button } from "@/components/ui/button";
 import { Fields } from "../fields";
 import { CSS } from "@dnd-kit/utilities";
+import { AddFieldBellow } from "../dialogs/add-field-dialog";
 
 export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
   const {
@@ -17,6 +18,7 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
     transition,
     isOver,
     active,
+    index,
   } = useSortable({
     id: field.id,
     animateLayoutChanges: () => false,
@@ -52,7 +54,7 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
           </Button>
         )}
 
-        {!isDragging && <FieldControls field={field} />}
+        {!isDragging && <FieldControls field={field} index={index} />}
       </div>
 
       {isOver && active?.data.current?.fromSidebar && (
@@ -72,21 +74,19 @@ const Content = memo(function Content({ field }: { field: FormSchemaField }) {
   return <>{createElement(Fields[field.type].BuilderField, { field })}</>;
 });
 
-function FieldControls({ field }: { field: FormSchemaField }) {
+function FieldControls({
+  field,
+  index,
+}: {
+  field: FormSchemaField;
+  index: number;
+}) {
   const removeField = useFormStore((state) => state.removeField);
   const editField = useFormStore((state) => state.editField);
 
   return (
-    <div className="max-lg ml-auto flex gap-1 max-lg:mb-4 lg:flex-col">
-      <Button
-        size="icon"
-        variant="secondary"
-        className="size-8"
-        onClick={() => removeField(field.id)}
-      >
-        <Trash2 className="size-4.5" />
-        <span className="sr-only">Remove</span>
-      </Button>
+    <div className="ml-auto flex gap-1.5 max-lg:mb-2">
+      {field.saved && <AddFieldBellow index={index + 1} />}
 
       {field.saved && (
         <Button
@@ -105,6 +105,16 @@ function FieldControls({ field }: { field: FormSchemaField }) {
           )}
         </Button>
       )}
+
+      <Button
+        size="icon"
+        variant="secondary"
+        className="size-8"
+        onClick={() => removeField(field.id)}
+      >
+        <Trash2 className="size-4.5" />
+        <span className="sr-only">Remove</span>
+      </Button>
     </div>
   );
 }

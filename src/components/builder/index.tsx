@@ -1,7 +1,9 @@
 "use client";
 
 import { useDragHandlers } from "./hooks/use-drag-handlers";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { useFormStore } from "./hooks/use-form-store";
+import { AddField } from "./dialogs/add-field-dialog";
 import FieldPanel from "./components/field-panel";
 import FieldItem from "./components/field-item";
 import Overlay from "./components/overlay";
@@ -41,7 +43,7 @@ export default function Builder() {
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <div className="grid gap-8 lg:grid-cols-[250px_1fr] xl:grid-cols-[230px_1fr_360px]">
+      <div className="grid gap-8 pb-6 lg:grid-cols-[250px_1fr] xl:grid-cols-[230px_1fr_360px]">
         <div className="bg-card sticky top-[94px] hidden h-fit rounded border p-3 lg:block">
           <FieldPanel />
         </div>
@@ -73,29 +75,45 @@ const LastItem = memo(function LastItem({
 }: {
   fieldsLength: number;
 }) {
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const { setNodeRef, isOver, active } = useDroppable({ id: "last-item" });
 
-  if (fieldsLength === 0) {
+  if (!isDesktop) {
+    return fieldsLength > 0 ? (
+      <AddField />
+    ) : (
+      <div className="mx-auto flex w-fit flex-col gap-1 pt-14">
+        <AddField fromScratch />
+        <button>Start from template</button>
+      </div>
+    );
+  }
+
+  if (fieldsLength > 0) {
     return (
-      <div
-        className={cn(
-          "grid h-40 place-content-center rounded border border-dashed border-black/20 dark:border-white/15",
-          { "bg-primary/5": isOver },
+      <div ref={setNodeRef} className="relative h-16">
+        {isOver && active?.data.current?.fromSidebar && (
+          <div className="bg-primary/60 absolute -top-2.5 left-0 h-1 w-full"></div>
         )}
-        ref={setNodeRef}
-      >
-        <p className="text-sm font-semibold">
-          No fields added, drag a field here
-        </p>
       </div>
     );
   }
 
   return (
-    <div ref={setNodeRef} className="relative h-20">
-      {isOver && active?.data.current?.fromSidebar && (
-        <div className="bg-primary/60 absolute -top-2.5 left-0 h-1 w-full"></div>
+    <div
+      ref={setNodeRef}
+      className={cn(
+        "grid h-40 place-content-center rounded border border-dashed border-black/20 dark:border-white/15",
+        { "bg-primary/5": isOver },
       )}
+    >
+      <div className="text-center font-semibold">
+        <p className="text-foreground-muted text-sm">
+          No fields added, drag a field here
+        </p>
+        <p>or</p>
+        <button>TODO: start from template</button>
+      </div>
     </div>
   );
 });

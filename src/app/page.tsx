@@ -15,7 +15,7 @@ export default function Home() {
 
           <div className="flex items-center gap-1 md:gap-4">
             <Button className="text-primary-text" variant="ghost" size="sm">
-              <Settings /> Settings
+              <Settings /> <span className="max-md:sr-only">Settings</span>
             </Button>
             <PreviewDialog />
             <Button size="sm">

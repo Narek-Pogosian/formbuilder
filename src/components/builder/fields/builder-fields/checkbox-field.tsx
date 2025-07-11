@@ -17,7 +17,7 @@ export default function BuilderCheckboxField({ field }: BuilderFieldProps) {
       </div>
 
       {field.showDescription && field.description && (
-        <p className="text-sm text-foreground-muted">{field.description}</p>
+        <p className="text-foreground-muted text-sm">{field.description}</p>
       )}
     </div>
   );

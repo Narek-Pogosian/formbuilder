@@ -1,5 +1,6 @@
 import Builder from "@/components/builder";
 import PreviewDialog from "@/components/builder/components/preview-dialog";
+import { SettingsDialog } from "@/components/builder/components/settings";
 import ThemeToggle from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Settings } from "lucide-react";
@@ -14,9 +15,7 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-1 md:gap-4">
-            <Button className="text-primary-text" variant="ghost" size="sm">
-              <Settings /> <span className="max-md:sr-only">Settings</span>
-            </Button>
+            <SettingsDialog />
             <PreviewDialog />
             <Button size="sm">
               <BookOpen /> Publish

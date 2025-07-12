@@ -13,6 +13,21 @@ export default function FieldPanel() {
           <FieldsPanelItem fieldType={key as FieldType} icon={field.icon} />
         </li>
       ))}
+      {Object.entries(Fields).map(([key, field]) => (
+        <li key={field.label}>
+          <FieldsPanelItem fieldType={key as FieldType} icon={field.icon} />
+        </li>
+      ))}
+      {Object.entries(Fields).map(([key, field]) => (
+        <li key={field.label}>
+          <FieldsPanelItem fieldType={key as FieldType} icon={field.icon} />
+        </li>
+      ))}
+      {Object.entries(Fields).map(([key, field]) => (
+        <li key={field.label}>
+          <FieldsPanelItem fieldType={key as FieldType} icon={field.icon} />
+        </li>
+      ))}
     </ul>
   );
 }
@@ -49,7 +64,7 @@ function FieldsPanelItem({
 
 export function FieldPanelOverlay({ fieldType }: { fieldType: FieldType }) {
   return (
-    <button className="bg-card flex w-[225px] cursor-grabbing items-center gap-2 rounded px-6 py-2.5 font-semibold capitalize shadow-lg dark:shadow-lg/40 [&>svg]:size-5">
+    <button className="card flex w-[225px] cursor-grabbing items-center gap-2 px-6 py-2.5 font-semibold capitalize shadow-lg dark:shadow-lg/40 [&>svg]:size-5">
       {createElement(Fields[fieldType].icon)}
       {fieldType}
     </button>

@@ -23,6 +23,7 @@ import {
 } from "@dnd-kit/core";
 import { memo } from "react";
 import { cn } from "@/lib/utils";
+import { SettingsForm } from "./components/settings";
 
 export default function Builder() {
   const isMounted = useIsMounted();
@@ -51,7 +52,7 @@ export default function Builder() {
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <div className="grid gap-8 pb-6 lg:grid-cols-[250px_1fr] xl:grid-cols-[230px_1fr_360px]">
+      <div className="grid gap-8 pb-6 lg:grid-cols-[250px_1fr] xl:grid-cols-[230px_1fr_320px]">
         <div className="card sticky top-[94px] hidden h-fit p-3 lg:block">
           <FieldPanel />
         </div>
@@ -60,7 +61,7 @@ export default function Builder() {
           items={fields.map((f) => f.id)}
           strategy={verticalListSortingStrategy}
         >
-          <ul className="mx-auto grid w-full max-w-xl gap-5">
+          <ul className="mx-auto grid h-fit w-full max-w-xl gap-5">
             {fields.map((field) => (
               <FieldItem key={field.id} field={field} />
             ))}
@@ -70,8 +71,8 @@ export default function Builder() {
 
         <Overlay draggedField={draggedField} />
 
-        <div className="card sticky top-[94px] hidden h-fit p-3 xl:block">
-          Settings
+        <div className="card sticky top-[94px] hidden h-fit p-4 xl:block">
+          <SettingsForm />
         </div>
       </div>
     </DndContext>
@@ -115,11 +116,9 @@ const LastItem = memo(function LastItem({
         { "bg-primary/5": isOver },
       )}
     >
-      <div className="text-center font-semibold">
-        <p className="text-foreground-muted text-sm">
-          No fields added, drag a field here
-        </p>
-        <p>or</p>
+      <div className="text-foreground-muted text-center text-sm font-semibold">
+        <p className="">No fields added yet, drag a field here</p>
+        <p className="my-1.5">or</p>
         <button>TODO: start from template</button>
       </div>
     </div>

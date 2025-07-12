@@ -144,6 +144,6 @@
   }
 
   .field-action-tooltip {
-    @apply absolute top-9 z-100 hidden rounded-(--radius) bg-neutral-800 px-2 py-1 text-xs text-white group-hover:block group-focus-visible:block dark:bg-neutral-50 dark:text-neutral-900;
+    @apply absolute top-9.5 z-100 hidden rounded-(--radius) bg-neutral-800 px-2 py-1 text-xs text-white group-hover:block group-focus-visible:block dark:bg-neutral-50 dark:text-neutral-900;
   }
 }

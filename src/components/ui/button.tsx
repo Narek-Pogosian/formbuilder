@@ -15,7 +15,7 @@ const buttonVariants = cva(
         danger:
           "bg-danger text-danger-foreground hover:bg-danger/80 focus-visible:ring-danger/20 dark:focus-visible:ring-danger/40",
         outline:
-          "bg-slate-600/5 border dark:bg-slate-100/5 hover:bg-slate-600/10 dark:hover:bg-slate-100/10",
+          "bg-slate-600/5 dark:bg-slate-100/5 hover:bg-slate-600/10 dark:hover:bg-slate-100/10",
         ghost: "hover:bg-slate-600/10 dark:hover:bg-slate-100/10",
       },
       size: {

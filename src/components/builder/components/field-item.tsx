@@ -36,7 +36,7 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
     <li
       ref={setNodeRef}
       style={style}
-      className="card group/item relative p-4 transition-none lg:p-6"
+      className="card group/item relative h-fit p-4 transition-none lg:p-6"
     >
       <div className="text-primary-text flex justify-between group-hover/item:opacity-100 has-focus-visible:opacity-100 max-lg:-mt-2 lg:absolute lg:-top-3 lg:-right-4 lg:-left-4 lg:opacity-0">
         {!field.editing && (

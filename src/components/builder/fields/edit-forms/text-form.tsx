@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { textSchema } from "@/lib/schemas/form-schemas";
-import { useFormStore } from "../../hooks/use-form-store";
+import { useEditForm } from "../../hooks/use-edit-form";
 
 const textFormSchema = textSchema.omit({
   id: true,
@@ -42,11 +42,7 @@ export default function TextEditForm({ field }: EditFormProps) {
     },
   });
 
-  const editField = useFormStore((state) => state.editField);
-
-  function onSubmit(data: TextFormSchemaType) {
-    editField(field.id, { ...field, ...data, editing: false, saved: true });
-  }
+  const { onSubmit, firstInputRef } = useEditForm<TextFormSchemaType>(field);
 
   return (
     <Form {...form}>
@@ -62,7 +58,7 @@ export default function TextEditForm({ field }: EditFormProps) {
             <FormItem>
               <FormLabel>Label</FormLabel>
               <FormControl>
-                <Input placeholder="Name" {...field} />
+                <Input placeholder="Name" {...field} ref={firstInputRef} />
               </FormControl>
               <FormMessage />
             </FormItem>

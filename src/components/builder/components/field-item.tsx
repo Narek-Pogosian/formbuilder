@@ -1,7 +1,6 @@
 import { type FormSchemaField } from "@/lib/schemas/form-schemas";
 import { GripVertical, Pencil, Trash2, X } from "lucide-react";
 import { createElement, memo, useMemo } from "react";
-import { AddFieldBellow } from "../dialogs/add-field-dialog";
 import { useFormStore } from "../hooks/use-form-store";
 import { useSortable } from "@dnd-kit/sortable";
 import { Button } from "@/components/ui/button";
@@ -18,7 +17,6 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
     transition,
     isOver,
     active,
-    index,
   } = useSortable({
     id: field.id,
     animateLayoutChanges: () => false,
@@ -41,18 +39,20 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
       className="card group/item relative p-4 transition-none lg:p-6"
     >
       <div className="text-primary-text flex justify-between group-hover/item:opacity-100 has-focus-visible:opacity-100 max-lg:-mt-2 lg:absolute lg:-top-3 lg:-right-4 lg:-left-4 lg:opacity-0">
-        <Button
-          size="icon"
-          variant="secondary"
-          {...listeners}
-          {...attributes}
-          className="group relative size-8 cursor-grab"
-        >
-          <GripVertical className="size-4.5" />
-          <span className="sr-only">Drag</span>
-        </Button>
+        {!field.editing && (
+          <Button
+            size="icon"
+            variant="secondary"
+            {...listeners}
+            {...attributes}
+            className="group relative size-8 cursor-grab"
+          >
+            <GripVertical className="size-4.5" />
+            <span className="sr-only">Drag</span>
+          </Button>
+        )}
 
-        {!isDragging && <FieldControls field={field} index={index} />}
+        {!isDragging && <FieldControls field={field} />}
       </div>
 
       {isOver && active?.data.current?.fromSidebar && (
@@ -72,20 +72,12 @@ const Content = memo(function Content({ field }: { field: FormSchemaField }) {
   return <>{createElement(Fields[field.type].BuilderField, { field })}</>;
 });
 
-function FieldControls({
-  field,
-  index,
-}: {
-  field: FormSchemaField;
-  index: number;
-}) {
+function FieldControls({ field }: { field: FormSchemaField }) {
   const removeField = useFormStore((state) => state.removeField);
   const editField = useFormStore((state) => state.editField);
 
   return (
     <div className="ml-auto flex gap-1.5 max-lg:mb-2">
-      {field.saved && <AddFieldBellow index={index + 1} />}
-
       {field.saved && (
         <Button
           size="icon"

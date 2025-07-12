@@ -15,7 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { type z } from "zod";
 import { EditFormProps } from "..";
-import { useFormStore } from "../../hooks/use-form-store";
+import { useEditForm } from "../../hooks/use-edit-form";
 
 const checkboxFormSchema = checkboxSchema.omit({
   id: true,
@@ -40,11 +40,8 @@ export default function CheckboxEditForm({ field }: EditFormProps) {
     },
   });
 
-  const editField = useFormStore((state) => state.editField);
-
-  function onSubmit(data: CheckboxFormSchemaType) {
-    editField(field.id, { ...field, ...data, editing: false, saved: true });
-  }
+  const { onSubmit, firstInputRef } =
+    useEditForm<CheckboxFormSchemaType>(field);
 
   return (
     <Form {...form}>
@@ -60,7 +57,7 @@ export default function CheckboxEditForm({ field }: EditFormProps) {
             <FormItem>
               <FormLabel>Label</FormLabel>
               <FormControl>
-                <Input placeholder="Name" {...field} />
+                <Input {...field} placeholder="Name" ref={firstInputRef} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -8,7 +8,7 @@
 :root {
   --radius: 6px;
 
-  --background: hsl(270, 50%, 98%);
+  --background: hsl(270, 50%, 97.5%);
   --foreground: hsl(0, 0%, 10%);
   --foreground-muted: hsl(0, 0%, 35%);
 
@@ -39,7 +39,7 @@
 }
 
 .dark {
-  --background: hsl(0, 0%, 8%);
+  --background: hsl(0, 0%, 7%);
   --foreground: hsl(0, 0%, 97%);
   --foreground-muted: hsl(0, 0%, 65%);
 
@@ -140,10 +140,10 @@
 
 @layer components {
   .card {
-    @apply bg-card rounded shadow inset-shadow-xs inset-shadow-white dark:shadow/40 dark:inset-shadow-white/5;
+    @apply bg-card rounded-(--radius) shadow/5 inset-shadow-sm inset-shadow-white dark:shadow/45 dark:inset-shadow-xs dark:inset-shadow-white/5;
   }
 
   .field-action-tooltip {
-    @apply absolute top-9 z-100 hidden rounded bg-neutral-900 px-2 py-1 text-xs text-white group-hover:block group-focus-visible:block dark:bg-neutral-50 dark:text-neutral-900;
+    @apply absolute top-9 z-100 hidden rounded-(--radius) bg-neutral-800 px-2 py-1 text-xs text-white group-hover:block group-focus-visible:block dark:bg-neutral-50 dark:text-neutral-900;
   }
 }

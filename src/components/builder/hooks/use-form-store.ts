@@ -26,7 +26,11 @@ export const useFormStore = create(
                 .filter((f) => f.saved || f.id === id),
             };
           } else {
-            return { fields: state.fields.concat(field) };
+            return {
+              fields: state.fields
+                .filter((f) => f.saved || f.id === id)
+                .concat(field),
+            };
           }
         });
       },

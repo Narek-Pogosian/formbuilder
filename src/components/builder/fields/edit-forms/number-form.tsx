@@ -15,7 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { type z } from "zod";
 import { numberSchema } from "@/lib/schemas/form-schemas";
 import { EditFormProps } from "..";
-import { useFormStore } from "../../hooks/use-form-store";
+import { useEditForm } from "../../hooks/use-edit-form";
 
 const numberFormSchema = numberSchema
   .omit({
@@ -57,11 +57,7 @@ export default function NumberEditForm({ field }: EditFormProps) {
     },
   });
 
-  const editField = useFormStore((state) => state.editField);
-
-  function onSubmit(data: NumberFormSchemaType) {
-    editField(field.id, { ...field, ...data, editing: false, saved: true });
-  }
+  const { onSubmit, firstInputRef } = useEditForm<NumberFormSchemaType>(field);
 
   return (
     <Form {...form}>
@@ -77,7 +73,7 @@ export default function NumberEditForm({ field }: EditFormProps) {
             <FormItem>
               <FormLabel>Label</FormLabel>
               <FormControl>
-                <Input placeholder="Age" {...field} />
+                <Input placeholder="Age" {...field} ref={firstInputRef} />
               </FormControl>
               <FormMessage />
             </FormItem>

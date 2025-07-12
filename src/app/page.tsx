@@ -1,5 +1,5 @@
 import Builder from "@/components/builder";
-import PreviewDialog from "@/components/builder/dialogs/preview-dialog";
+import PreviewDialog from "@/components/builder/components/preview-dialog";
 import ThemeToggle from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Settings } from "lucide-react";

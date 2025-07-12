@@ -2,7 +2,7 @@
 
 import { getDefaultField } from "../utils/get-default-field";
 import { useFormStore } from "../hooks/use-form-store";
-import { Plus, StickyNote } from "lucide-react";
+import { StickyNote } from "lucide-react";
 import { FieldType } from "@/lib/schemas/form-schemas";
 import { Button } from "@/components/ui/button";
 import { Fields } from "../fields";
@@ -11,6 +11,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogOverlay,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -20,7 +21,7 @@ export function AddField({ fromScratch = false }: { fromScratch?: boolean }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen} modal={false}>
       <DialogTrigger asChild>
         <Button
           size="sm"
@@ -36,47 +37,25 @@ export function AddField({ fromScratch = false }: { fromScratch?: boolean }) {
           )}
         </Button>
       </DialogTrigger>
+      {open && (
+        <div className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80"></div>
+      )}
+
       <Content setOpen={setOpen} />
     </Dialog>
   );
 }
 
-export function AddFieldBellow({ index }: { index: number }) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button
-          size="icon"
-          variant="secondary"
-          className="group relative size-8"
-        >
-          <Plus />
-          <span className="field-action-tooltip">Add field bellow</span>
-        </Button>
-      </DialogTrigger>
-      <Content setOpen={setOpen} index={index} />
-    </Dialog>
-  );
-}
-
-function Content({
-  index,
-  setOpen,
-}: {
-  setOpen: (b: boolean) => void;
-  index?: number;
-}) {
+function Content({ setOpen }: { setOpen: (b: boolean) => void }) {
   const addField = useFormStore((state) => state.addField);
 
   function handleAdd(type: string) {
-    addField(getDefaultField(type as FieldType), index);
+    addField(getDefaultField(type as FieldType));
     setOpen(false);
   }
 
   return (
-    <DialogContent className="max-w-[270px] p-4 pr-6">
+    <DialogContent showCloseButton={false} className="max-w-[260px] p-4">
       <DialogHeader>
         <DialogTitle className="sr-only">Add field</DialogTitle>
         <DialogDescription></DialogDescription>

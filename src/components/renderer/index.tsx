@@ -1,3 +1,5 @@
+"use client";
+
 import { createElement, useEffect, useMemo } from "react";
 import {
   type FormSchema,

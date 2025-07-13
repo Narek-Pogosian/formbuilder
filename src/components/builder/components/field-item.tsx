@@ -59,12 +59,16 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
         <div className="bg-primary/60 absolute -top-3 left-0 h-1 w-full"></div>
       )}
 
-      <Content field={field} />
+      <FieldContent field={field} />
     </li>
   );
 });
 
-const Content = memo(function Content({ field }: { field: FormSchemaField }) {
+const FieldContent = memo(function Content({
+  field,
+}: {
+  field: FormSchemaField;
+}) {
   if (field.editing) {
     return <>{createElement(Fields[field.type].EditForm, { field })}</>;
   }
@@ -72,7 +76,7 @@ const Content = memo(function Content({ field }: { field: FormSchemaField }) {
   return <>{createElement(Fields[field.type].BuilderField, { field })}</>;
 });
 
-function FieldControls({ field }: { field: FormSchemaField }) {
+const FieldControls = ({ field }: { field: FormSchemaField }) => {
   const removeField = useFormStore((state) => state.removeField);
   const editField = useFormStore((state) => state.editField);
 
@@ -110,7 +114,7 @@ function FieldControls({ field }: { field: FormSchemaField }) {
       </Button>
     </div>
   );
-}
+};
 
 export function FieldItemOverlay({ field }: { field: FormSchemaField }) {
   return (
@@ -124,7 +128,7 @@ export function FieldItemOverlay({ field }: { field: FormSchemaField }) {
         <span className="sr-only">Drag</span>
       </Button>
 
-      <Content field={field} />
+      <FieldContent field={field} />
     </li>
   );
 }

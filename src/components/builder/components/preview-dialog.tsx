@@ -36,7 +36,7 @@ function Content() {
   const fields = useFormStore((state) => state.fields);
 
   return (
-    <div className="w-full">
+    <div>
       <FormRenderer fields={fields} />
     </div>
   );

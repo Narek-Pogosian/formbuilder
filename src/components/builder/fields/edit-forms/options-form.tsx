@@ -44,7 +44,7 @@ export default function OptionsEditForm({ field }: EditFormProps) {
 
   const { onSubmit, firstInputRef } = useEditForm<OptionsFormSchemaType>(field);
 
-  const { fields, append, remove, move } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "options",
   });
@@ -123,43 +123,58 @@ export default function OptionsEditForm({ field }: EditFormProps) {
         )}
 
         <div className="mb-1">
-          <p className="mb-1 text-sm font-semibold">Options</p>
-
-          <ul className="mb-2 space-y-2">
-            {fields.map((option, index) => (
-              <FormField
-                key={option.id}
-                control={form.control}
-                name={`options.${index}.value`}
-                render={({ field }) => (
-                  <FormItem className="flex gap-2">
-                    <FormControl className="grow">
-                      <Input placeholder={`Option ${index + 1}`} {...field} />
-                    </FormControl>
-
-                    <Button
-                      size="icon"
-                      type="button"
-                      variant="outline"
-                      onClick={() => remove(index)}
-                    >
-                      <Trash2 />
-                    </Button>
-                  </FormItem>
+          <FormField
+            control={form.control}
+            name="options"
+            render={() => (
+              <FormItem>
+                <p className="mb-1 text-sm font-semibold">Options</p>
+                {form.formState.errors.options?.root?.message && (
+                  <p className="text-danger-text text-sm font-medium">
+                    {form.formState.errors.options?.root?.message as string}
+                  </p>
                 )}
-              />
-            ))}
-          </ul>
 
-          <Button
-            type="button"
-            size="sm"
-            className="border text-xs"
-            variant="outline"
-            onClick={() => append({ value: "" })}
-          >
-            Add Option
-          </Button>
+                <ul className="mb-2 space-y-2">
+                  {fields.map((option, index) => (
+                    <FormField
+                      key={option.id}
+                      control={form.control}
+                      name={`options.${index}.value`}
+                      render={({ field }) => (
+                        <FormItem className="flex gap-2">
+                          <FormControl className="grow">
+                            <Input
+                              placeholder={`Option ${index + 1}`}
+                              {...field}
+                            />
+                          </FormControl>
+                          <Button
+                            size="icon"
+                            type="button"
+                            variant="outline"
+                            onClick={() => remove(index)}
+                          >
+                            <Trash2 />
+                          </Button>
+                        </FormItem>
+                      )}
+                    />
+                  ))}
+                </ul>
+
+                <Button
+                  type="button"
+                  size="sm"
+                  className="w-fit border text-xs"
+                  variant="outline"
+                  onClick={() => append({ value: "" })}
+                >
+                  Add Option
+                </Button>
+              </FormItem>
+            )}
+          />
         </div>
 
         <Button className="w-fit" type="submit" size="sm">

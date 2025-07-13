@@ -93,7 +93,7 @@ const LastItem = memo(function LastItem({
     ) : (
       <div className="mx-auto flex w-fit flex-col gap-1 pt-14">
         <AddField fromScratch />
-        <button>Start from template</button>
+        <button>TODO: Start from template</button>
       </div>
     );
   }
@@ -111,12 +111,12 @@ const LastItem = memo(function LastItem({
   return (
     <div
       ref={setNodeRef}
-      className={cn(
-        "grid h-40 place-content-center rounded border border-dashed border-black/20 dark:border-white/15",
-        { "bg-primary/5": isOver },
-      )}
+      className={cn("grid h-40 place-content-center rounded", {
+        "bg-accent": isOver,
+      })}
     >
       <div className="text-foreground-muted text-center text-sm font-semibold">
+        <p>TODO: Nice image</p>
         <p className="">No fields added yet, drag a field here</p>
         <p className="my-1.5">or</p>
         <button>TODO: start from template</button>

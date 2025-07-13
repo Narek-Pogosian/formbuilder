@@ -24,7 +24,7 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
 
   const style = useMemo<React.CSSProperties>(
     () => ({
-      opacity: isDragging ? 0.5 : undefined,
+      opacity: isDragging ? 0.4 : undefined,
       transform: CSS.Translate.toString(transform),
       touchAction: "none",
       transition,

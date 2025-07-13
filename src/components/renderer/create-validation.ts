@@ -27,6 +27,14 @@ function createFieldSchema(field: FormSchemaField): ZodTypeAny {
         field.required,
       );
 
+    case "options":
+      const optionsSchema = z
+        .string()
+        .refine((val) => field.options.some((o) => o.value === val), {
+          message: "Invalid option",
+        });
+      return field.required ? optionsSchema : optionsSchema.optional();
+
     case "number":
       let numberSchema = z.coerce.number({ message: "Must be a number" });
       if (typeof field.min === "number") {

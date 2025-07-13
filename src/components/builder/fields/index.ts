@@ -1,6 +1,7 @@
 import {
   CircleCheckBig,
   Link2,
+  ListTodo,
   Mail,
   Sigma,
   Type,
@@ -23,6 +24,9 @@ import RenderEmailField from "./render-fields/email-field";
 import RenderUrlField from "./render-fields/url-field";
 import BuilderEmailField from "./builder-fields/email-field";
 import BuilderUrlField from "./builder-fields/url-field";
+import RenderOptionsField from "./render-fields/options-field";
+import OptionsEditForm from "./edit-forms/options-form";
+import BuilderOptionField from "./builder-fields/options-field";
 
 type Fields = Record<
   FieldType,
@@ -42,6 +46,13 @@ export const Fields: Fields = {
     RenderField: RenderTextField,
     BuilderField: BuilderTextField,
     EditForm: TextEditForm,
+  },
+  options: {
+    icon: ListTodo,
+    label: "Options",
+    RenderField: RenderOptionsField,
+    EditForm: OptionsEditForm,
+    BuilderField: BuilderOptionField,
   },
   email: {
     label: "Email",

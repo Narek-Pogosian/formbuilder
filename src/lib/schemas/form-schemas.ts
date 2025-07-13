@@ -32,6 +32,17 @@ export const urlSchema = baseFieldSchema.extend({
   placeholder: z.string(),
 });
 
+export const optionsSchema = baseFieldSchema.extend({
+  type: z.literal("options"),
+  options: z
+    .array(
+      z.object({
+        value: z.string().trim().min(1, { message: "Required" }),
+      }),
+    )
+    .min(1),
+});
+
 export const numberSchema = baseFieldSchema.extend({
   type: z.literal("number"),
   min: z.union([z.literal(""), z.coerce.number().optional()]),
@@ -48,6 +59,7 @@ export const formSchema = z
       textSchema,
       emailSchema,
       urlSchema,
+      optionsSchema,
       numberSchema,
       checkboxSchema,
     ]),

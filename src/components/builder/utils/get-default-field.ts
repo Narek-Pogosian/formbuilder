@@ -35,6 +35,17 @@ export function getDefaultField(type: FieldType): FormSchemaField {
         placeholder: "",
       };
 
+    case "options":
+      return {
+        ...base,
+        type: "options",
+        options: [
+          { value: "Option 1" },
+          { value: "Option 2" },
+          { value: "Option 3" },
+        ],
+      };
+
     case "number":
       return {
         ...base,

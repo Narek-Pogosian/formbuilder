@@ -13,21 +13,6 @@ export default function FieldPanel() {
           <FieldsPanelItem fieldType={key as FieldType} icon={field.icon} />
         </li>
       ))}
-      {Object.entries(Fields).map(([key, field]) => (
-        <li key={field.label}>
-          <FieldsPanelItem fieldType={key as FieldType} icon={field.icon} />
-        </li>
-      ))}
-      {Object.entries(Fields).map(([key, field]) => (
-        <li key={field.label}>
-          <FieldsPanelItem fieldType={key as FieldType} icon={field.icon} />
-        </li>
-      ))}
-      {Object.entries(Fields).map(([key, field]) => (
-        <li key={field.label}>
-          <FieldsPanelItem fieldType={key as FieldType} icon={field.icon} />
-        </li>
-      ))}
     </ul>
   );
 }

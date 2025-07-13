@@ -1,4 +1,11 @@
-import { CircleCheckBig, Sigma, Type, type LucideIcon } from "lucide-react";
+import {
+  CircleCheckBig,
+  Link2,
+  Mail,
+  Sigma,
+  Type,
+  type LucideIcon,
+} from "lucide-react";
 import type { FieldType, FormSchemaField } from "@/lib/schemas/form-schemas";
 import type { UseFormReturn } from "react-hook-form";
 import RenderTextField from "./render-fields/text-field";
@@ -10,6 +17,12 @@ import BuilderCheckboxField from "./builder-fields/checkbox-field";
 import TextEditForm from "./edit-forms/text-form";
 import NumberEditForm from "./edit-forms/number-form";
 import CheckboxEditForm from "./edit-forms/checkbox-form";
+import EmailEditForm from "./edit-forms/email-form";
+import UrlEditForm from "./edit-forms/url-form";
+import RenderEmailField from "./render-fields/email-field";
+import RenderUrlField from "./render-fields/url-field";
+import BuilderEmailField from "./builder-fields/email-field";
+import BuilderUrlField from "./builder-fields/url-field";
 
 type Fields = Record<
   FieldType,
@@ -29,6 +42,20 @@ export const Fields: Fields = {
     RenderField: RenderTextField,
     BuilderField: BuilderTextField,
     EditForm: TextEditForm,
+  },
+  email: {
+    label: "Email",
+    icon: Mail,
+    RenderField: RenderEmailField,
+    BuilderField: BuilderEmailField,
+    EditForm: EmailEditForm,
+  },
+  url: {
+    label: "URL",
+    icon: Link2,
+    RenderField: RenderUrlField,
+    BuilderField: BuilderUrlField,
+    EditForm: UrlEditForm,
   },
   number: {
     label: "Number",

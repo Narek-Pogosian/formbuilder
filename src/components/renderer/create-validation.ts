@@ -16,6 +16,17 @@ function createFieldSchema(field: FormSchemaField): ZodTypeAny {
     case "text":
       return applyCommonStringRules(z.string().trim(), field.required);
 
+    case "email":
+      return applyCommonStringRules(z.string().trim().email(), field.required);
+
+    case "url":
+      const urlRegex =
+        /\b(?:https?|ftp):\/\/(?:www\.)?([a-zA-Z0-9-]+\.[a-zA-Z]{2,})(?:\/[^\s]*)?|\b(?:www\.)?([a-zA-Z0-9-]+\.[a-zA-Z]{2,})(?:\/[^\s]*)?\b/;
+      return applyCommonStringRules(
+        z.string().trim().regex(urlRegex, "Invalid URL"),
+        field.required,
+      );
+
     case "number":
       let numberSchema = z.coerce.number({ message: "Must be a number" });
       if (typeof field.min === "number") {

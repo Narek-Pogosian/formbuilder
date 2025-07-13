@@ -1,9 +1,9 @@
-import Builder from "@/components/builder";
-import PreviewDialog from "@/components/builder/components/preview-dialog";
 import { SettingsDialog } from "@/components/builder/components/settings";
-import ThemeToggle from "@/components/theme-toggle";
+import { BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Settings } from "lucide-react";
+import PreviewDialog from "@/components/builder/components/preview-dialog";
+import ThemeToggle from "@/components/theme-toggle";
+import Builder from "@/components/builder";
 
 export default function Home() {
   return (

@@ -22,6 +22,16 @@ export const textSchema = baseFieldSchema.extend({
   placeholder: z.string(),
 });
 
+export const emailSchema = baseFieldSchema.extend({
+  type: z.literal("email"),
+  placeholder: z.string(),
+});
+
+export const urlSchema = baseFieldSchema.extend({
+  type: z.literal("url"),
+  placeholder: z.string(),
+});
+
 export const numberSchema = baseFieldSchema.extend({
   type: z.literal("number"),
   min: z.union([z.literal(""), z.coerce.number().optional()]),
@@ -34,7 +44,13 @@ export const checkboxSchema = baseFieldSchema.extend({
 
 export const formSchema = z
   .array(
-    z.discriminatedUnion("type", [textSchema, numberSchema, checkboxSchema]),
+    z.discriminatedUnion("type", [
+      textSchema,
+      emailSchema,
+      urlSchema,
+      numberSchema,
+      checkboxSchema,
+    ]),
   )
   .min(1, { message: "At least 1 field is required" });
 

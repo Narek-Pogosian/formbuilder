@@ -21,9 +21,9 @@ import {
   KeyboardSensor,
   useDroppable,
 } from "@dnd-kit/core";
+import { SettingsTitle } from "./components/settings";
 import { memo } from "react";
 import { cn } from "@/lib/utils";
-import { SettingsForm } from "./components/settings";
 
 export default function Builder() {
   const isMounted = useIsMounted();
@@ -53,7 +53,7 @@ export default function Builder() {
       onDragEnd={handleDragEnd}
     >
       <div className="grid gap-8 pb-6 lg:grid-cols-[250px_1fr] xl:grid-cols-[230px_1fr_320px]">
-        <div className="card sticky top-[94px] hidden h-fit p-3 lg:block">
+        <div className="card sticky top-[92px] hidden h-fit p-3 lg:block">
           <FieldPanel />
         </div>
 
@@ -71,8 +71,8 @@ export default function Builder() {
 
         <Overlay draggedField={draggedField} />
 
-        <div className="card sticky top-[94px] hidden h-fit p-4 xl:block">
-          <SettingsForm />
+        <div className="card sticky top-[92px] hidden h-fit p-4 xl:block">
+          <SettingsTitle />
         </div>
       </div>
     </DndContext>

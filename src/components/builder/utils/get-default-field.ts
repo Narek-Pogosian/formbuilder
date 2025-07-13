@@ -21,6 +21,20 @@ export function getDefaultField(type: FieldType): FormSchemaField {
         placeholder: "",
       };
 
+    case "email":
+      return {
+        ...base,
+        type: "email",
+        placeholder: "",
+      };
+
+    case "url":
+      return {
+        ...base,
+        type: "url",
+        placeholder: "",
+      };
+
     case "number":
       return {
         ...base,

@@ -15,61 +15,29 @@ import { Settings } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
-export function SettingsForm() {
+export function SettingsTitle() {
   const settings = useFormStore((state) => state.settings);
   const setSettings = useFormStore((state) => state.setSettings);
 
   return (
-    <form className="@container grid gap-10">
-      <div className="flex flex-col gap-2 @xl:flex-row @xl:gap-8">
-        <div className="shrink-0 @md:w-72">
-          <Label htmlFor="title1" className="mb-1">
-            Title
-          </Label>
-          <p id="title-description" className="text-foreground-muted text-sm">
-            The main title of your form
-          </p>
-        </div>
-
-        <Input
-          id="title1"
-          type="text"
-          aria-describedby="title-description"
-          placeholder="Enter a title..."
-          value={settings.title}
-          onChange={(e) =>
-            setSettings({
-              title: e.target.value,
-              description: settings.description,
-            })
-          }
-        />
-      </div>
-
-      <div className="flex flex-col gap-2 @xl:flex-row @xl:gap-8">
-        <div className="shrink-0 @md:w-72">
-          <Label htmlFor="description" className="mb-1">
-            Description
-          </Label>
-          <p id="description-help" className="text-foreground-muted text-sm">
-            Give you respondents more information about what this form is about
-          </p>
-        </div>
-
-        <Textarea
-          id="description"
-          aria-describedby="description-help"
-          placeholder="Enter a description..."
-          value={settings.description}
-          onChange={(e) =>
-            setSettings({
-              title: settings.title,
-              description: e.target.value,
-            })
-          }
-        />
-      </div>
-    </form>
+    <div className="grid gap-2">
+      <Label htmlFor="title1" className="mb-1">
+        Title of form
+      </Label>
+      <Input
+        id="title1"
+        type="text"
+        aria-describedby="title-description"
+        placeholder="Enter a title..."
+        value={settings.title}
+        onChange={(e) =>
+          setSettings({
+            title: e.target.value,
+            description: settings.description,
+          })
+        }
+      />
+    </div>
   );
 }
 
@@ -90,5 +58,60 @@ export function SettingsDialog() {
         <SettingsForm />
       </DialogContent>
     </Dialog>
+  );
+}
+
+function SettingsForm() {
+  const settings = useFormStore((state) => state.settings);
+  const setSettings = useFormStore((state) => state.setSettings);
+
+  return (
+    <form className="@container grid gap-8">
+      <div className="flex flex-col gap-2 @xl:flex-row @xl:gap-8">
+        <div className="shrink-0 @md:w-72">
+          <Label htmlFor="title1" className="mb-1">
+            Title
+          </Label>
+          <p id="title-description" className="text-foreground-muted text-sm">
+            The main title of your form
+          </p>
+        </div>
+        <Input
+          id="title1"
+          type="text"
+          aria-describedby="title-description"
+          placeholder="Enter a title..."
+          value={settings.title}
+          onChange={(e) =>
+            setSettings({
+              title: e.target.value,
+              description: settings.description,
+            })
+          }
+        />
+      </div>
+      <div className="flex flex-col gap-2 @xl:flex-row @xl:gap-8">
+        <div className="shrink-0 @md:w-72">
+          <Label htmlFor="description" className="mb-1">
+            Description
+          </Label>
+          <p id="description-help" className="text-foreground-muted text-sm">
+            Give you respondents more information about what this form is about
+          </p>
+        </div>
+        <Textarea
+          id="description"
+          aria-describedby="description-help"
+          placeholder="Enter a description..."
+          value={settings.description}
+          onChange={(e) =>
+            setSettings({
+              title: settings.title,
+              description: e.target.value,
+            })
+          }
+        />
+      </div>
+    </form>
   );
 }

@@ -38,6 +38,7 @@ export default function OptionsEditForm({ field }: EditFormProps) {
       required: field.required,
       description: field.description,
       showDescription: field.showDescription,
+      multiAnswer: field.multiAnswer,
       options: field.options,
     },
   });
@@ -100,6 +101,23 @@ export default function OptionsEditForm({ field }: EditFormProps) {
                   />
                 </FormControl>
                 <FormLabel className="mb-0 pl-1">Show Description</FormLabel>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="multiAnswer"
+            render={({ field }) => (
+              <FormItem className="flex items-center">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <FormLabel className="mb-0 pl-1">Multiple Answers</FormLabel>
                 <FormMessage />
               </FormItem>
             )}

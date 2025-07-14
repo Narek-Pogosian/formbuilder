@@ -27,9 +27,14 @@ interface Props {
 }
 
 export default function FormRenderer({ fields }: Props) {
-  const schema = useMemo(() => createValidationSchema(fields), [fields]);
+  const { schema, defaultValues } = useMemo(
+    () => createValidationSchema(fields),
+    [fields],
+  );
+
   const form = useForm({
     resolver: zodResolver(schema),
+    defaultValues,
   });
 
   const watchedValues = form.watch();

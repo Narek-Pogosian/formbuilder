@@ -34,6 +34,7 @@ export const urlSchema = baseFieldSchema.extend({
 
 export const optionsSchema = baseFieldSchema.extend({
   type: z.literal("options"),
+  multiAnswer: z.boolean().default(false),
   options: z
     .array(
       z.object({

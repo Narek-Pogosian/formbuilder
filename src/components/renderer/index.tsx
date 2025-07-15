@@ -57,12 +57,12 @@ export default function FormRenderer({ fields }: Props) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mx-auto grid max-w-lg gap-6"
+        className="mx-auto grid max-w-lg gap-9"
       >
         {fields
           .filter((f) => f.saved)
           .map((formField) => {
-            if (!isVisible(formField, watchedValues)) return null;
+            // if (!isVisible(formField, watchedValues)) return null;
 
             return createElement(Fields[formField.type].RenderField, {
               form,

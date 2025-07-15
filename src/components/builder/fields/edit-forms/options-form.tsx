@@ -170,7 +170,7 @@ export default function OptionsEditForm({ field }: EditFormProps) {
                           <Button
                             size="icon"
                             type="button"
-                            variant="outline"
+                            variant="secondary"
                             onClick={() => remove(index)}
                           >
                             <Trash2 />
@@ -185,7 +185,7 @@ export default function OptionsEditForm({ field }: EditFormProps) {
                   type="button"
                   size="sm"
                   className="w-fit border text-xs"
-                  variant="outline"
+                  variant="secondary"
                   onClick={() => append({ value: "" })}
                 >
                   Add Option

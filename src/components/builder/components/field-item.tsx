@@ -42,7 +42,7 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
         {!field.editing && (
           <Button
             size="icon"
-            variant="secondary"
+            variant="fieldAction"
             {...listeners}
             {...attributes}
             className="group relative size-8 cursor-grab"
@@ -85,7 +85,7 @@ const FieldControls = ({ field }: { field: FormSchemaField }) => {
       {field.saved && (
         <Button
           size="icon"
-          variant="secondary"
+          variant="fieldAction"
           className="group relative size-8"
           onClick={() =>
             editField(field.id, { ...field, editing: !field.editing })
@@ -105,7 +105,7 @@ const FieldControls = ({ field }: { field: FormSchemaField }) => {
 
       <Button
         size="icon"
-        variant="secondary"
+        variant="fieldAction"
         className="group relative size-8"
         onClick={() => removeField(field.id)}
       >
@@ -121,7 +121,7 @@ export function FieldItemOverlay({ field }: { field: FormSchemaField }) {
     <li className="card group relative list-none p-4 shadow-lg lg:p-6 dark:shadow-lg/40">
       <Button
         size="icon"
-        variant="secondary"
+        variant="fieldAction"
         className="absolute -top-3 -left-4 size-8 cursor-grabbing"
       >
         <GripVertical className="size-4.5" />

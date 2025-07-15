@@ -24,6 +24,7 @@ import {
 import { SettingsTitle } from "./components/settings";
 import { memo } from "react";
 import { cn } from "@/lib/utils";
+import Templates from "./components/templates";
 
 export default function Builder() {
   const isMounted = useIsMounted();
@@ -93,7 +94,7 @@ const LastItem = memo(function LastItem({
     ) : (
       <div className="mx-auto flex w-fit flex-col gap-1 pt-14">
         <AddField fromScratch />
-        <button>TODO: Start from template</button>
+        <Templates />
       </div>
     );
   }
@@ -119,7 +120,7 @@ const LastItem = memo(function LastItem({
         <p>TODO: Nice image</p>
         <p className="">No fields added yet, drag a field here</p>
         <p className="my-1.5">or</p>
-        <button>TODO: start from template</button>
+        <Templates />
       </div>
     </div>
   );

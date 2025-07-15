@@ -20,11 +20,13 @@ function createOptionsSchema(field: FormSchemaField): ZodTypeAny {
       res.every((val) => field.options.map((f) => f.value).includes(val)),
     );
   } else {
-    const schema = field.required ? z.string() : z.string().optional();
+    const schema = field.required
+      ? z.string().refine((val) => field.options.some((o) => o.value === val), {
+          message: "Invalid option",
+        })
+      : z.string().optional();
 
-    return schema.refine((val) => field.options.some((o) => o.value === val), {
-      message: "Invalid option",
-    });
+    return schema;
   }
 }
 

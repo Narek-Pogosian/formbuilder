@@ -24,9 +24,7 @@ export default function RenderTextField({ form, formField }: RenderFieldProps) {
           <FormLabel>{formField.label}</FormLabel>
 
           {formField.showDescription && formField.description && (
-            <FormDescription className="mb-1">
-              {formField.description}
-            </FormDescription>
+            <FormDescription>{formField.description}</FormDescription>
           )}
 
           <FormControl>

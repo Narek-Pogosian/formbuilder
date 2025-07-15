@@ -8,8 +8,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
+import { cn } from "@/lib/utils";
 
 export default function RenderOptionsField({
   form,
@@ -26,9 +26,7 @@ export default function RenderOptionsField({
         name={formField.id}
         render={() => (
           <FormItem>
-            <FormLabel
-              className={cn("mb-1", { "mb-0": formField.showDescription })}
-            >
+            <FormLabel className={cn({ "mb-1": !formField.showDescription })}>
               {formField.label}
             </FormLabel>
             {formField.showDescription && formField.description && (
@@ -81,13 +79,11 @@ export default function RenderOptionsField({
       name={formField.id}
       render={({ field }) => (
         <FormItem>
-          <FormLabel
-            className={cn("mb-3", { "mb-0": formField.showDescription })}
-          >
+          <FormLabel className={cn({ "mb-1": !formField.showDescription })}>
             {formField.label}
           </FormLabel>
           {formField.showDescription && formField.description && (
-            <FormDescription className="mb-2">
+            <FormDescription className="mb-1">
               {formField.description}
             </FormDescription>
           )}

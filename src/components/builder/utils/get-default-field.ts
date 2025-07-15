@@ -39,6 +39,7 @@ export function getDefaultField(type: FieldType): FormSchemaField {
       return {
         ...base,
         type: "options",
+        multiAnswer: false,
         options: [
           { value: "Option 1" },
           { value: "Option 2" },

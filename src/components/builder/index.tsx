@@ -117,9 +117,7 @@ const LastItem = memo(function LastItem({
       })}
     >
       <div className="text-foreground-muted text-center text-sm font-semibold">
-        <p>TODO: Nice image</p>
-        <p className="">No fields added yet, drag a field here</p>
-        <p className="my-1.5">or</p>
+        <p className="mb-2">Drag a field here to get started or</p>
         <Templates />
       </div>
     </div>

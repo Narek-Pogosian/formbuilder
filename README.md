@@ -20,10 +20,9 @@
 
 ## TODO
 
-- Unit tests
+- Follow up questions
 
 - Authenication
 - Publish form
 - Respond
 - Download csv
-- Follow up questions

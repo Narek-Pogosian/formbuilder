@@ -8,33 +8,24 @@ import { Fields } from "../fields";
 import { CSS } from "@dnd-kit/utilities";
 
 export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
-  const {
-    setNodeRef,
-    attributes,
-    isDragging,
-    listeners,
-    transform,
-    transition,
-    isOver,
-    active,
-  } = useSortable({
+  const sortable = useSortable({
     id: field.id,
     animateLayoutChanges: () => false,
   });
 
   const style = useMemo<React.CSSProperties>(
     () => ({
-      opacity: isDragging ? 0.4 : undefined,
-      transform: CSS.Translate.toString(transform),
+      opacity: sortable.isDragging ? 0.4 : undefined,
+      transform: CSS.Translate.toString(sortable.transform),
       touchAction: "none",
-      transition,
+      transition: sortable.transition,
     }),
-    [isDragging, transform, transition],
+    [sortable.isDragging, sortable.transform, sortable.transition],
   );
 
   return (
     <li
-      ref={setNodeRef}
+      ref={sortable.setNodeRef}
       style={style}
       className="card group/item relative h-fit p-4 transition-none lg:p-6"
     >
@@ -43,8 +34,8 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
           <Button
             size="icon"
             variant="fieldAction"
-            {...listeners}
-            {...attributes}
+            {...sortable.listeners}
+            {...sortable.attributes}
             className="group relative size-8 cursor-grab"
           >
             <GripVertical className="size-4.5" />
@@ -52,10 +43,10 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
           </Button>
         )}
 
-        {!isDragging && <FieldControls field={field} />}
+        {!sortable.isDragging && <FieldControls field={field} />}
       </div>
 
-      {isOver && active?.data.current?.fromSidebar && (
+      {sortable.isOver && sortable.active?.data.current?.fromSidebar && (
         <div className="bg-primary/60 absolute -top-3 left-0 h-1 w-full"></div>
       )}
 

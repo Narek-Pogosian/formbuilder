@@ -18,11 +18,10 @@
 - **Zod Validation**  
   Forms automatically generate Zod schemas for powerful runtime validation of submissions.
 
-## TODO
-
-- Follow up questions
+## Roadmap
 
 - Authenication
 - Publish form
+- Manage forms
 - Respond
 - Download csv

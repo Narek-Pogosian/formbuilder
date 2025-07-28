@@ -1,10 +1,12 @@
 import type { FormSchema, FormSchemaField } from "@/lib/schemas/form-schemas";
 import { z, type ZodTypeAny } from "zod";
 
+const REQUIRED_MESSAGE = "This field is required";
+
 function applyStringRules(schema: z.ZodString, required: boolean): ZodTypeAny {
   schema = schema.max(600, { message: "Must be at most 600 characters" });
   return required
-    ? schema.min(1, { message: "This field is required" })
+    ? schema.min(1, { message: REQUIRED_MESSAGE })
     : schema.optional().or(z.literal(""));
 }
 
@@ -21,9 +23,11 @@ function createOptionsSchema(field: FormSchemaField): ZodTypeAny {
     );
   } else {
     const schema = field.required
-      ? z.string().refine((val) => field.options.some((o) => o.value === val), {
-          message: "Invalid option",
-        })
+      ? z
+          .string({ message: REQUIRED_MESSAGE })
+          .refine((val) => field.options.some((o) => o.value === val), {
+            message: "Invalid option",
+          })
       : z.string().optional();
 
     return schema;
@@ -83,7 +87,7 @@ function createFieldSchema(field: FormSchemaField): ZodTypeAny {
       const checkboxSchema = z.boolean();
       return field.required
         ? checkboxSchema.refine((val) => val, {
-            message: "This field is required",
+            message: REQUIRED_MESSAGE,
           })
         : checkboxSchema.optional();
     }
@@ -101,7 +105,7 @@ function getDefaultValue(field: FormSchemaField) {
     case "checkbox":
       return false;
     default:
-      return undefined;
+      return "";
   }
 }
 

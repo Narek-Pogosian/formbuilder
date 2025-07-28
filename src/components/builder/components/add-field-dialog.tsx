@@ -11,7 +11,6 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogOverlay,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -25,7 +24,7 @@ export function AddField({ fromScratch = false }: { fromScratch?: boolean }) {
       <DialogTrigger asChild>
         <Button
           size="sm"
-          variant={fromScratch ? "ghost" : "outline"}
+          variant={fromScratch ? "ghost" : "secondary"}
           className="w-fit"
         >
           {fromScratch ? (

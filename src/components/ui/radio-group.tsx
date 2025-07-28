@@ -3,7 +3,6 @@
 import * as React from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { CircleIcon } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 
 function RadioGroup({
@@ -30,7 +29,7 @@ function RadioGroupItem({
         "text-primary bg-input aspect-square size-4 shrink-0 rounded-full transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50",
         "border border-black/10 dark:border-white/5",
         "focus-visible:ring-ring focus-visible:border-ring focus-visible:ring-2",
-        "aria-invalid:ring-danger-500/50 aria-invalid:border-danger-500/50",
+        "aria-invalid:ring-danger/70! aria-invalid:border-danger/70!",
         className,
       )}
       {...props}

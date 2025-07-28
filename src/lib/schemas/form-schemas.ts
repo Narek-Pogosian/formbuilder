@@ -8,12 +8,6 @@ const baseFieldSchema = z.object({
   description: z.string().trim(),
   editing: z.boolean(),
   saved: z.boolean(),
-  followUps: z
-    .object({
-      parentId: z.string(),
-      valueToMatch: z.any(),
-    })
-    .optional(),
 });
 
 export const textSchema = baseFieldSchema.extend({
@@ -54,18 +48,16 @@ export const checkboxSchema = baseFieldSchema.extend({
   type: z.literal("checkbox"),
 });
 
-export const formSchema = z
-  .array(
-    z.discriminatedUnion("type", [
-      textSchema,
-      emailSchema,
-      urlSchema,
-      optionsSchema,
-      numberSchema,
-      checkboxSchema,
-    ]),
-  )
-  .min(1, { message: "At least 1 field is required" });
+export const formSchema = z.array(
+  z.discriminatedUnion("type", [
+    textSchema,
+    emailSchema,
+    urlSchema,
+    optionsSchema,
+    numberSchema,
+    checkboxSchema,
+  ]),
+);
 
 export type FormSchema = z.infer<typeof formSchema>;
 export type FormSchemaField = FormSchema[number];

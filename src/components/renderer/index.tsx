@@ -1,22 +1,19 @@
 "use client";
 
-import { createElement, useEffect, useMemo } from "react";
-import {
-  type FormSchema,
-  type FormSchemaField,
-} from "@/lib/schemas/form-schemas";
+import { createElement, useMemo } from "react";
 import { createValidationSchema } from "./create-validation";
+import { type FormSchema } from "@/lib/schemas/form-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Fields } from "../builder/fields";
 import { Button } from "../ui/button";
 import { Form } from "../ui/form";
 
-function isVisible(field: FormSchemaField, watched: Record<string, unknown>) {
-  if (!field.followUps) return true;
+// function isVisible(field: FormSchemaField, watched: Record<string, unknown>) {
+//   if (!field.followUps) return true;
 
-  return field.followUps.valueToMatch === watched[field.followUps.parentId];
-}
+//   return field.followUps.valueToMatch === watched[field.followUps.parentId];
+// }
 
 function onSubmit(data: unknown) {
   alert(JSON.stringify(data, null, 2));
@@ -37,21 +34,21 @@ export default function FormRenderer({ fields }: Props) {
     defaultValues,
   });
 
-  const watchedValues = form.watch();
+  // const watchedValues = form.watch();
 
-  useEffect(() => {
-    for (const field of fields) {
-      if (!field.followUps) continue;
+  // useEffect(() => {
+  //   for (const field of fields) {
+  //     if (!field.followUps) continue;
 
-      const { parentId, valueToMatch } = field.followUps;
-      const parentValue = watchedValues[parentId];
+  //     const { parentId, valueToMatch } = field.followUps;
+  //     const parentValue = watchedValues[parentId];
 
-      // If the condition no longer matches and the field has a value, clear it
-      if (parentValue !== valueToMatch && form.getValues(field.id)) {
-        form.resetField(field.id, { defaultValue: undefined });
-      }
-    }
-  }, [watchedValues, fields, form]);
+  //     // If the condition no longer matches and the field has a value, clear it
+  //     if (parentValue !== valueToMatch && form.getValues(field.id)) {
+  //       form.resetField(field.id, { defaultValue: undefined });
+  //     }
+  //   }
+  // }, [watchedValues, fields, form]);
 
   return (
     <Form {...form}>

@@ -1,7 +1,7 @@
 import { SettingsDialog } from "@/components/builder/components/settings";
 import { BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import PreviewDialog from "@/components/builder/components/preview-dialog";
+import PreviewDialog from "@/components/builder/components/dialogs/preview-dialog";
 import ThemeToggle from "@/components/theme-toggle";
 import Builder from "@/components/builder";
 

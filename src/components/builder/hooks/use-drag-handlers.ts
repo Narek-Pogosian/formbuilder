@@ -62,9 +62,9 @@ export function useDragHandlers() {
       setFields(arrayMove(fields, activeIndex, overIndex));
     }
 
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
+    // if (document.activeElement instanceof HTMLElement) {
+    //   document.activeElement.blur();
+    // }
 
     setTimeout(() => {
       setDraggedField(null);

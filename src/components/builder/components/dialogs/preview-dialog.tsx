@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Eye } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import { useFormStore } from "../hooks/use-form-store";
+import { useFormStore } from "../../hooks/use-form-store";
 import FormRenderer from "@/components/renderer";
 
 export default function PreviewDialog() {

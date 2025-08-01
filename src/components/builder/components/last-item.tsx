@@ -1,6 +1,6 @@
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useDroppable } from "@dnd-kit/core";
-import { AddField } from "./add-field-dialog";
+import { AddField } from "./dialogs/add-field-dialog";
 import { memo } from "react";
 import { cn } from "@/lib/utils";
 import Templates from "../components/templates";

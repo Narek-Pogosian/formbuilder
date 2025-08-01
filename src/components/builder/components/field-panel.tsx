@@ -49,7 +49,7 @@ function FieldsPanelItem({
 
 export function FieldPanelOverlay({ fieldType }: { fieldType: FieldType }) {
   return (
-    <button className="card flex h-12 w-[225px] cursor-grabbing items-center gap-2 px-6 py-2.5 font-semibold capitalize shadow-lg dark:shadow-lg/40 [&>svg]:size-5">
+    <button className="card flex h-12 w-[225px] cursor-grabbing items-center gap-2 px-6 py-2.5 font-semibold capitalize shadow-lg dark:shadow-xl/50 [&>svg]:size-5">
       {createElement(Fields[fieldType].icon)}
       {fieldType}
     </button>

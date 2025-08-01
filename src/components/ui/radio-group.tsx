@@ -27,7 +27,7 @@ function RadioGroupItem({
       data-slot="radio-group-item"
       className={cn(
         "text-primary bg-input aspect-square size-4 shrink-0 rounded-full transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50",
-        "border border-black/10 dark:border-white/5",
+        "border",
         "focus-visible:ring-ring focus-visible:border-ring focus-visible:ring-2",
         "aria-invalid:ring-danger/70! aria-invalid:border-danger/70!",
         className,

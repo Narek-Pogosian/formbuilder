@@ -1,11 +1,10 @@
 "use client";
 
+import FieldPanel, { FieldPanelOverlay } from "./components/field-panel";
+import FieldItem, { FieldItemOverlay } from "./components/field-item";
 import { useDragHandlers } from "./hooks/use-drag-handlers";
 import { useFormStore } from "./hooks/use-form-store";
 import { useIsMounted } from "@/hooks/use-is-mounted";
-import FieldPanel from "./components/field-panel";
-import FieldItem from "./components/field-item";
-import Overlay from "./components/overlay";
 import {
   SortableContext,
   sortableKeyboardCoordinates,
@@ -17,7 +16,9 @@ import {
   useSensors,
   PointerSensor,
   KeyboardSensor,
+  DragOverlay,
 } from "@dnd-kit/core";
+import { type FieldType } from "@/lib/schemas/form-schemas";
 import { SettingsTitle } from "./components/settings";
 import { LastItem } from "./components/last-item";
 
@@ -65,7 +66,20 @@ export default function Builder() {
           </ul>
         </SortableContext>
 
-        <Overlay draggedField={draggedField} />
+        <DragOverlay
+          dropAnimation={draggedField?.fromSidebar ? null : { duration: 200 }}
+        >
+          {draggedField &&
+            (draggedField.fromSidebar ? (
+              <FieldPanelOverlay
+                fieldType={draggedField.draggingId as FieldType}
+              />
+            ) : (
+              <FieldItemOverlay
+                field={fields.find((f) => f.id === draggedField.draggingId)!}
+              />
+            ))}
+        </DragOverlay>
 
         <div className="card sticky top-[92px] hidden h-fit p-4 xl:block">
           <SettingsTitle />

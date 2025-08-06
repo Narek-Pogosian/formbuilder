@@ -49,7 +49,7 @@ export default function Builder() {
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <div className="grid gap-8 pb-6 lg:grid-cols-[250px_1fr] xl:grid-cols-[230px_1fr_320px]">
+      <div className="grid gap-8 lg:grid-cols-[250px_1fr] xl:grid-cols-[230px_1fr_320px]">
         <div className="card sticky top-[92px] hidden h-fit p-3 lg:block">
           <FieldPanel />
         </div>

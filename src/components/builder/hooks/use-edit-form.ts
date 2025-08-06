@@ -13,6 +13,10 @@ export function useEditForm<T>(field: FormSchemaField) {
   useEffect(() => {
     setTimeout(() => {
       firstInputRef.current?.focus();
+      firstInputRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }, 100);
   }, []);
 

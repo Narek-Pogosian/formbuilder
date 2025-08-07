@@ -1,7 +1,7 @@
 import { getServerAuthSession } from "@/server/auth";
-import { forms } from "@/server/db/schema";
 import { redirect } from "next/navigation";
 import { desc, eq } from "drizzle-orm";
+import { forms } from "@/server/db/schema";
 import { db } from "@/server/db";
 import SignOut from "@/components/sign-out";
 
@@ -12,7 +12,13 @@ export default async function HomePage() {
   }
 
   const res = await db
-    .select()
+    .select({
+      id: forms.id,
+      title: forms.title,
+      cancelled: forms.cancelled,
+      description: forms.description,
+      createdAt: forms.createdAt,
+    })
     .from(forms)
     .where(eq(forms.createdById, session.user.id))
     .orderBy(desc(forms.createdAt));

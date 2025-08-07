@@ -17,6 +17,8 @@ interface Store {
   editField: (id: string, field: FormSchemaField) => void;
   setFields: (fields: FormSchema) => void;
   removeField: (id: string) => void;
+
+  reset: () => void;
 }
 
 export const useFormStore = create(
@@ -73,6 +75,16 @@ export const useFormStore = create(
 
       setFields: (fields) => {
         set((state) => ({ ...state, fields }));
+      },
+
+      reset: () => {
+        set(() => ({
+          settings: {
+            title: "",
+            description: "",
+          },
+          fields: [],
+        }));
       },
     }),
     {

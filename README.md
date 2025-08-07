@@ -20,10 +20,9 @@
 
 ## Roadmap
 
-- Authenication
-- Publish form
 - Manage forms
 - Respond
 - Download csv
+- Better empty form message in builder
 
 - Use middleware for auth check in /landing,/login,/register, currently bugged.

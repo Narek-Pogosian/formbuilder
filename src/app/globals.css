@@ -68,12 +68,12 @@
   --danger-foreground: hsl(260, 6%, 100%);
   --danger-text: hsl(360, 100%, 67%);
 
-  --input: hsla(260, 6%, 12%);
+  --input: hsla(260, 6%, 14%);
   --input-foreground: hsl(260, 6%, 95%);
   --input-placeholder: hsl(260, 6%, 45%);
 
   --scrollbar: hsl(260, 6%, 25%);
-  --border: hsla(260, 6%, 15%);
+  --border: hsla(260, 6%, 16%);
 }
 
 @theme inline {

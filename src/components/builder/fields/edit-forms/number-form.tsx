@@ -1,4 +1,4 @@
-import { Resolver, useForm } from "react-hook-form";
+import { type Resolver, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -14,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { type z } from "zod";
 import { numberSchema } from "@/lib/schemas/form-schemas";
-import { EditFormProps } from "..";
+import { type EditFormProps } from "..";
 import { useEditForm } from "../../hooks/use-edit-form";
 
 const numberFormSchema = numberSchema

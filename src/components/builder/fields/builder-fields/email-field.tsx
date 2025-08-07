@@ -1,4 +1,4 @@
-import { BuilderFieldProps } from "..";
+import { type BuilderFieldProps } from "..";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 

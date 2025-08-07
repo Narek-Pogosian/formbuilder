@@ -3,7 +3,7 @@
 import { getDefaultField } from "../../utils/get-default-field";
 import { useFormStore } from "../../hooks/use-form-store";
 import { StickyNote } from "lucide-react";
-import { FieldType } from "@/lib/schemas/form-schemas";
+import { type FieldType } from "@/lib/schemas/form-schemas";
 import { Button } from "@/components/ui/button";
 import { Fields } from "../../fields";
 import {

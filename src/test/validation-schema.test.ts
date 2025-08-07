@@ -23,7 +23,7 @@ describe("createValidationSchema", () => {
     const result = schema.safeParse({ textField: "" });
 
     expect(result.success).toBe(false);
-    expect(result.error?.errors[0].message).toBe("This field is required");
+    expect(result.error?.errors[0]?.message).toBe("This field is required");
   });
 
   it("should pass if an optional text field is empty", () => {
@@ -90,7 +90,7 @@ describe("createValidationSchema", () => {
     const result = schema.safeParse({ emailField: "invalid-email" });
 
     expect(result.success).toBe(false);
-    expect(result.error?.errors[0].message).toBe("Invalid email");
+    expect(result.error?.errors[0]?.message).toBe("Invalid email");
   });
 
   it("should pass if the URL field is valid", () => {
@@ -158,7 +158,7 @@ describe("createValidationSchema", () => {
     const result = schema.safeParse({ numberField: 5 });
 
     expect(result.success).toBe(false);
-    expect(result.error?.errors[0].message).toBe("Must be at least 10");
+    expect(result.error?.errors[0]?.message).toBe("Must be at least 10");
   });
 
   it("should pass if the options field has a valid value", () => {
@@ -201,7 +201,7 @@ describe("createValidationSchema", () => {
     const result = schema.safeParse({ checkboxField: false });
 
     expect(result.success).toBe(false);
-    expect(result.error?.errors[0].message).toBe("This field is required");
+    expect(result.error?.errors[0]?.message).toBe("This field is required");
   });
 
   it("should pass if the checkbox field is checked (required)", () => {

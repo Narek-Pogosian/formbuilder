@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { type z } from "zod";
-import { EditFormProps } from "..";
+import { type EditFormProps } from "..";
 import { useEditForm } from "../../hooks/use-edit-form";
 
 const checkboxFormSchema = checkboxSchema.omit({

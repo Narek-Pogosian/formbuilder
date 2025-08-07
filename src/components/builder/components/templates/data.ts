@@ -1,4 +1,4 @@
-import { FormSchema } from "@/lib/schemas/form-schemas";
+import { type FormSchema } from "@/lib/schemas/form-schemas";
 
 export type Template = {
   title: string;

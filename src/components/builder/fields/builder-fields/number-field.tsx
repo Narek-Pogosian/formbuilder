@@ -1,4 +1,4 @@
-import { BuilderFieldProps } from "..";
+import { type BuilderFieldProps } from "..";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -12,7 +12,7 @@ export default function BuilderNumberField({ field }: BuilderFieldProps) {
       <Label htmlFor={field.id}>{field.label}</Label>
 
       {field.showDescription && field.description && (
-        <p className="mb-1 text-sm text-foreground-muted">
+        <p className="text-foreground-muted mb-1 text-sm">
           {field.description}
         </p>
       )}

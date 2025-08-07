@@ -1,5 +1,5 @@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { BuilderFieldProps } from "..";
+import { type BuilderFieldProps } from "..";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 

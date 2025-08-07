@@ -1,30 +1,27 @@
-import { SettingsDialog } from "@/components/builder/components/settings";
-import { BookOpen } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import PreviewDialog from "@/components/builder/components/dialogs/preview-dialog";
-import ThemeToggle from "@/components/theme-toggle";
-import Builder from "@/components/builder";
+import { getServerAuthSession } from "@/server/auth";
+import { forms } from "@/server/db/schema";
+import { redirect } from "next/navigation";
+import { desc, eq } from "drizzle-orm";
+import { db } from "@/server/db";
+import SignOut from "@/components/sign-out";
 
-export default function Home() {
+export default async function HomePage() {
+  const session = await getServerAuthSession();
+  if (!session) {
+    redirect("/landing");
+  }
+
+  const res = await db
+    .select()
+    .from(forms)
+    .where(eq(forms.createdById, session.user.id))
+    .orderBy(desc(forms.createdAt));
+
   return (
-    <div className="relative mx-auto w-full max-w-[1740px] px-4 lg:px-8">
-      <header className="sticky top-3 left-0 z-40 mb-10">
-        <div className="card flex items-center justify-between px-4 py-2">
-          <div className="flex md:gap-2">
-            <ThemeToggle />
-          </div>
-
-          <div className="flex items-center gap-1 md:gap-4">
-            <SettingsDialog />
-            <PreviewDialog />
-            <Button size="sm">
-              <BookOpen /> Publish
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <Builder />
+    <div>
+      <h1>Home page</h1>
+      <SignOut />
+      <pre>{JSON.stringify(res, null, 2)}</pre>
     </div>
   );
 }

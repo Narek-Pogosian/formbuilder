@@ -20,10 +20,10 @@
 
 ## Roadmap
 
-- Black and white theme
 - Authenication
 - Publish form
 - Manage forms
 - Respond
 - Download csv
-- Landing page
+
+- Use middleware for auth check in /landing,/login,/register, currently bugged.

@@ -42,20 +42,24 @@ export const responses = createTable(
   (t) => [index("formId_idx").on(t.formId)],
 );
 
-export const users = createTable("user", (d) => ({
-  id: d
-    .varchar({ length: 255 })
-    .notNull()
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  name: d.varchar({ length: 255 }).notNull(),
-  email: d.varchar({ length: 255 }).notNull(),
-  hashedPassword: d.varchar({ length: 255 }).notNull(),
-  image: d.varchar({ length: 255 }),
-  emailVerified: d
-    .timestamp({
-      mode: "date",
-      withTimezone: true,
-    })
-    .default(sql`CURRENT_TIMESTAMP`),
-}));
+export const users = createTable(
+  "user",
+  (d) => ({
+    id: d
+      .varchar({ length: 255 })
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    name: d.varchar({ length: 255 }).notNull(),
+    email: d.varchar({ length: 255 }).notNull().unique(),
+    hashedPassword: d.varchar({ length: 255 }).notNull(),
+    image: d.varchar({ length: 255 }),
+    emailVerified: d
+      .timestamp({
+        mode: "date",
+        withTimezone: true,
+      })
+      .default(sql`CURRENT_TIMESTAMP`),
+  }),
+  (t) => [index("email_idx").on(t.email)],
+);

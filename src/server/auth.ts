@@ -7,6 +7,10 @@ import {
 import { type Adapter } from "next-auth/adapters";
 import { db } from "@/server/db";
 import Credentials from "next-auth/providers/credentials";
+import { loginSchema } from "@/lib/schemas/auth-schemas";
+import { users } from "./db/schema";
+import { eq } from "drizzle-orm";
+import bcrypt from "bcrypt";
 
 declare module "next-auth" {
   interface Session extends DefaultSession {
@@ -44,16 +48,25 @@ export const authOptions: NextAuthOptions = {
         password: {},
       },
       authorize: async (credentials) => {
-        if (!credentials) {
+        const { data, success } = loginSchema.safeParse(credentials);
+        if (!success) {
           return null;
         }
 
-        const user = {
-          id: crypto.randomUUID(),
-          name: credentials.email.split("@")[0],
-          email: credentials.email,
-          image: "",
-        };
+        const res = await db
+          .select()
+          .from(users)
+          .where(eq(users.email, data.email))
+          .limit(1);
+
+        const user = res[0];
+
+        if (!user) {
+          throw new Error("User not found.");
+        }
+
+        const isMatch = bcrypt.compareSync(data.password, user.hashedPassword);
+        if (!isMatch) return null;
 
         return {
           id: user.id,

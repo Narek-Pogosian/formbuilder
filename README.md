@@ -20,7 +20,7 @@
 
 ## Roadmap
 
-- Manage forms
+- Share form
 - Respond
 - Download csv
 - Better empty form message in builder

@@ -4,6 +4,7 @@ import { type getAllForms } from "@/server/queries/form";
 import { Download, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import FormActions from "./form-actions";
+import SharePopover from "./share-popover";
 
 interface Props {
   form: Awaited<ReturnType<typeof getAllForms>>[number];
@@ -15,7 +16,10 @@ export default function FormCard({ form }: Props) {
       <div className="flex justify-between gap-2">
         <h3 className="font-semibold">{form.title}</h3>
 
-        <FormActions cancelled={form.cancelled} id={form.id} />
+        <div className="flex items-center">
+          {!form.cancelled && <SharePopover id={form.id} />}
+          <FormActions cancelled={form.cancelled} id={form.id} />
+        </div>
       </div>
 
       <div className="flex items-center justify-between">

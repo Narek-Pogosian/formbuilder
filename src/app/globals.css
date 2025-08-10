@@ -155,6 +155,10 @@
     @apply bg-card rounded-(--radius) shadow-md/4 inset-shadow-sm inset-shadow-white dark:shadow/30 dark:inset-shadow-xs dark:inset-shadow-white/5;
   }
 
+  .popover {
+    @apply bg-popover rounded shadow-lg/7 inset-shadow-sm inset-shadow-white dark:shadow-lg/40 dark:inset-shadow-xs dark:inset-shadow-white/5;
+  }
+
   .field-action-tooltip {
     @apply absolute top-9.5 z-100 hidden rounded-(--radius) bg-neutral-800 px-2 py-1 text-xs text-white group-hover:block group-focus-visible:block dark:bg-neutral-50 dark:text-neutral-900;
   }

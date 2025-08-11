@@ -24,6 +24,7 @@ export const forms = createTable(
   (t) => [index("created_by_idx").on(t.createdById)],
 );
 
+export type Response = typeof responses.$inferSelect;
 export const responses = createTable(
   "response",
   (d) => ({

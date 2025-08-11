@@ -18,11 +18,9 @@
 - **Zod Validation**  
   Forms automatically generate Zod schemas for powerful runtime validation of submissions.
 
-## Roadmap
+## Improvements
 
-- Respond
-- Download csv
+- Filters for forms list
 - Better empty form message in builder
 - Not keep editing state in formschema, in field-item instead maybe
-
 - Use middleware for auth check in /landing,/login,/register, currently bugged.

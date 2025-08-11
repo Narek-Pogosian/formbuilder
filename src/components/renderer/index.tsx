@@ -15,15 +15,12 @@ import { Form } from "../ui/form";
 //   return field.followUps.valueToMatch === watched[field.followUps.parentId];
 // }
 
-function onSubmit(data: unknown) {
-  alert(JSON.stringify(data, null, 2));
-}
-
 interface Props {
   fields: FormSchema;
+  onSubmit: (data: unknown) => void;
 }
 
-export default function FormRenderer({ fields }: Props) {
+export default function FormRenderer({ fields, onSubmit }: Props) {
   const { schema, defaultValues } = useMemo(
     () => createValidationSchema(fields),
     [fields],
@@ -54,7 +51,7 @@ export default function FormRenderer({ fields }: Props) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mx-auto grid max-w-lg gap-9"
+        className="mx-auto grid max-w-xl gap-9"
       >
         {fields
           .filter((f) => f.saved)

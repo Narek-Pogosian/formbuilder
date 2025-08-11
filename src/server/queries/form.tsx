@@ -18,3 +18,13 @@ export async function getAllForms(userId: string) {
     .groupBy(forms.id)
     .orderBy(desc(forms.createdAt));
 }
+
+export async function getFormById(formId: number) {
+  const res = await db
+    .select()
+    .from(forms)
+    .where(eq(forms.id, formId))
+    .limit(1);
+
+  return res[0];
+}

@@ -37,7 +37,7 @@ function Content() {
 
   return (
     <div>
-      <FormRenderer fields={fields} />
+      <FormRenderer fields={fields} onSubmit={(data: unknown) => alert(data)} />
     </div>
   );
 }

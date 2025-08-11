@@ -17,8 +17,8 @@ export default function FormCard({ form }: Props) {
         <h3 className="font-semibold">{form.title}</h3>
 
         <div className="flex items-center">
-          {!form.cancelled && <SharePopover id={form.id} />}
           <FormActions cancelled={form.cancelled} id={form.id} />
+          {!form.cancelled && <SharePopover id={form.id} />}
         </div>
       </div>
 

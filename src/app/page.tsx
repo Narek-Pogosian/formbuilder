@@ -25,7 +25,7 @@ export default async function HomePage() {
           <div className="flex items-center gap-1 md:gap-2">
             <ThemeToggle />
             <SignOut />
-            <Button asChild>
+            <Button size="sm" asChild>
               <Link href="/create">Create a form</Link>
             </Button>
           </div>

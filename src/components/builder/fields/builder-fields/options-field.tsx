@@ -34,9 +34,12 @@ export default function BuilderOptionField({ field }: BuilderFieldProps) {
         <RadioGroup className="mt-2 flex flex-col space-y-1">
           {field.options.map((option) => (
             <div key={option.value} className="flex items-center gap-1">
-              <RadioGroupItem value={option.value} id={option.value} />
+              <RadioGroupItem
+                value={option.value}
+                id={option.value + field.id}
+              />
               <Label
-                htmlFor={option.value}
+                htmlFor={option.value + field.id}
                 className="pl-2 font-normal capitalize"
               >
                 {option.value}

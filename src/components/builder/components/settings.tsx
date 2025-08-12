@@ -45,7 +45,7 @@ export function SettingsDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="sm" variant="ghost" className="text-primary-text">
+        <Button variant="ghost">
           <Settings />
           <span className="max-sm:sr-only"> Settings</span>
         </Button>

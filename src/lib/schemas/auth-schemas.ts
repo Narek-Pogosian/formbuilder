@@ -5,7 +5,7 @@ export const loginSchema = z.object({
   password: z
     .string()
     .trim()
-    .min(6, { message: "Passwords needs to be atleast 6 characters long" }),
+    .min(6, { message: "Password needs to be atleast 6 characters long" }),
 });
 
 export const registerSchema = loginSchema
@@ -14,7 +14,7 @@ export const registerSchema = loginSchema
     confirmPassword: z
       .string()
       .trim()
-      .min(6, { message: "Passwords needs to be atleast 6 characters long" }),
+      .min(6, { message: "Password needs to be atleast 6 characters long" }),
   })
   .refine(
     (vals) => {

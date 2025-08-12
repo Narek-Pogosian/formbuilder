@@ -8,7 +8,7 @@ export default function LoginPage() {
       <LoginForm />
       <p className="mt-10 text-center text-sm font-medium">
         Don&apos;t have an account,{" "}
-        <Link href="/register" className="text-primary-text hover:underline">
+        <Link href="/register" replace className="underline">
           register here
         </Link>
       </p>

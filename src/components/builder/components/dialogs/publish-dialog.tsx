@@ -23,7 +23,7 @@ export default function PublishDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="sm">
+        <Button>
           <BookOpen /> Publish
         </Button>
       </DialogTrigger>

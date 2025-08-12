@@ -24,7 +24,7 @@ export function AddField({ fromScratch = false }: { fromScratch?: boolean }) {
       <DialogTrigger asChild>
         <Button
           size="sm"
-          variant={fromScratch ? "ghost" : "secondary"}
+          variant={fromScratch ? "default" : "secondary"}
           className="w-fit"
         >
           {fromScratch ? (

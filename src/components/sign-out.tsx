@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 export default function SignOut() {
   return (
-    <Button variant="secondary" size="sm" onClick={() => signOut()}>
+    <Button variant="secondary" onClick={() => signOut()}>
       Sign out
     </Button>
   );

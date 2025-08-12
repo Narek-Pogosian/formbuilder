@@ -19,8 +19,8 @@ export default function Templates() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost">
-          <LayoutPanelTop className="size-4" /> Use a template
+        <Button size="sm">
+          <LayoutPanelTop className="size-4" /> Choose a Template
         </Button>
       </DialogTrigger>
       <DialogContent className="p-10 sm:max-w-3xl">

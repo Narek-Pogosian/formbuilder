@@ -89,6 +89,9 @@ export const useFormStore = create(
     }),
     {
       name: "form-builder",
+      partialize: (state) => {
+        return { ...state, fields: state.fields.filter((f) => f.saved) };
+      },
     },
   ),
 );

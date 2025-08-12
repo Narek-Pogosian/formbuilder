@@ -16,7 +16,7 @@ export default async function HomePage() {
   const forms = await getAllForms(session.user.id);
 
   return (
-    <div className="relative mx-auto w-full max-w-[1740px] px-4 lg:px-8">
+    <div className="relative container">
       <header className="sticky top-3 left-0 z-40 mb-10">
         <div className="card flex items-center justify-between px-4 py-2">
           <div className="flex md:gap-1">
@@ -25,7 +25,7 @@ export default async function HomePage() {
           <div className="flex items-center gap-1 md:gap-2">
             <ThemeToggle />
             <SignOut />
-            <Button size="sm" asChild>
+            <Button asChild>
               <Link href="/create">Create a form</Link>
             </Button>
           </div>

@@ -16,9 +16,7 @@ import FormRenderer from "@/components/renderer";
 export default function PreviewDialog() {
   return (
     <Dialog>
-      <DialogTrigger
-        className={buttonVariants({ size: "sm", variant: "ghost" })}
-      >
+      <DialogTrigger className={buttonVariants({ variant: "ghost" })}>
         <Eye /> <span className="max-sm:sr-only">Preview</span>
       </DialogTrigger>
       <DialogContent className="md:max-2w-xl overflow-y-scroll py-12 lg:max-w-3xl">

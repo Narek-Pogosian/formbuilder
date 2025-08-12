@@ -29,11 +29,11 @@ export default memo(function FieldItem({ field }: { field: FormSchemaField }) {
       style={style}
       className="card group/item relative h-fit p-4 transition-none lg:p-6"
     >
-      <div className="text-primary-text flex justify-between group-hover/item:opacity-100 has-focus-visible:opacity-100 max-lg:-mt-2 lg:absolute lg:-top-3 lg:-right-4 lg:-left-4 lg:opacity-0">
+      <div className="flex justify-between group-hover/item:opacity-100 has-focus-visible:opacity-100 max-lg:-mt-2 lg:absolute lg:-top-3 lg:-right-4 lg:-left-4 lg:opacity-0">
         {!field.editing && (
           <Button
             size="icon"
-            variant="fieldAction"
+            // variant="secondary"
             {...sortable.listeners}
             {...sortable.attributes}
             className="group relative size-8 cursor-grab"
@@ -76,7 +76,6 @@ const FieldControls = ({ field }: { field: FormSchemaField }) => {
       {field.saved && (
         <Button
           size="icon"
-          variant="fieldAction"
           className="group relative size-8"
           onClick={() =>
             editField(field.id, { ...field, editing: !field.editing })
@@ -96,7 +95,6 @@ const FieldControls = ({ field }: { field: FormSchemaField }) => {
 
       <Button
         size="icon"
-        variant="fieldAction"
         className="group relative size-8"
         onClick={() => removeField(field.id)}
       >
@@ -112,8 +110,7 @@ export function FieldItemOverlay({ field }: { field: FormSchemaField }) {
     <li className="card group relative list-none p-4 shadow-lg lg:p-6 dark:shadow-lg/40">
       <Button
         size="icon"
-        variant="fieldAction"
-        className="absolute -top-3 -left-4 size-8 cursor-grabbing"
+        className="bg-primary/90 dark:bg-primary/80 absolute -top-3 -left-4 size-8 cursor-grabbing"
       >
         <GripVertical className="size-4.5" />
         <span className="sr-only">Drag</span>

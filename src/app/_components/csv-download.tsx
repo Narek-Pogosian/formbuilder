@@ -62,6 +62,7 @@ export default function DownloadCSVButton({
   return (
     <Button
       size="sm"
+      variant="secondary"
       className={cn("w-full", { "cursor-not-allowed": responseCount === 0 })}
       onClick={handleClick}
     >

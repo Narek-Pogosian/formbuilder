@@ -17,7 +17,7 @@ export const LastItem = memo(function LastItem({
     return fieldsLength > 0 ? (
       <AddField />
     ) : (
-      <div className="mx-auto flex w-fit flex-col gap-1 pt-14">
+      <div className="mx-auto flex w-fit flex-col gap-2 pt-14">
         <AddField fromScratch />
         <Templates />
       </div>
@@ -37,14 +37,22 @@ export const LastItem = memo(function LastItem({
   return (
     <div
       ref={setNodeRef}
-      className={cn("grid h-40 place-content-center rounded", {
-        "bg-accent": isOver,
-      })}
+      className={cn(
+        "grid h-40 place-content-center rounded border-2 border-dashed border-black/7 transition-colors dark:border-white/10",
+        {
+          "bg-secondary border-black/20 dark:border-white/20": isOver,
+        },
+      )}
     >
-      <div className="text-center text-sm font-semibold">
-        <p className="text-primary-text mb-2">
-          Drag a field here to get started or
-        </p>
+      <div className="flex flex-col items-center gap-4 text-center">
+        <div className="flex flex-col items-center">
+          <p className="mb-1 text-xl font-semibold">
+            Drag a field here to get started
+          </p>
+          <p className="text-foreground-muted font-medium">
+            Or quickly start from a template
+          </p>
+        </div>
         <Templates />
       </div>
     </div>

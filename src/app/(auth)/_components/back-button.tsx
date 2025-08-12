@@ -11,7 +11,7 @@ export default function BackButton() {
     <Button
       role="link"
       variant="secondary"
-      className="absolute top-4 left-4 border lg:top-8 lg:left-8"
+      className="absolute top-4 left-4 border lg:top-8 lg:left-8 dark:border-white/5"
       onClick={() => router.back()}
     >
       <MoveLeft />

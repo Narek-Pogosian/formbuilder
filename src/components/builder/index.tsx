@@ -50,7 +50,7 @@ export default function Builder() {
       onDragEnd={handleDragEnd}
     >
       <div className="grid gap-8 lg:grid-cols-[250px_1fr] xl:grid-cols-[230px_1fr_320px]">
-        <div className="card sticky top-[95px] hidden h-fit p-3 lg:block">
+        <div className="card sticky top-[94px] hidden h-fit p-3 lg:block">
           <FieldPanel />
         </div>
 
@@ -81,7 +81,7 @@ export default function Builder() {
             ))}
         </DragOverlay>
 
-        <div className="card sticky top-[95px] hidden h-fit p-4 xl:block">
+        <div className="card sticky top-[94px] hidden h-fit p-4 xl:block">
           <SettingsTitle />
         </div>
       </div>

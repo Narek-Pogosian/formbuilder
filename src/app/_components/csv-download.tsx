@@ -4,6 +4,7 @@ import { type Response } from "@/server/db/schema";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 async function fetchResponses(
   formId: number,
@@ -33,8 +34,11 @@ export default function DownloadCSVButton({
   title: string;
   responseCount: number;
 }) {
+  const [isLoading, setIsLoading] = useState(false);
+
   async function handleClick() {
     if (responseCount === 0) return;
+    setIsLoading(true);
 
     const data = await fetchResponses(id);
     if (!data) {
@@ -56,17 +60,19 @@ export default function DownloadCSVButton({
       downloadCsv(title, csv);
     } catch (error) {
       console.error("Error processing CSV download:", error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
   return (
     <Button
-      size="sm"
       variant="secondary"
       className={cn("w-full", { "cursor-not-allowed": responseCount === 0 })}
+      loading={isLoading}
       onClick={handleClick}
     >
-      <Download className="mr-2 h-4 w-4" />
+      {!isLoading && <Download className="mr-2 h-4 w-4" />}
       Download Responses (CSV)
     </Button>
   );

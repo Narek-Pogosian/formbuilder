@@ -38,7 +38,7 @@ function FieldsPanelItem({
       {...listeners}
       {...attributes}
       style={{ touchAction: "none" }}
-      className="relative w-full cursor-grab justify-start gap-2 capitalize"
+      className="relative w-full cursor-grab justify-start gap-2 py-2 capitalize"
     >
       <GripVertical className="size-4 opacity-30" />
       {createElement(icon)}

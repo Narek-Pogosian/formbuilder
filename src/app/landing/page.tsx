@@ -24,7 +24,7 @@ export default function LandingPage() {
 
           <p className="text-foreground-muted mx-auto mb-8 max-w-lg font-semibold text-pretty lg:text-lg">
             Try out this form builder built with React, DnD-Kit, Zod,
-            React-Hook-Form and Tailwind CSS.
+            React-Hook-Form, Zustand and Tailwind CSS.
           </p>
 
           <div className="flex items-center justify-center gap-4">

@@ -20,8 +20,7 @@
 
 ## TODO
 
-- Redesign field-item
 - Filters for forms list
-- Not keep editing state in formschema, in field-item instead maybe
 - Demo account
+- Not keep editing state in formschema, in field-item instead maybe
 - Use middleware for auth check in /landing,/login,/register, currently bugged.

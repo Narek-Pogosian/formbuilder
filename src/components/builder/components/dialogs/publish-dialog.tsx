@@ -16,6 +16,7 @@ import { useAction } from "next-safe-action/hooks";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import DemoSignin from "@/components/demo-signin";
 
 export default function PublishDialog() {
   const session = useSession();
@@ -66,10 +67,11 @@ function AuthenticatedHeader() {
 
 function NotAuthenticatedContent() {
   return (
-    <div>
-      <Button className="w-full" asChild>
+    <div className="flex gap-2">
+      <Button asChild>
         <Link href="/login">Sign in</Link>
       </Button>
+      <DemoSignin />
     </div>
   );
 }

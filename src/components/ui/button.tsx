@@ -13,7 +13,7 @@ const buttonVariants = cva(
           "bg-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background text-primary-foreground hover:bg-primary/90 dark:hover:bg-primary/85",
         ghost: "hover:bg-secondary-hover",
         secondary:
-          "bg-secondary hover:bg-secondary-hover text-secondary-foreground",
+          "bg-secondary hover:bg-secondary-hover text-secondary-foreground border dark:border-white/5 border-black/5",
         danger:
           "bg-danger text-danger-foreground hover:bg-danger/80 focus-visible:ring-danger/20 dark:focus-visible:ring-danger/40",
       },

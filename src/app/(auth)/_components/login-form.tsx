@@ -29,17 +29,24 @@ export default function LoginForm() {
   });
 
   async function onSubmit(data: LoginSchemaType) {
+    if (isLoading) return;
+
     setIsLoading(true);
     setError("");
 
-    const res = await signIn("credentials", { ...data, redirect: false });
-    if (res?.ok) {
-      location.replace("/");
-    } else if (res?.error) {
-      setError("Invalid Credentials");
+    try {
+      const res = await signIn("credentials", { ...data, redirect: false });
+      if (res?.ok) {
+        location.replace("/");
+      } else if (res?.error) {
+        setError("Invalid Credentials");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong");
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
   return (

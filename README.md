@@ -20,6 +20,4 @@
 
 ## TODO
 
-- Demo account
-- Filters for forms list
 - Use middleware for auth check in /landing,/login,/register, currently bugged.

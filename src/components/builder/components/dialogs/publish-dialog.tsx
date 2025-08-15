@@ -76,7 +76,7 @@ function NotAuthenticatedContent() {
 
 function AuthenticatedContent() {
   const settings = useFormStore((state) => state.settings);
-  const fields = useFormStore((state) => state.fields);
+  const fields = useFormStore((state) => state.fields).filter((f) => f.saved);
   const reset = useFormStore((state) => state.reset);
 
   const router = useRouter();

@@ -13,15 +13,7 @@ export default async function AuthLayout({
   }
 
   return (
-    <div className="from-background relative min-h-full content-center bg-gradient-to-br to-white/5 px-4 lg:col-span-2">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 hidden transition-opacity dark:block"
-        style={{
-          background:
-            "radial-gradient(600px at 233px 8px, rgba(255, 255, 255, 0.12), transparent 80%)",
-        }}
-      ></div>
+    <div className="via-background relative min-h-full content-center bg-gradient-to-b from-white/6 to-white/2 px-4 lg:col-span-2">
       <BackButton />
       <div className="card mx-auto max-w-lg rounded p-8">{children}</div>
     </div>

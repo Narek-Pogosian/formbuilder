@@ -4,9 +4,9 @@ import { protectedActionClient } from ".";
 import { revalidatePath } from "next/cache";
 import { formSchema } from "@/lib/schemas/form-schemas";
 import { forms } from "../db/schema";
+import { eq } from "drizzle-orm";
 import { db } from "../db";
 import z from "zod";
-import { eq } from "drizzle-orm";
 
 const createFormScema = z.object({
   title: z.string().trim().min(1, { message: "Title is required" }),
@@ -15,7 +15,7 @@ const createFormScema = z.object({
 });
 
 export const createForm = protectedActionClient
-  .schema(createFormScema)
+  .inputSchema(createFormScema)
   .action(async ({ parsedInput, ctx }) => {
     const form = await db
       .insert(forms)

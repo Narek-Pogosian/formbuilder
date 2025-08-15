@@ -20,7 +20,6 @@
 
 ## TODO
 
-- Filters for forms list
 - Demo account
-- Not keep editing state in formschema, in field-item instead maybe
+- Filters for forms list
 - Use middleware for auth check in /landing,/login,/register, currently bugged.

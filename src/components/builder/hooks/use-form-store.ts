@@ -1,4 +1,8 @@
-import type { FormSchema, FormSchemaField } from "@/lib/schemas/form-schemas";
+import {
+  type FormSchema,
+  type FormSchemaField,
+} from "@/lib/schemas/form-schemas";
+import { storageSchema } from "@/lib/schemas/storage-schema";
 import { persist } from "zustand/middleware";
 import { create } from "zustand";
 
@@ -91,6 +95,16 @@ export const useFormStore = create(
       name: "form-builder",
       partialize: (state) => {
         return { ...state, fields: state.fields.filter((f) => f.saved) };
+      },
+      merge: (fromStorage, state) => {
+        const { data, success } = storageSchema.safeParse(fromStorage);
+        if (!success) return state;
+
+        return {
+          ...state,
+          fields: data.fields.map((f) => ({ ...f, editing: false })),
+          settings: data.settings,
+        };
       },
     },
   ),
